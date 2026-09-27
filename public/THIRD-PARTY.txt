@@ -1,0 +1,7 @@
+FFmpeg.wasm / FFmpeg: https://github.com/ffmpegwasm/ffmpeg.wasm (MIT wrapper; core includes GPL components). Core source/build: https://github.com/ffmpegwasm/ffmpeg.wasm/tree/main/packages/core
+Supertonic helper: https://github.com/supertone-oss-archive/supertonic (MIT; see SUPERTONIC-LICENSE.txt). Model: https://huggingface.co/supertone-oss-archive/supertonic-3
+Transformers.js: https://github.com/huggingface/transformers.js (Apache-2.0). Whisper model: https://huggingface.co/onnx-community/whisper-tiny
+ONNX Runtime: https://github.com/microsoft/onnxruntime (MIT).
+fflate: https://github.com/101arrowz/fflate (MIT).
+Nanum Myeongjo: Naver, SIL Open Font License 1.1. https://github.com/google/fonts/tree/main/ofl/nanummyeongjo
+No user media is included in this distribution. demo.mp4 is generated test pattern and sine audio.

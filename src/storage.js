@@ -1,0 +1,3 @@
+const dbp=new Promise((resolve,reject)=>{const r=indexedDB.open('haejja-free-studio',1);r.onupgradeneeded=()=>r.result.createObjectStore('projects',{keyPath:'id'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
+export async function db(mode,action){const d=await dbp;return new Promise((resolve,reject)=>{const tx=d.transaction('projects',mode),r=action(tx.objectStore('projects'));tx.oncomplete=()=>resolve(r.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)})}
+export const saveProject=p=>db('readwrite',s=>s.put(p));export const getProject=id=>db('readonly',s=>s.get(id));export const listProjects=()=>db('readonly',s=>s.getAll());
