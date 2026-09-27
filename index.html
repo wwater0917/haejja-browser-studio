@@ -23,12 +23,106 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}main>*{min-width:0}.mobile-n
  footer{padding:16px;padding-bottom:max(20px,env(safe-area-inset-bottom))}.timeline-legend{flex-wrap:wrap;gap:6px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body:not(.editing) #cutEditor{display:none!important}body:not(.editing) .mobile-nav{display:none!important}
 </style>
 <header><div><div class="eyebrow">REEL STUDIO</div><h1>릴스 제작실</h1></div><div class="badge" id="aiState">맥 연결 확인 중</div></header><nav class="mobile-nav" aria-label="작업 바로가기"><a href="#sourcePanel">새 영상</a><a href="#editorPanel">편집</a><a href="#cutEditor">타임라인</a><a href="#previewPanel">미리보기</a></nav>
 <section id="connectPanel" class="card" style="max-width:650px;margin:24px auto"><h2>내 맥 제작기 연결</h2><p>맥에서 ‘웹 연결 시작.command’를 실행하고 표시되는 연결 코드를 입력하세요. 처음 한 번 연결하면 다음부터 링크만 넣어 제작할 수 있어요.</p><form id="connectForm"><label for="connectCode">맥 연결 코드</label><input id="connectCode" autocomplete="off" required maxlength="12"><button id="connectButton" style="margin-top:12px">내 제작기 연결</button><p id="connectError" role="alert"></p></form></section><div id="notice" role="status" style="max-width:1000px;margin:15px auto"></div><main><aside id="sourcePanel"><div class="card"><details><summary>개발 체크리스트</summary><p class="muted">문서의 전체 공장은 개발 중입니다. 각 항목의 구현·검증 상태를 표시합니다.</p><div id="development"></div></details></div><div class="card"><h2>새 영상 만들기</h2><p class="muted">링크 하나로 제목·한국어 자막·컷·음향을 구성하고 영상을 만듭니다. 완성본을 본 뒤 필요한 부분만 수정하세요. 제작하는 동안 맥은 켜 두세요.</p><label for="url">YouTube 영상 링크</label><input id="url" placeholder="https://youtube.com/shorts/…"><div class="row" style="margin-top:12px"><button id="new">링크로 릴스 자동 완성</button><button hidden class="secondary" id="importOnly">원본만 가져오기 · 번역 안 함</button></div></div><div class="card"><h2>작업 목록</h2><div id="projects"></div></div><div class="card"><details><summary>소재 찾기</summary><label for="search">검색어</label><input id="search" placeholder="couple comedy shorts"><button id="searchBtn" style="margin-top:10px">후보 검색</button><p class="muted">YouTube 공개 검색 · 3분 이하 후보<br>선택한 영상만 가져옵니다.</p><div id="results"></div></details></div></aside>
 <section id="editorPanel" hidden><div class="card"><div class="row" style="justify-content:space-between"><h2>편집 대본</h2><span class="pill" id="pid">프로젝트 선택</span></div><p class="muted">자동 대본은 초안입니다. 말뜻·화자·중요 장면을 확인한 뒤 다듬어 주세요.</p><label for="title">제목 · 줄바꿈 가능</label><textarea id="title" rows="3" placeholder="영상 제목"></textarea><div id="titleSuggestions" class="row" style="margin-top:8px"></div><div class="two"><div><label for="titleSize">제목 크기</label><input id="titleSize" type="number" value="124" min="24" max="160"></div><div><label for="subSize">번역 자막 크기</label><input id="subSize" type="number" value="73.5" step=".5" min="24" max="110"></div></div><div class="two"><div><label for="titleX">제목 가로 위치 · 가운데 기준</label><input id="titleX" type="number" min="0" max="1080" value="540"></div><div><label for="titleY">제목 세로 위치 · 위쪽 기준</label><input id="titleY" type="number" min="0" max="1850" value="60"></div><div><label for="subX">본문 자막 가로 위치 · 가운데 기준</label><input id="subX" type="number" min="0" max="1080" value="540"></div><div><label for="subY">본문 자막 세로 위치 · 위쪽 기준</label><input id="subY" type="number" min="0" max="1850" value="1460"></div></div><p class="muted">1080 × 1920 화면 기준. 가로 540은 중앙입니다. 모든 본문 자막에 같은 위치와 크기를 적용합니다. 원본 영상에 박힌 영어 자막은 이동하지 않습니다.</p><label for="layoutAt">배치 확인할 대사</label><select id="layoutAt"></select><button id="layoutPreview" class="secondary" style="margin-top:12px">현재 배치 미리보기</button><p id="layoutStatus" class="muted">위치·크기를 바꾼 뒤 미리보기로 확인하세요. 저장 후 ‘수정 반영해 다시 만들기’를 누르면 영상에 적용됩니다.</p><img id="layoutImage" hidden alt="현재 제목과 본문 자막 배치" style="width:100%;max-width:360px;border-radius:8px"><div class="two"><div><label for="titleFont">제목 글꼴</label><select id="titleFont"></select></div><div><label for="subtitleFont">본문 글꼴</label><select id="subtitleFont"></select></div></div><p class="muted">제작실에 등록된 한글 지원 글꼴입니다. 글꼴을 바꾼 뒤 배치 미리보기로 줄바꿈을 확인하세요.</p><div class="row"><button id="save">대본 저장</button><button id="render">수정 반영해 다시 만들기</button><button id="draft" class="secondary">AI 대본 새로 만들기</button></div></div><div class="card" id="cutEditor"><div class="row" style="justify-content:space-between"><h2>컷편집 타임라인</h2><span id="cutLength" class="muted"></span></div><div class="cut-monitor"><video id="cutPreview" controls playsinline preload="metadata"></video><div><p id="cutSelection">바에서 구간을 선택하세요.</p><p class="muted">초록은 사용할 구간, 어두운 구간은 제외된 부분이에요. 양끝 손잡이를 드래그해 길이를 조절하세요.</p><div class="timeline-tools"><button id="cutPlay" class="secondary">선택 구간 재생</button><button id="cutPlayAll" class="secondary">편집본 이어보기</button></div><p id="cutPreviewStatus" class="muted">원본 영상으로 컷 연결을 미리 봅니다.</p></div></div><div class="timeline-tools"><button id="cutSplit" class="secondary">현재 위치에서 분할</button><button id="cutToggle" class="secondary">선택 구간 제외</button><button id="cutUndo" class="secondary">되돌리기</button><label for="cutZoom">타임라인 확대</label><input id="cutZoom" type="range" min="1" max="6" step=".5" value="1" style="width:100px"></div><div class="timeline-view" id="timelineView"><div class="timeline-inner" id="timelineInner"><div class="timeline-ruler" id="timelineRuler"></div><div class="timeline-track" id="timelineTrack" aria-label="원본 영상 컷 타임라인"></div><div id="sfxTrack" class="sfx-track" aria-label="효과음 타임라인 트랙"></div><div class="timeline-head" id="timelineHead"></div><div class="timeline-legend"><span>초록 · 사용　어둡게 · 제외</span><span id="cutTime">00:00.00</span></div></div></div><div class="timeline-tools"><strong style="font-size:13px;color:#d4b8ff">♪ 효과음 트랙</strong><button id="sfxAddHere" class="secondary">재생 위치에 효과음 추가</button><button id="sfxUndo" class="secondary" disabled>효과음 되돌리기</button></div><p id="sfxTrackStatus" class="muted">보라색 마커에서 효과음 위치를 확인하세요.</p><div id="sfxInspector" class="sfx-inspector" hidden><strong id="sfxSelected"></strong><div><label for="sfxTrackAt">시작 초 · 도입 포함</label><input id="sfxTrackAt" type="number" min="0" step=".01"></div><div><label for="sfxTrackKind">효과음 종류</label><select id="sfxTrackKind"><option value="pop">팝</option><option value="tap">톡</option><option value="swish">전환</option></select></div><div><label for="sfxTrackGain">음량</label><input id="sfxTrackGain" type="number" min=".1" max="1" step=".1"></div><button id="sfxScene" class="secondary">주변 장면 보기</button><button id="sfxTrackDelete" class="secondary">선택 효과음 삭제</button></div><label for="cutSeek" class="muted">원본 재생 위치 · 방향키로 미세 조정</label><input id="cutSeek" type="range" min="0" max="1" step="0.0333333333" value="0"><p class="muted">완성본 연결 순서</p><div id="timelineOutput" class="timeline-output"></div><div class="cut-apply-row"><button id="cutApply" disabled>컷편집 적용 · 영상 다시 만들기</button><span id="cutApplyState" class="muted">바를 수정한 뒤 적용 버튼을 눌러 주세요.</span></div><details><summary>초 단위 정밀 조정</summary><div id="cutRows"></div><div class="row"><button id="addCut" class="secondary">구간 추가</button><button id="resetCuts" class="secondary">원본 전체 사용</button></div></details></div><div class="card"><h2>효과음 편집</h2><label for="sfxCount">넣을 개수 · 0이면 끄기</label><input id="sfxCount" type="number" min="0" max="30" value="15"><button id="arrangeSfx" class="secondary" style="margin-top:8px">대사 빈틈에 자동 배치</button><p class="muted">편집 전 영상 기준 시간이며 컷에 맞춰 자동 이동합니다. 배치 후 시간·종류·음량을 수정할 수 있어요. 저장하고 다시 만들면 적용됩니다.</p><div id="sfxEvents"></div></div><div class="card"><h2>이 장면, 왜 웃길까?</h2><p class="muted">대사를 읽기 전에 보는 웃음 구조와 편집 제안입니다. 해석 메모이며 영상에 자동으로 삽입되지는 않습니다.</p><div id="humor"></div></div><div class="card"><h2>번역 자막</h2><div id="cues"><p class="muted">영상을 가져오면 여기에 대본이 표시됩니다.</p></div></div><div class="card"><details open><summary>중계 나레이션</summary><label for="voiceChoice">나레이션 목소리</label><select id="voiceChoice"><option value="ko-KR-InJoonNeural">인준 · 온라인 신경망 남성</option><option value="ko-KR-HyunsuMultilingualNeural">현수 · 온라인 신경망 남성</option><option value="ko-KR-SunHiNeural">선희 · 온라인 신경망 여성</option><option value="Yuna">유나 · 맥 기본 음성</option></select><div class="two"><div><label for="voiceSpeed">말하기 속도 · 배율</label><input id="voiceSpeed" type="number" min="0.6" max="1.57" step="0.05" value="1.4"></div><div><label for="voicePitch">목소리 높이 · Hz</label><input id="voicePitch" type="number" min="-30" max="30" step="1" value="10"></div></div><p id="voiceInfo" class="muted"></p><button id="voicePreview" class="secondary">첫 나레이션 미리듣기</button><audio id="voiceAudio" controls style="width:100%;margin-top:12px" hidden></audio><div id="narrations"></div></details></div></section>
 <aside class="right" id="previewPanel"><button id="editToggle" class="secondary" style="margin-bottom:20px">마음에 안 드는 부분 수정하기</button><div class="card"><h2>영상 미리보기</h2><video id="preview" controls playsinline preload="metadata"></video><p class="muted">재생을 누르면 소리와 함께 재생됩니다.</p><div class="row"><button id="sound" class="secondary">소리 켜고 재생</button><a id="download" class="link" hidden download>MP4 다운로드</a></div><label for="volume">미리보기 음량</label><input id="volume" type="range" min="0" max="1" step=".05" value="1"><div class="two"><div><label for="originalVolume">원음 배율</label><input id="originalVolume" type="number" min="0" max="2" step=".1" value=".83"></div><div><label for="narrVolume">중계 음성 배율</label><input id="narrVolume" type="number" min="0" max="2" step=".1" value="1"></div></div><p id="qa" class="muted"></p></div><div class="card"><h2>제작·검사</h2><div class="row"><button id="continueJob">자동 제작 계속하기</button><button id="checkVideo" class="secondary">현재 영상 다시 검사</button></div><p class="muted">계속하기는 저장된 분석과 대본을 재사용합니다. 새 번역이 필요하면 ‘AI 대본 새로 만들기’를 사용하세요.</p><div id="checkDetails"></div><h2 style="margin-top:20px">진행 상황</h2><div id="status" class="muted">대기 중</div><p class="muted">분석·번역·음성은 저장해서 재사용합니다. 글꼴이나 자막 위치만 수정하면 AI를 다시 부르지 않습니다.</p></div></aside></main><footer><a href="/manual.html">이전 파일 편집기 · 브라우저 저장 작업</a><br>영상 편집은 이 맥에서 실행 · 나레이션은 선택한 음성 엔진 사용 · 자동 업로드 없음</footer>
-<script src="/relay-client.js"></script><script src="/timeline-model.js"></script>
+<script>
+/* The Mac owns projects and runs the complete production pipeline. */
+const relayBase='https://haejja-free-helper.onrender.com';
+let studioToken=localStorage.getItem('haejja-mac-token')||'';
+let unlock;
+const connected=new Promise(resolve=>unlock=resolve);
+const mediaCache=new Map(),mediaPending=new Map();
+async function bridge(path,body){
+ const response=await fetch(relayBase+path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...(studioToken?{Authorization:'Bearer '+studioToken}:{})},...(body?{body:JSON.stringify(body)}:{})});
+ const data=await response.json();
+ if(!response.ok){if(response.status===401){studioToken='';localStorage.removeItem('haejja-mac-token');document.getElementById('connectPanel').hidden=false;}throw Error(data.error||'웹 연결 오류');}
+ return data;
+}
+async function relayRequest(path,body){
+ await connected;
+ const job=await bridge('/bridge/request',{path,method:body?'POST':'GET',body});
+ const deadline=Date.now()+1200000;
+ while(Date.now()<deadline){
+  await new Promise(r=>setTimeout(r,700));
+  const result=await bridge('/bridge/jobs/'+job.job);
+  if(result.status!=='done')continue;
+  if(result.code>=400)throw Error(result.data?.error||'맥 제작 요청 실패');
+  return result;
+ }
+ throw Error('맥에서 응답을 받지 못했습니다. 저장된 작업에서 진행 상황을 확인하세요.');
+}
+async function relayMedia(path){
+ if(mediaCache.has(path))return mediaCache.get(path);
+ if(mediaPending.has(path))return mediaPending.get(path);
+ const promise=(async()=>{
+  const result=await relayRequest(path);
+  if(!result.file)throw Error('영상 파일을 받지 못했습니다.');
+  const response=await fetch(relayBase+result.file);
+  if(!response.ok)throw Error('영상 전송이 중단됐습니다.');
+  const url=URL.createObjectURL(await response.blob());mediaCache.set(path,url);return url;
+ })();
+ mediaPending.set(path,promise);
+ try{return await promise;}finally{mediaPending.delete(path);}
+}
+function mediaPath(path){return mediaCache.get(path)||'';}
+async function relayApi(path,body){
+ const result=await relayRequest(path,body),data=result.data;
+ if(path.startsWith('/api/project/')&&data.source_duration>0){
+  await relayMedia('/media/'+data.id+'/source/source.mp4');
+  if(data.latest)await relayMedia('/media/'+data.id+'/output/'+data.latest.file);
+ }
+ if(data?.url?.startsWith('/media/'))data.url=await relayMedia(data.url);
+ return data;
+}
+document.getElementById('connectForm').onsubmit=async event=>{
+ event.preventDefault();const button=document.getElementById('connectButton');button.disabled=true;
+ try{
+  const result=await bridge('/bridge/pair',{code:document.getElementById('connectCode').value});
+  studioToken=result.token;localStorage.setItem('haejja-mac-token',studioToken);
+  document.getElementById('connectCode').value='';document.getElementById('connectPanel').hidden=true;unlock();
+ }catch(e){document.getElementById('connectError').textContent=e.message;}finally{button.disabled=false;}
+};
+if(studioToken){document.getElementById('connectPanel').hidden=true;unlock();}
+document.getElementById('editToggle').onclick=()=>{
+ const editor=document.getElementById('editorPanel');editor.hidden=!editor.hidden;
+ document.body.classList.toggle('editing',!editor.hidden);
+ document.getElementById('editToggle').textContent=editor.hidden?'마음에 안 드는 부분 수정하기':'수정 도구 접기';
+ if(!editor.hidden)editor.scrollIntoView({behavior:'smooth'});
+};
+
+</script><script>
+/* Frame-based operations shared by the visual editor and its regression checks. */
+var CutModel=(()=>{
+ const fps=30,frame=t=>Math.round(t*fps),sec=f=>f/fps;
+ function normalize(rows,duration){
+  const end=frame(duration),kept=rows.filter(r=>r.keep!==false).map((r,i)=>({...r,id:r.id||'clip-'+i,start:sec(frame(r.start)),end:sec(frame(r.end)),keep:true})).sort((a,b)=>a.start-b.start);
+  const out=[];let cursor=0;
+  for(const r of kept){if(frame(r.start)<frame(cursor)||r.end<=r.start||frame(r.end)>end)throw Error('구간의 순서·중복·길이를 확인하세요.');if(r.start>cursor)out.push({id:'gap-'+frame(cursor),start:cursor,end:r.start,keep:false});out.push(r);cursor=r.end;}
+  if(frame(cursor)<end)out.push({id:'gap-'+frame(cursor),start:cursor,end:sec(end),keep:false});return out;
+ }
+ function merged(rows){const out=[];for(const r of rows.filter(r=>r.keep)){const last=out[out.length-1];if(last&&frame(last.end)===frame(r.start))last.end=r.end;else out.push({start:r.start,end:r.end});}return out;}
+ function trim(rows,id,edge,time,duration){
+  const kept=rows.filter(r=>r.keep).map(r=>({...r})),i=kept.findIndex(r=>r.id===id);if(i<0)return rows;
+  const r=kept[i],lo=edge==='start'?frame(kept[i-1]?.end||0):frame(r.start)+1,hi=edge==='start'?frame(r.end)-1:frame(kept[i+1]?.start??duration);
+  r[edge]=sec(Math.max(lo,Math.min(hi,frame(time))));return normalize(kept,duration);
+ }
+ function split(rows,time,duration){const t=sec(frame(time)),i=rows.findIndex(r=>r.keep&&r.start<t&&t<r.end);if(i<0)throw Error('사용할 구간 안에 재생선을 놓아 주세요.');const out=rows.map(r=>({...r})),r=out[i];out.splice(i,1,{...r,end:t},{...r,id:r.id+'-split-'+frame(t),start:t});return normalize(out,duration);}
+ function effectPlacement(rows,event,intro,duration,outro){
+  const length={pop:.16,tap:.14,swish:.22}[event.kind],a=event.at,b=a+length,source=a-intro,body=merged(rows).reduce((v,r)=>v+frame(r.end)-frame(r.start),0)/fps;
+  if(a>=0&&b<=intro)return {source,output:a,region:'intro'};
+  if(a>=intro+duration&&b<=intro+duration+outro)return {source,output:a-duration+body,region:'outro'};
+  let cursor=frame(intro);for(const r of merged(rows)){const start=frame(r.start),end=frame(r.end);if(a>=intro&&b<=intro+duration&&frame(source)>=start&&frame(source+length)<=end)return {source,output:sec(cursor+frame(source)-start),region:'body'};cursor+=end-start;}
+  return {source,output:null,region:'removed'};
+ }
+ return {frame,sec,normalize,merged,trim,split,effectPlacement};
+})();
+if(typeof module!=='undefined')module.exports=CutModel;
+
+</script>
 <script>
 const $=id=>document.getElementById(id);let current=null,dirty=false,lastPhase='';
 async function api(path,data){return relayApi(path,data)}
@@ -158,7 +252,7 @@ $('voicePreview').onclick=guard(async()=>{if(!current?.plan?.narrations?.length)
 function layoutStyle(){return {title_font:$('titleFont').value,subtitle_font:$('subtitleFont').value,title_size:+$('titleSize').value,subtitle_size:+$('subSize').value,title_x:+$('titleX').value,title_y:+$('titleY').value,subtitle_x:+$('subX').value,subtitle_y:+$('subY').value};}
 $('layoutPreview').onclick=guard(async()=>{if(!current?.plan)throw Error('프로젝트를 먼저 선택하세요.');$('layoutPreview').disabled=true;try{const result=await api('/api/layout-preview',{id:current.id,plan:{...current.plan,title:$('title').value},style:{...current.style,...layoutStyle()},at:+$('layoutAt').value});$('layoutImage').src=result.image;$('layoutImage').hidden=false;$('layoutStatus').textContent='현재 입력값으로 만든 배치입니다. 아직 저장하거나 영상에 반영하지 않았습니다.';}finally{$('layoutPreview').disabled=false}});
 async function save(){if(!current?.plan)throw Error('대본이 아직 없습니다. AI 대본 만들기를 먼저 실행하세요.');current.plan.title=$('title').value;current.plan.sound_effects?.sort((a,b)=>a.at-b.at);selectedSfx=-1;Object.assign(current.style,{...chosenVoice(),...layoutStyle(),original_volume:+$('originalVolume').value,narration_volume:+$('narrVolume').value});await api('/api/save',{id:current.id,plan:current.plan,style:current.style});dirty=false;notice('저장했어요.')}
-async function create(stage){const r=await api('/api/new',{url:$('url').value});await select(r.id);await api('/api/run',{id:r.id,stage});notice('제작 대기열에 넣었어요.')}
+async function create(stage){const r=await api('/api/new',{url:$('url').value,reuse:true});await select(r.id);await api('/api/run',{id:r.id,stage});notice('제작 대기열에 넣었어요.')}
 $('new').onclick=guard(async()=>{$('new').disabled=true;try{await create('produce')}finally{$('new').disabled=false}});$('importOnly').onclick=guard(()=>create('download'));$('save').onclick=guard(save);$('render').onclick=guard(async()=>{await save();await api('/api/run',{id:current.id,stage:'render'});notice('저장된 분석을 재사용해 영상을 다시 만들고 있어요.')});$('draft').onclick=guard(async()=>{if(!current)throw Error('프로젝트를 먼저 선택하세요.');if(current.plan&&!confirm('수정한 대본을 보관하고 AI 초안으로 교체할까요?'))return;await api('/api/run',{id:current.id,stage:'draft',regenerate:true});notice('로컬 AI가 대본을 만들고 있어요. 인텔 맥에서는 시간이 걸릴 수 있어요.')});
 $('sound').onclick=guard(async()=>{let v=$('preview');v.muted=false;v.volume=1;$('volume').value=1;await v.play()});$('volume').oninput=()=>{$('preview').volume=+$('volume').value;$('preview').muted=false};for(let id of ['titleFont','subtitleFont','title','titleSize','subSize','titleX','titleY','subX','subY','originalVolume','narrVolume'])$(id).oninput=()=>{dirty=true;$('layoutStatus').textContent='배치 수정됨 · 현재 배치 미리보기로 확인하세요.';$('layoutImage').hidden=true};
 $('searchBtn').onclick=guard(async()=>{$('searchBtn').disabled=true;try{let rows=await api('/api/search',{query:$('search').value});$('results').replaceChildren();for(let r of rows){let b=text('button',r.title+' · '+(r.duration||'?')+'초','secondary');b.onclick=()=>{$('url').value=r.url;notice('링크를 입력했어요. 자동 제작 또는 원본만 받기를 선택하세요.')};$('results').append(b)}if(!rows.length)$('results').append(text('p','3분 이하 후보가 없습니다. 검색어를 바꿔 주세요.','muted'))}finally{$('searchBtn').disabled=false}});
