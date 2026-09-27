@@ -1,0 +1,4 @@
+import {pipeline,env} from '@huggingface/transformers';
+env.allowLocalModels=false;env.backends.onnx.wasm.numThreads=1;
+let translator;
+self.onmessage=async({data})=>{try{translator??=await pipeline('translation','Xenova/m2m100_418M',{device:'wasm',dtype:'q8',progress_callback:p=>postMessage({progress:p.status==='progress'?`번역 모델 다운로드 ${Math.round(p.progress)}%`:'한국어 번역 모델 준비 중…'})});const cues=[];for(let i=0;i<data.cues.length;i++){postMessage({progress:`한국어 번역 ${i+1}/${data.cues.length}`});const out=await translator(data.cues[i].sourceText||data.cues[i].text,{src_lang:data.language||'en',tgt_lang:'ko',max_new_tokens:256});const text=out[0].translation_text?.trim();if(!text)throw Error('번역 결과가 비어 있어 원문을 보존했습니다.');cues.push({...data.cues[i],sourceText:data.cues[i].sourceText||data.cues[i].text,text})}postMessage({result:{cues}})}catch(e){postMessage({error:'이 기기에서 번역을 완료하지 못했습니다. 원문은 유지됩니다. '+e.message})}};

@@ -49,11 +49,13 @@ def work(key,kind,data):
         else:
             text=data.get('text','').strip();voice=data.get('voice','ko-KR-InJoonNeural')
             if not 1<=len(text)<=1500:raise ValueError('음성 원고는 1~1500자까지 가능합니다.')
-            if voice not in {'ko-KR-InJoonNeural','ko-KR-SunHiNeural','ko-KR-HyunsuNeural'}:raise ValueError('지원하지 않는 목소리입니다.')
+            if voice not in {'ko-KR-InJoonNeural','ko-KR-SunHiNeural','ko-KR-HyunsuMultilingualNeural'}:raise ValueError('지원하지 않는 목소리입니다.')
             speed=float(data.get('speed',1.05))
             if not .7<=speed<=1.5:raise ValueError('말하기 속도를 확인하세요.')
+            pitch=float(data.get('pitch',10))
+            if not -30<=pitch<=30:raise ValueError('음성 높이를 확인하세요.')
             path=folder/'voice.mp3'
-            asyncio.run(asyncio.wait_for(edge_tts.Communicate(text,voice,rate=f'{round((speed-1)*100):+d}%').save(str(path)),timeout=90))
+            asyncio.run(asyncio.wait_for(edge_tts.Communicate(text,voice,rate=f'{round((speed-1)*100):+d}%',pitch=f'{round(pitch):+d}Hz').save(str(path)),timeout=90))
             j.update(title='한국어 내레이션',mime='audio/mpeg')
         j.update(status='ready',path=str(path),size=path.stat().st_size)
     except Exception as e:

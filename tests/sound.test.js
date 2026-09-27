@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {arrangeEffects,effectWave,soundLengths} from '../src/sound.js';
+test('automatic effects avoid spoken intervals',()=>{const p={cuts:[{start:0,end:12,keep:true}],cues:[{start:2,end:5},{start:8,end:10}],narration:true,narrationStart:0,narrationDuration:1};const rows=arrangeEffects(p,3);assert.equal(rows.length,3);for(const r of rows)for(const [a,b]of [[0,1],[2,5],[8,10]])assert(!(r.at<b&&r.at+soundLengths[r.kind]>a));});
+test('too little silence refuses fake placement',()=>assert.throws(()=>arrangeEffects({cuts:[{start:0,end:3,keep:true}],cues:[{start:0,end:3}]},1)));
+test('sound is real nonzero mono PCM with bounded length',()=>{const a=effectWave([{at:.5,kind:'pop',gain:.5}],1);const v=new DataView(a.buffer);assert.equal(v.getUint32(24,true),48000);assert.equal(v.getUint16(22,true),1);assert(a.slice(44).some(x=>x!==0));assert.throws(()=>effectWave([{at:.99,kind:'swish',gain:1}],1))});

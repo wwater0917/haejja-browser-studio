@@ -5,3 +5,5 @@ ONNX Runtime: https://github.com/microsoft/onnxruntime (MIT).
 fflate: https://github.com/101arrowz/fflate (MIT).
 Nanum Myeongjo: Naver, SIL Open Font License 1.1. https://github.com/google/fonts/tree/main/ofl/nanummyeongjo
 No user media is included in this distribution. demo.mp4 is generated test pattern and sine audio.
+M2M100 translation: https://huggingface.co/facebook/m2m100_418M (MIT); browser conversion https://huggingface.co/Xenova/m2m100_418M
+Experimental Qwen draft worker is not exposed in the released UI after quality checks failed. Model source: https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct (Apache-2.0).
