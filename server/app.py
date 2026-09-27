@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import asyncio, collections, json, os, re, secrets, shutil, subprocess, sys, tempfile, threading, time
 import edge_tts, imageio_ffmpeg
+import relay
 ROOT=Path(tempfile.mkdtemp(prefix='haejja-'))
 ORIGIN=os.environ.get('WEB_ORIGIN','https://haejja-reel-studio.onrender.com')
 POOL=ThreadPoolExecutor(max_workers=1)
@@ -72,8 +73,12 @@ class Handler(BaseHTTPRequestHandler):
         b=json.dumps(data,ensure_ascii=False).encode();self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(b)));self.end_headers();self.wfile.write(b)
     def do_OPTIONS(self):
         if self.headers.get('Origin')!=ORIGIN:return self.json({'error':'Origin denied'},403)
-        self.send_response(204);self.send_header('Access-Control-Allow-Methods','GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Headers','Content-Type');self.end_headers()
+        self.send_response(204);self.send_header('Access-Control-Allow-Methods','GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Headers','Content-Type, Authorization');self.end_headers()
     def do_POST(self):
+        if self.path.startswith("/bridge/"):
+            try: relay.handle(self)
+            except (ValueError,TypeError,KeyError) as e:self.json({"error":str(e)},400)
+            return
         if self.headers.get('Origin')!=ORIGIN:return self.json({'error':'Origin denied'},403)
         try:
             cleanup();n=int(self.headers.get('Content-Length','0'))
@@ -90,6 +95,10 @@ class Handler(BaseHTTPRequestHandler):
             POOL.submit(work,key,kind,data);self.json({'job':key},202)
         except (ValueError,TypeError,KeyError,json.JSONDecodeError) as e:self.json({'error':str(e)},400)
     def do_GET(self):
+        if self.path.startswith("/bridge/"):
+            try: relay.handle(self)
+            except (ValueError,TypeError,KeyError) as e:self.json({"error":str(e)},400)
+            return
         if self.path in {'/','/healthz'}:return self.json({'status':'ok','plan':'free','stores_user_library':False})
         m=re.fullmatch(r'/api/jobs/([A-Za-z0-9_-]{32})(/file)?',self.path)
         if not m:return self.json({'error':'not found'},404)

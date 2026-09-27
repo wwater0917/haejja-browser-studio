@@ -1,426 +1,167 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#244d3c" />
-    <meta
-      name="description"
-      content="영상 파일을 기기 안에서 편집하고 MP4로 저장하는 해짜 릴스 제작실"
-    />
-    <title>해짜 릴스 제작실</title>
-  </head>
-  <body>
-    <header>
-      <div>
-        <small>HAEJJA · REEL STUDIO</small>
-        <h1>릴스 제작실</h1>
-      </div>
-      <span class="badge">무료 호스팅 · 기기 내 편집</span>
-    </header>
-    <nav>
-      <a href="#sourcePanel">영상</a><a href="#editPanel">편집</a
-      ><a href="#audioPanel">음성</a><a href="#exportPanel">저장</a>
-    </nav>
-    <div id="status" role="status" aria-live="polite">
-      영상 파일을 선택해 시작하세요. 파일은 외부 서버에 업로드되지 않습니다.
-    </div>
-    <progress id="progress" hidden></progress>
-    <main>
-      <aside>
-        <section class="card" id="sourcePanel">
-          <small>01 / SOURCE</small>
-          <h2>새 영상</h2>
-          <label for="videoFile">영상 파일</label
-          ><input id="videoFile" type="file" accept="video/*" />
-          <p class="muted">
-            휴대폰 사진 보관함 또는 다운로드한 영상을 선택하세요. 짧은 영상과
-            720p 출력을 권장합니다.
-          </p>
-          <label for="sourceUrl">원본 링크 기록</label
-          ><input
-            id="sourceUrl"
-            type="url"
-            placeholder="https://www.youtube.com/watch?v=…"
-          />
-          <p class="muted">
-            링크는 출처 기록용입니다. 이 무료 버전은 유튜브 링크 자동 다운로드를
-            지원하지 않습니다.
-          </p>
-          <button id="demo" class="secondary">짧은 예제로 사용해 보기</button>
-        </section>
-        <section class="card">
-          <h2>내 작업</h2>
-          <p class="muted">
-            이 브라우저에 저장됩니다. 다른 기기로 옮길 때는 작업 백업을
-            사용하세요.
-          </p>
-          <div id="projects"></div>
-          <button id="save" class="secondary">작업 저장</button
-          ><button id="backup" class="secondary">작업 백업 ZIP</button
-          ><label for="restore">백업 불러오기</label
-          ><input id="restore" type="file" accept=".zip" />
-        </section>
-        <details class="card">
-          <summary>무료 버전의 기능과 보관 방식</summary>
-          <p>
-            영상 자르기·순서 변경, 제목과 자막, 원본 소리·음성·배경음악, MP4
-            출력을 기기 안에서 처리합니다.
-          </p>
-          <p>
-            자동 자막과 한국어 음성은 처음 실행할 때 무료 모델을 다운로드합니다.
-            Wi-Fi에서 사용하세요. 기기에 따라 오래 걸릴 수 있습니다.
-          </p>
-          <p>
-            기존 맥 제작실의 유튜브 수집, 댓글 분석, 시각 근거 기반 AI 연출,
-            얼굴·자막 영역 인식은 이 버전에 포함되지 않았습니다. 기존 제작실은
-            그대로 보존되어 있습니다.
-          </p>
-          <p>
-            브라우저 데이터를 지우면 저장된 작업도 사라집니다. 중요한 작업은
-            ZIP으로 백업하세요. 웹 화면은 공개되지만 작업 파일은 공개되지
-            않습니다.
-          </p>
-          <a href="/THIRD-PARTY.txt" target="_blank" rel="noopener"
-            >오픈소스 고지</a
-          >
-        </details>
-      </aside>
-      <section id="editPanel">
-        <div class="card">
-          <small>02 / EDIT</small>
-          <h2>제목과 화면</h2>
-          <label for="title">제목 · 줄바꿈 가능</label
-          ><textarea
-            id="title"
-            rows="2"
-            maxlength="100"
-            placeholder="영상 위에 들어갈 제목"
-          ></textarea>
-          <div class="two">
-            <div>
-              <label for="titleSize">제목 크기</label
-              ><input
-                id="titleSize"
-                type="number"
-                min="30"
-                max="160"
-                value="100"
-              />
-            </div>
-            <div>
-              <label for="subtitleSize">자막 크기</label
-              ><input
-                id="subtitleSize"
-                type="number"
-                min="24"
-                max="100"
-                value="64"
-              />
-            </div>
-          </div>
-          <details>
-            <summary>제목·자막 위치와 영상 영역</summary>
-            <p class="muted">
-              1080 × 1920 기준 좌표입니다. 출력 해상도에 맞춰 자동 조정됩니다.
-            </p>
-            <div class="two">
-              <div>
-                <label for="titleY">제목 세로 위치</label
-                ><input
-                  id="titleY"
-                  type="number"
-                  min="0"
-                  max="1850"
-                  value="60"
-                />
-              </div>
-              <div>
-                <label for="subtitleY">자막 세로 위치</label
-                ><input
-                  id="subtitleY"
-                  type="number"
-                  min="0"
-                  max="1850"
-                  value="1460"
-                />
-              </div>
-              <div>
-                <label for="videoX">영상 가로 위치</label
-                ><input
-                  id="videoX"
-                  type="number"
-                  min="0"
-                  max="1078"
-                  value="135"
-                />
-              </div>
-              <div>
-                <label for="videoY">영상 세로 위치</label
-                ><input
-                  id="videoY"
-                  type="number"
-                  min="0"
-                  max="1918"
-                  value="440"
-                />
-              </div>
-              <div>
-                <label for="videoW">영상 너비</label
-                ><input
-                  id="videoW"
-                  type="number"
-                  min="2"
-                  max="1080"
-                  value="810"
-                />
-              </div>
-              <div>
-                <label for="videoH">영상 높이</label
-                ><input
-                  id="videoH"
-                  type="number"
-                  min="2"
-                  max="1920"
-                  value="1440"
-                />
-              </div>
-            </div>
-          </details>
-          <label for="fit">영상 배치</label
-          ><select id="fit">
-            <option value="contain">전체 보이기 · 원본 자막 보존</option>
-            <option value="cover">영역 채우기 · 가장자리 잘림</option>
-          </select>
-        </div>
-        <div class="card" hidden>
-          <h2>AI 제목·내레이션 초안</h2>
-          <label for="aiNotes">장면 설명 · 강조하고 싶은 내용</label
-          ><textarea
-            id="aiNotes"
-            rows="3"
-            maxlength="1500"
-            placeholder="영상에서 실제로 보이는 상황을 적어 주세요"
-          ></textarea
-          ><button id="draft" class="secondary">자막으로 초안 만들기</button>
-          <p class="muted">
-            기기 내 AI를 사용합니다. 첫 실행 약 500MB 다운로드가 필요하고,
-            휴대폰에서는 느릴 수 있어요. 화면을 직접 보는 모델이 아니므로 장면
-            설명과 원문을 대조하세요.
-          </p>
-          <div id="draftResult" hidden>
-            <label for="draftTitle">제목 제안</label
-            ><textarea id="draftTitle" rows="2"></textarea
-            ><label for="draftScript">내레이션 제안</label
-            ><textarea id="draftScript" rows="4"></textarea
-            ><button id="applyDraft" class="secondary">제목·원고에 적용</button>
-          </div>
-        </div>
-        <div class="card">
-          <h2>사용할 구간</h2>
-          <video id="source" hidden controls playsinline preload="metadata"></video>
-          <p class="muted">
-            원본 재생 위치에서 구간을 나누거나 시작·끝 시간을 초 단위로
-            수정하세요. 순서대로 이어 붙입니다.
-          </p>
-          <div class="row">
-            <button id="split" class="secondary">현재 위치에서 나누기</button
-            ><button id="addCut" class="secondary">구간 추가</button
-            ><button id="playCuts" class="secondary">편집 순서로 재생</button>
-          </div>
-          <div id="cuts"></div>
-          <p id="duration" class="muted"></p>
-        </div>
-        <div class="card">
-          <h2>자막</h2>
-          <div class="row">
-            <select id="asrLang" aria-label="원본 음성 언어">
-              <option value="english">영어 음성</option>
-              <option value="korean">한국어 음성</option>
-              <option value="japanese">일본어 음성</option></select
-            ><button id="transcribe" class="secondary">원본 음성 → 자막</button>
-          </div>
-          <p class="muted">
-            자동 인식 결과는 원문입니다. 한국어 번역은 별도 버튼으로 실행하며,
-            첫 사용 시 큰 모델 다운로드가 필요하므로 Wi-Fi를 권장합니다. 자막
-            시간은 편집 완료 영상 기준입니다. 구간을 바꾼 뒤에는 시간을
-            확인하세요.
-          </p>
-          <div class="row">
-            <button id="addCue" class="secondary">자막 추가</button
-            ><button id="translate" class="secondary">한국어 번역 초안</button
-            ><button id="undoTranslation" class="secondary">
-              원문으로 복원</button
-            ><button id="exportSrt" class="secondary">SRT 저장</button>
-          </div>
-          <label for="srtFile">SRT 자막 불러오기</label
-          ><input type="file" id="srtFile" accept=".srt" />
-          <div id="cues"></div>
-        </div>
-      </section>
-      <aside>
-        <section class="card preview">
-          <small>PREVIEW</small>
-          <h2>화면 미리보기</h2>
-          <canvas
-            id="canvas"
-            width="720"
-            height="1280"
-            aria-label="세로 영상 미리보기"
-          ></canvas>
-          <p class="muted">
-            제목·자막 배치를 확인하는 미리보기입니다. 최종 음성 합성 결과는 출력
-            영상에서 확인하세요.
-          </p>
-        </section>
-        <section class="card" id="audioPanel">
-          <small>03 / AUDIO</small>
-          <h2>내레이션</h2>
-          <label for="script">한국어 원고</label
-          ><textarea
-            id="script"
-            rows="5"
-            maxlength="1500"
-            placeholder="영상에 넣을 한국어 내레이션"
-          ></textarea>
-          <div class="two">
-            <div>
-              <label for="voice">목소리</label
-              ><select id="voice">
-                <option value="ko-KR-InJoonNeural">인준 · 온라인 무료</option>
-                <option value="ko-KR-SunHiNeural">선희 · 온라인 무료</option>
-                <option value="ko-KR-HyunsuMultilingualNeural">
-                  현수 · 온라인 무료
-                </option>
-                <option value="M1">Supertonic 남성 1 · 기기 내</option>
-                <option value="M2">Supertonic 남성 2</option>
-                <option value="F1">Supertonic 여성 1</option>
-                <option value="F2">Supertonic 여성 2</option>
-              </select>
-            </div>
-            <div>
-              <label for="speed">말하기 속도</label
-              ><input
-                type="number"
-                id="speed"
-                min="0.7"
-                max="1.5"
-                step="0.05"
-                value="1.05"
-              />
-            </div>
-          </div>
-          <label for="pitch">음성 높이(Hz) · 온라인 음성</label
-          ><input
-            id="pitch"
-            type="number"
-            min="-30"
-            max="30"
-            value="10"
-          /><button id="tts">무료 음성 만들기</button>
-          <p class="muted">
-            인준·선희·현수는 원고를 Microsoft 음성 서비스로 전달합니다. 무료
-            서버가 쉬고 있으면 처음 약 1분 걸립니다. Supertonic은 기기 안에서
-            처리하며 첫 실행 약 400MB 다운로드가 필요합니다.
-          </p>
-          <label for="narrationFile">또는 녹음·음성 파일</label
-          ><input id="narrationFile" type="file" accept="audio/*" /><audio
-            id="narrationPlayer"
-            controls
-          ></audio
-          ><button id="removeNarration" class="secondary">음성 빼기</button
-          ><label for="narrationStart">내레이션 시작 위치(초)</label
-          ><input
-            id="narrationStart"
-            type="number"
-            min="0"
-            step="0.1"
-            value="0"
-          /><label for="originalVolume"
-            >원본 소리 <output id="originalVolumeLabel">83%</output></label
-          ><input
-            id="originalVolume"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value="0.83"
-          /><label class="row"
-            ><input
-              id="duck"
-              type="checkbox"
-              checked
-              style="width: 20px"
-            />내레이션 중 원본 소리 낮추기</label
-          ><label for="narrationVolume">내레이션 크기</label
-          ><input
-            id="narrationVolume"
-            type="range"
-            min="0"
-            max="2"
-            step="0.05"
-            value="1"
-          /><label for="bgmFile">배경음악</label
-          ><input id="bgmFile" type="file" accept="audio/*" /><button
-            id="removeBgm"
-            class="secondary"
-          >
-            배경음악 빼기
-          </button>
-          <p id="bgmName" class="muted">선택 없음</p>
-          <label for="bgmVolume">배경음악 크기</label
-          ><input
-            id="bgmVolume"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value="0.15"
-          />
-        </section>
-        <section class="card">
-          <h2>효과음</h2>
-          <label for="effectCount">자동 배치 개수</label
-          ><input
-            id="effectCount"
-            type="number"
-            min="0"
-            max="30"
-            value="3"
-          /><button id="arrangeEffects" class="secondary">
-            대사를 피해 자동 배치</button
-          ><button id="addEffect" class="secondary">직접 추가</button>
-          <p class="muted">
-            팝·톡·스윽 효과음. 시간은 편집 완료 영상 기준입니다.
-          </p>
-          <div id="effects"></div>
-        </section>
-        <section class="card" id="exportPanel">
-          <small>04 / EXPORT</small>
-          <h2>완성 영상</h2>
-          <label for="quality">출력 해상도</label
-          ><select id="quality">
-            <option value="720">720 × 1280 · 권장</option>
-            <option value="1080">1080 × 1920 · 더 느림</option></select
-          ><button id="render" class="primary">MP4 만들기</button
-          ><button id="cancel" class="secondary" hidden>작업 중단</button>
-          <p class="muted">
-            만드는 동안 이 탭을 열어 두세요. 휴대폰 메모리가 부족하면 더 짧은
-            구간으로 나눠 출력하세요.
-          </p>
-          <video id="result" controls playsinline hidden></video
-          ><a id="download" class="button" hidden>MP4 저장</a
-          ><button id="share" class="secondary" hidden>
-            휴대폰으로 공유·저장
-          </button>
-          <p id="outputState" class="muted"></p>
-        </section>
-      </aside>
-    </main>
-    <footer>
-      해짜 릴스 제작실 · 무료 브라우저 에디션 · 작업 파일은 현재 기기에
-      보관됩니다.
-    </footer>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>해짜 릴스 제작실</title>
+<style>
+body:not(.editing) main{grid-template-columns:minmax(280px,420px) minmax(300px,620px);justify-content:center}
+body:not(.editing) #previewPanel{display:block;grid-column:auto}
+#sourcePanel>.card:first-child,#sourcePanel>.card:last-child{display:none}
+.mobile-nav{display:none}
+@media(max-width:700px){body:not(.editing) main{display:block}#connectPanel{margin:15px!important}}
+
+:root{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:#202831;background:#f3f4f2}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}header{padding:26px 40px;border-bottom:1px solid #daddd8;display:flex;justify-content:space-between;align-items:center;background:#fafbf9}h1{font-size:24px;letter-spacing:-1px;margin:0}h2{font-size:17px;margin:0 0 18px}.eyebrow{font-size:11px;letter-spacing:2px;color:#5a756c;margin-bottom:8px}.badge{background:#e5eee7;padding:8px 12px;border-radius:20px;font-size:12px;color:#27523f}main{max-width:1500px;margin:auto;padding:28px;display:grid;grid-template-columns:280px minmax(350px,1fr) 330px;gap:22px}.card{background:white;border:1px solid #e0e3dd;border-radius:14px;padding:22px;margin-bottom:18px}label{display:block;font-size:13px;margin:15px 0 7px;color:#525e59}input,textarea,select{width:100%;font:inherit;border:1px solid #cbd2c9;border-radius:7px;padding:10px;background:#fafbf9}textarea{resize:vertical;line-height:1.5}button,.link{font:inherit;font-size:13px;cursor:pointer;background:#244d3c;color:white;border:0;border-radius:7px;padding:11px 15px;text-decoration:none;display:inline-block}button:disabled{opacity:.5;cursor:wait}button.secondary{color:#244d3c;background:#eaf0eb}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.muted{color:#717b75;font-size:12px;line-height:1.65}.project{display:block;width:100%;text-align:left;background:#f0f3ee;color:#273c31;margin:8px 0;overflow-wrap:anywhere}.project.active{outline:2px solid #386549}#preview{width:100%;max-height:590px;background:#10151b;border-radius:12px}#notice{padding:14px;border-radius:8px;background:#f7ecd7;white-space:pre-wrap;font-size:13px;display:none;margin-bottom:16px}.stage{font-size:12px;padding:9px 0;border-bottom:1px solid #eef0eb}.stage b{display:inline-block;min-width:95px}.cue{padding:12px 0;border-bottom:1px solid #edf0ea}.time{font-size:12px;color:#65716a}.source{font-size:12px;color:#819087;margin:6px 0}#cues{max-height:470px;overflow:auto}summary{cursor:pointer;font-size:14px}#results button{display:block;text-align:left;margin-top:8px;width:100%}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}footer{padding:5px 40px 25px;color:#7b857e;font-size:12px}.pill{font-size:11px;border:1px solid #cbd5c8;border-radius:4px;padding:3px 6px;color:#54765f}@media(max-width:1100px){main{grid-template-columns:230px 1fr}.right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:20px}}@media(max-width:700px){header{padding:20px}main{display:block;padding:15px}.right{display:block}}
+
+#cutEditor{background:#19221f;color:#eef6f0;border-color:#304239;padding:20px;grid-column:1/-1}#cutEditor .muted{color:#b4c5bb}#cutEditor h2{color:#fff}#cutEditor button.secondary{background:#34473d;color:#e4f6eb}#cutEditor input{background:#293a31;color:#fff;border-color:#587160}#cutEditor button:disabled{cursor:default;opacity:.35}.timeline-view{position:relative;overflow-x:auto;background:#111a15;border:1px solid #3b5345;border-radius:8px;margin:14px 0;touch-action:pan-x}.timeline-inner{position:relative;min-width:100%;height:225px;user-select:none}.timeline-ruler{height:28px;position:relative;font-size:10px;color:#a8bdb0}.timeline-tick{position:absolute;top:6px;transform:translateX(-50%);border-left:1px solid #57715f;padding-left:3px;white-space:nowrap}.timeline-track{position:relative;height:82px;margin:0 12px;background:#25392d;background-size:100% 100%;cursor:crosshair}.timeline-clip{position:absolute;top:0;height:82px;border:2px solid #6ee7a4;background:rgba(26,100,62,.43);border-radius:5px;color:white;overflow:visible;cursor:pointer;touch-action:none}.timeline-clip.excluded{border:1px dashed #64736a;background:rgba(12,16,14,.8);color:#9aa69f}.timeline-clip.selected{border-color:#ffe68b;box-shadow:0 0 0 2px #ffe68b;z-index:3}.clip-label{position:absolute;bottom:6px;left:9px;right:9px;font-size:11px;overflow:hidden;white-space:nowrap;pointer-events:none;background:#132219aa;padding:3px}.trim-handle{position:absolute;top:-2px;bottom:-2px;width:13px;background:#b4f9ca;border:0;border-radius:4px;cursor:ew-resize;padding:0;touch-action:none;z-index:5}.trim-handle.start{left:-2px}.trim-handle.end{right:-2px}.timeline-clip:not(.selected) .trim-handle{display:none}.trim-handle:after{content:'‖';color:#1b3827;position:absolute;top:30px;left:3px}.timeline-head{position:absolute;top:23px;height:190px;width:2px;background:#ff646b;z-index:8;pointer-events:none}.timeline-head:before{content:'';position:absolute;left:-5px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid #ff646b}.timeline-legend{display:flex;justify-content:space-between;font-size:11px;padding:9px 12px;color:#afc5b7}.timeline-output{display:flex;gap:3px;min-height:32px;margin:9px 0 16px}.timeline-output button{min-width:12px;overflow:hidden;white-space:nowrap;padding:7px 2px;background:#386449;border-radius:4px;font-size:11px}.timeline-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.timeline-tools label{margin:0}.cut-monitor{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:18px;align-items:center}#cutPreview{width:100%;max-height:290px;background:#070b09;border-radius:8px}#cutSelection{font-size:14px;line-height:1.8}#cutApply{background:#bbf7cd;color:#163522;font-weight:700}.cut-apply-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid #3c5144;padding-top:16px;margin-top:16px}#cutSeek{accent-color:#ef737a;padding:0}#cutEditor details{margin-top:18px}#cutEditor .cue{border-color:#3c5144}@media(max-width:650px){.cut-monitor{grid-template-columns:1fr}#cutPreview{max-height:230px}}
+.sfx-track{position:relative;height:62px;margin:10px 12px 0;background:repeating-linear-gradient(90deg,#281f38 0,#281f38 49px,#392a4d 50px);border-radius:5px}.sfx-marker{position:absolute;transform:translateX(-50%);min-width:26px;height:25px;padding:3px 5px;background:#b899f5;color:#231432;border:1px solid #d7c4ff;font-size:11px;touch-action:none;cursor:ew-resize;z-index:4}.sfx-marker.selected{outline:2px solid #ffe68b;z-index:6}.sfx-marker.removed{background:#49424e;color:#c8c3cb;border-style:dashed}.sfx-inspector{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:#292235;padding:12px;border-radius:8px;margin:10px 0}.sfx-inspector label{color:#d2bedf!important;margin:0 0 5px}.sfx-inspector input,.sfx-inspector select{width:100px!important}.sfx-inspector select{background:#392e47;color:#fff}#sfxSelected{flex-basis:100%;font-size:13px;color:#e4d4ff}
+
+html{scroll-behavior:smooth;scroll-padding-top:72px}main>*{min-width:0}.mobile-nav{display:none}button,.link,input,select,summary{touch-action:manipulation}.pill{overflow-wrap:anywhere}video{max-width:100%}
+@media(max-width:700px){
+ header{gap:12px;padding:16px}.badge{max-width:45%;overflow-wrap:anywhere}
+ main{padding:12px}.card{padding:16px}input,textarea,select{font-size:16px;min-height:44px}button,.link,summary{min-height:44px}
+ .mobile-nav{display:flex;position:sticky;top:0;z-index:30;justify-content:space-around;gap:4px;padding:8px;background:#fafbf9;border-bottom:1px solid #daddd8}
+ .mobile-nav a{flex:1;text-align:center;padding:12px 4px;color:#244d3c;text-decoration:none;font-size:14px;border-radius:6px;background:#eaf0eb}
+ #projects{max-height:220px;overflow:auto}#cues{max-height:none}#cutEditor{padding:14px}.timeline-tools{gap:10px}
+ .trim-handle{width:24px;min-height:44px}.trim-handle:after{left:8px}.sfx-track{height:102px}.sfx-marker{height:44px;min-width:44px}
+ .timeline-inner{height:265px}.timeline-head{height:230px}.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ footer{padding:16px;padding-bottom:max(20px,env(safe-area-inset-bottom))}.timeline-legend{flex-wrap:wrap;gap:6px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<header><div><div class="eyebrow">REEL STUDIO</div><h1>릴스 제작실</h1></div><div class="badge" id="aiState">맥 연결 확인 중</div></header><nav class="mobile-nav" aria-label="작업 바로가기"><a href="#sourcePanel">새 영상</a><a href="#editorPanel">편집</a><a href="#cutEditor">타임라인</a><a href="#previewPanel">미리보기</a></nav>
+<section id="connectPanel" class="card" style="max-width:650px;margin:24px auto"><h2>내 맥 제작기 연결</h2><p>맥에서 ‘웹 연결 시작.command’를 실행하고 표시되는 연결 코드를 입력하세요. 처음 한 번 연결하면 다음부터 링크만 넣어 제작할 수 있어요.</p><form id="connectForm"><label for="connectCode">맥 연결 코드</label><input id="connectCode" autocomplete="off" required maxlength="12"><button id="connectButton" style="margin-top:12px">내 제작기 연결</button><p id="connectError" role="alert"></p></form></section><div id="notice" role="status" style="max-width:1000px;margin:15px auto"></div><main><aside id="sourcePanel"><div class="card"><details><summary>개발 체크리스트</summary><p class="muted">문서의 전체 공장은 개발 중입니다. 각 항목의 구현·검증 상태를 표시합니다.</p><div id="development"></div></details></div><div class="card"><h2>새 영상 만들기</h2><p class="muted">링크 하나로 제목·한국어 자막·컷·음향을 구성하고 영상을 만듭니다. 완성본을 본 뒤 필요한 부분만 수정하세요. 제작하는 동안 맥은 켜 두세요.</p><label for="url">YouTube 영상 링크</label><input id="url" placeholder="https://youtube.com/shorts/…"><div class="row" style="margin-top:12px"><button id="new">링크로 릴스 자동 완성</button><button hidden class="secondary" id="importOnly">원본만 가져오기 · 번역 안 함</button></div></div><div class="card"><h2>작업 목록</h2><div id="projects"></div></div><div class="card"><details><summary>소재 찾기</summary><label for="search">검색어</label><input id="search" placeholder="couple comedy shorts"><button id="searchBtn" style="margin-top:10px">후보 검색</button><p class="muted">YouTube 공개 검색 · 3분 이하 후보<br>선택한 영상만 가져옵니다.</p><div id="results"></div></details></div></aside>
+<section id="editorPanel" hidden><div class="card"><div class="row" style="justify-content:space-between"><h2>편집 대본</h2><span class="pill" id="pid">프로젝트 선택</span></div><p class="muted">자동 대본은 초안입니다. 말뜻·화자·중요 장면을 확인한 뒤 다듬어 주세요.</p><label for="title">제목 · 줄바꿈 가능</label><textarea id="title" rows="3" placeholder="영상 제목"></textarea><div id="titleSuggestions" class="row" style="margin-top:8px"></div><div class="two"><div><label for="titleSize">제목 크기</label><input id="titleSize" type="number" value="124" min="24" max="160"></div><div><label for="subSize">번역 자막 크기</label><input id="subSize" type="number" value="73.5" step=".5" min="24" max="110"></div></div><div class="two"><div><label for="titleX">제목 가로 위치 · 가운데 기준</label><input id="titleX" type="number" min="0" max="1080" value="540"></div><div><label for="titleY">제목 세로 위치 · 위쪽 기준</label><input id="titleY" type="number" min="0" max="1850" value="60"></div><div><label for="subX">본문 자막 가로 위치 · 가운데 기준</label><input id="subX" type="number" min="0" max="1080" value="540"></div><div><label for="subY">본문 자막 세로 위치 · 위쪽 기준</label><input id="subY" type="number" min="0" max="1850" value="1460"></div></div><p class="muted">1080 × 1920 화면 기준. 가로 540은 중앙입니다. 모든 본문 자막에 같은 위치와 크기를 적용합니다. 원본 영상에 박힌 영어 자막은 이동하지 않습니다.</p><label for="layoutAt">배치 확인할 대사</label><select id="layoutAt"></select><button id="layoutPreview" class="secondary" style="margin-top:12px">현재 배치 미리보기</button><p id="layoutStatus" class="muted">위치·크기를 바꾼 뒤 미리보기로 확인하세요. 저장 후 ‘수정 반영해 다시 만들기’를 누르면 영상에 적용됩니다.</p><img id="layoutImage" hidden alt="현재 제목과 본문 자막 배치" style="width:100%;max-width:360px;border-radius:8px"><div class="two"><div><label for="titleFont">제목 글꼴</label><select id="titleFont"></select></div><div><label for="subtitleFont">본문 글꼴</label><select id="subtitleFont"></select></div></div><p class="muted">제작실에 등록된 한글 지원 글꼴입니다. 글꼴을 바꾼 뒤 배치 미리보기로 줄바꿈을 확인하세요.</p><div class="row"><button id="save">대본 저장</button><button id="render">수정 반영해 다시 만들기</button><button id="draft" class="secondary">AI 대본 새로 만들기</button></div></div><div class="card" id="cutEditor"><div class="row" style="justify-content:space-between"><h2>컷편집 타임라인</h2><span id="cutLength" class="muted"></span></div><div class="cut-monitor"><video id="cutPreview" controls playsinline preload="metadata"></video><div><p id="cutSelection">바에서 구간을 선택하세요.</p><p class="muted">초록은 사용할 구간, 어두운 구간은 제외된 부분이에요. 양끝 손잡이를 드래그해 길이를 조절하세요.</p><div class="timeline-tools"><button id="cutPlay" class="secondary">선택 구간 재생</button><button id="cutPlayAll" class="secondary">편집본 이어보기</button></div><p id="cutPreviewStatus" class="muted">원본 영상으로 컷 연결을 미리 봅니다.</p></div></div><div class="timeline-tools"><button id="cutSplit" class="secondary">현재 위치에서 분할</button><button id="cutToggle" class="secondary">선택 구간 제외</button><button id="cutUndo" class="secondary">되돌리기</button><label for="cutZoom">타임라인 확대</label><input id="cutZoom" type="range" min="1" max="6" step=".5" value="1" style="width:100px"></div><div class="timeline-view" id="timelineView"><div class="timeline-inner" id="timelineInner"><div class="timeline-ruler" id="timelineRuler"></div><div class="timeline-track" id="timelineTrack" aria-label="원본 영상 컷 타임라인"></div><div id="sfxTrack" class="sfx-track" aria-label="효과음 타임라인 트랙"></div><div class="timeline-head" id="timelineHead"></div><div class="timeline-legend"><span>초록 · 사용　어둡게 · 제외</span><span id="cutTime">00:00.00</span></div></div></div><div class="timeline-tools"><strong style="font-size:13px;color:#d4b8ff">♪ 효과음 트랙</strong><button id="sfxAddHere" class="secondary">재생 위치에 효과음 추가</button><button id="sfxUndo" class="secondary" disabled>효과음 되돌리기</button></div><p id="sfxTrackStatus" class="muted">보라색 마커에서 효과음 위치를 확인하세요.</p><div id="sfxInspector" class="sfx-inspector" hidden><strong id="sfxSelected"></strong><div><label for="sfxTrackAt">시작 초 · 도입 포함</label><input id="sfxTrackAt" type="number" min="0" step=".01"></div><div><label for="sfxTrackKind">효과음 종류</label><select id="sfxTrackKind"><option value="pop">팝</option><option value="tap">톡</option><option value="swish">전환</option></select></div><div><label for="sfxTrackGain">음량</label><input id="sfxTrackGain" type="number" min=".1" max="1" step=".1"></div><button id="sfxScene" class="secondary">주변 장면 보기</button><button id="sfxTrackDelete" class="secondary">선택 효과음 삭제</button></div><label for="cutSeek" class="muted">원본 재생 위치 · 방향키로 미세 조정</label><input id="cutSeek" type="range" min="0" max="1" step="0.0333333333" value="0"><p class="muted">완성본 연결 순서</p><div id="timelineOutput" class="timeline-output"></div><div class="cut-apply-row"><button id="cutApply" disabled>컷편집 적용 · 영상 다시 만들기</button><span id="cutApplyState" class="muted">바를 수정한 뒤 적용 버튼을 눌러 주세요.</span></div><details><summary>초 단위 정밀 조정</summary><div id="cutRows"></div><div class="row"><button id="addCut" class="secondary">구간 추가</button><button id="resetCuts" class="secondary">원본 전체 사용</button></div></details></div><div class="card"><h2>효과음 편집</h2><label for="sfxCount">넣을 개수 · 0이면 끄기</label><input id="sfxCount" type="number" min="0" max="30" value="15"><button id="arrangeSfx" class="secondary" style="margin-top:8px">대사 빈틈에 자동 배치</button><p class="muted">편집 전 영상 기준 시간이며 컷에 맞춰 자동 이동합니다. 배치 후 시간·종류·음량을 수정할 수 있어요. 저장하고 다시 만들면 적용됩니다.</p><div id="sfxEvents"></div></div><div class="card"><h2>이 장면, 왜 웃길까?</h2><p class="muted">대사를 읽기 전에 보는 웃음 구조와 편집 제안입니다. 해석 메모이며 영상에 자동으로 삽입되지는 않습니다.</p><div id="humor"></div></div><div class="card"><h2>번역 자막</h2><div id="cues"><p class="muted">영상을 가져오면 여기에 대본이 표시됩니다.</p></div></div><div class="card"><details open><summary>중계 나레이션</summary><label for="voiceChoice">나레이션 목소리</label><select id="voiceChoice"><option value="ko-KR-InJoonNeural">인준 · 온라인 신경망 남성</option><option value="ko-KR-HyunsuMultilingualNeural">현수 · 온라인 신경망 남성</option><option value="ko-KR-SunHiNeural">선희 · 온라인 신경망 여성</option><option value="Yuna">유나 · 맥 기본 음성</option></select><div class="two"><div><label for="voiceSpeed">말하기 속도 · 배율</label><input id="voiceSpeed" type="number" min="0.6" max="1.57" step="0.05" value="1.4"></div><div><label for="voicePitch">목소리 높이 · Hz</label><input id="voicePitch" type="number" min="-30" max="30" step="1" value="10"></div></div><p id="voiceInfo" class="muted"></p><button id="voicePreview" class="secondary">첫 나레이션 미리듣기</button><audio id="voiceAudio" controls style="width:100%;margin-top:12px" hidden></audio><div id="narrations"></div></details></div></section>
+<aside class="right" id="previewPanel"><button id="editToggle" class="secondary" style="margin-bottom:20px">마음에 안 드는 부분 수정하기</button><div class="card"><h2>영상 미리보기</h2><video id="preview" controls playsinline preload="metadata"></video><p class="muted">재생을 누르면 소리와 함께 재생됩니다.</p><div class="row"><button id="sound" class="secondary">소리 켜고 재생</button><a id="download" class="link" hidden download>MP4 다운로드</a></div><label for="volume">미리보기 음량</label><input id="volume" type="range" min="0" max="1" step=".05" value="1"><div class="two"><div><label for="originalVolume">원음 배율</label><input id="originalVolume" type="number" min="0" max="2" step=".1" value=".83"></div><div><label for="narrVolume">중계 음성 배율</label><input id="narrVolume" type="number" min="0" max="2" step=".1" value="1"></div></div><p id="qa" class="muted"></p></div><div class="card"><h2>제작·검사</h2><div class="row"><button id="continueJob">자동 제작 계속하기</button><button id="checkVideo" class="secondary">현재 영상 다시 검사</button></div><p class="muted">계속하기는 저장된 분석과 대본을 재사용합니다. 새 번역이 필요하면 ‘AI 대본 새로 만들기’를 사용하세요.</p><div id="checkDetails"></div><h2 style="margin-top:20px">진행 상황</h2><div id="status" class="muted">대기 중</div><p class="muted">분석·번역·음성은 저장해서 재사용합니다. 글꼴이나 자막 위치만 수정하면 AI를 다시 부르지 않습니다.</p></div></aside></main><footer><a href="/manual.html">이전 파일 편집기 · 브라우저 저장 작업</a><br>영상 편집은 이 맥에서 실행 · 나레이션은 선택한 음성 엔진 사용 · 자동 업로드 없음</footer>
+<script src="/relay-client.js"></script><script src="/timeline-model.js"></script>
+<script>
+const $=id=>document.getElementById(id);let current=null,dirty=false,lastPhase='';
+async function api(path,data){return relayApi(path,data)}
+function notice(t){$('notice').textContent=t;$('notice').style.display=t?'block':'none'}
+function guard(fn){return async()=>{try{await fn()}catch(e){notice(e.message)}}}
+function text(tag,t,cls){let e=document.createElement(tag);e.textContent=t;if(cls)e.className=cls;return e}
+async function list(){const rows=await api('/api/projects');$('projects').replaceChildren();for(let r of rows){let b=text('button',(r.display_name||r.id),'project'+(current?.id===r.id?' active':''));b.onclick=guard(()=>select(r.id));$('projects').append(b)}return rows}
+function state(d){let box=$('status');box.replaceChildren();let names={'comments':'댓글·설명','ai-screen':'AI 영상 판별','captions-read':'원본 자막','voice':'목소리 측정','blur':'원본 자막 유지','scene':'얼굴·장면','camera-marks':'화면 변화','audio-marks':'소리 측정','direct':'연출안','relay-seat':'번역·중계','narrate':'음성 생성','layout':'시간표','relay-render':'영상 제작','package':'검수 꾸러미',download:'원본 수집',transcribe:'대사 분석',captions:'원본 자막 읽기',draft:'AI 번역·중계',render:'영상 제작',check:'검사',produce:'전체 제작'};let phases={pending:'미실행',queued:'대기',running:'진행 중',done:'완료',cached:'저장 결과 재사용',failed:'실패'};for(let k of [...new Set(['download','comments','ai-screen','transcribe','captions-read','voice','blur','scene','camera-marks','audio-marks','direct','relay-seat','narrate','layout','relay-render','check','package',...Object.keys(d.stages||{})])]){let v=d.stages?.[k]||{phase:'pending'};let row=text('div','','stage');row.append(text('b',names[k]||k),text('span',v.measurement==='NOT_MEASURED'?'미측정':v.measurement==='PARTIAL'?'일부 측정':v.measurement==='INCOMPLETE'?'추가 검사 필요':v.measurement==='SAVED_PLAN'?'저장된 대본 재사용':phases[v.phase]||v.phase));if(v.error)row.append(text('p',v.error));box.append(row)}}
+function preview(d){drawChecks(d);if(!d.latest){let ready=['done','cached'].includes(d.state?.stages?.download?.phase);let src=ready?mediaPath('/media/'+d.id+'/source/source.mp4'):'';if(($('preview').getAttribute('src')||'')!==src){$('preview').pause();if(src)$('preview').src=src;else $('preview').removeAttribute('src');$('preview').load()}$('download').hidden=true;$('download').removeAttribute('href');$('qa').textContent=ready?'원본 준비 완료 · 자동 제작 진행 상황을 확인하세요.':'새 원본을 가져오는 중입니다.';return;}let src=mediaPath('/media/'+d.id+'/output/'+d.latest.file);if($('preview').getAttribute('src')!==src){$('preview').src=src;$('preview').muted=false;$('preview').volume=+$('volume').value} $('download').href=src;$('download').hidden=false;$('qa').textContent=(d.latest.qa.technical_pass?'영상·음성 기술 검사 통과. ':'기술 검사 실패. ')+(d.latest.qa.verdict==='INCOMPLETE'?'필수 미측정 항목이 있어 완성본 등록 전입니다. ':'')+'번역·연출 품질은 미리보기로 확인해 주세요.'}
+async function select(id){if(dirty&&current?.id!==id&&!confirm('저장하지 않은 수정 내용이 있습니다. 다른 작업으로 이동할까요?'))return;current=await api('/api/project/'+id);dirty=false;lastPhase=current.state?.phase;draw();await list()}
+function drawHumor(d){
+ const box=$('humor');box.replaceChildren();
+ if(!d.humor){box.append(text('p','아직 웃음 포인트 해설이 없습니다. 새 AI 대본에는 근거 대사와 편집 제안을 함께 작성합니다.','muted'));return}
+ box.append(text('p',d.humor.summary));
+ for(const point of d.humor.points){
+  const row=text('article','','cue');row.append(text('strong',point.label));
+  row.append(text('div','원본 '+point.start.toFixed(1)+'–'+point.end.toFixed(1)+'초','time'));
+  row.append(text('p','근거 대사 · '+point.evidence,'source'));
+  row.append(text('p','웃음 포인트 · '+point.why));
+  row.append(text('p','편집 제안 · '+point.edit));
+  const button=text('button','이 구간 보기','secondary');button.disabled=!d.latest;
+  button.onclick=guard(async()=>{const video=$('preview');const at=outputTime(point.start);if(at===null)throw Error('컷편집에서 제외된 구간입니다.');video.currentTime=at;await video.play()});row.append(button);box.append(row);
+ }
+}
+function draw(){drawHumor(current);drawCuts();drawSfx();let d=current,p=d.plan,s=d.style;$('pid').textContent=d.id;$('title').value=p?.title||'';$('titleSuggestions').replaceChildren();for(const option of p?.title_options||[]){let b=text('button',option,'secondary');b.onclick=()=>{$('title').value=option;dirty=true;$('layoutImage').hidden=true};$('titleSuggestions').append(b)}$('titleSize').value=s.title_size;$('subSize').value=s.subtitle_size;$('subY').value=s.subtitle_y;$('titleFont').value=s.title_font||'';$('subtitleFont').value=s.subtitle_font||'';$('titleX').value=s.title_x??540;$('titleY').value=s.title_y;$('subX').value=s.subtitle_x??540;$('layoutImage').hidden=true;$('layoutAt').replaceChildren();for(const c of p?.cues||[]){let o=text('option',c.start.toFixed(1)+'초 · '+c.text);o.value=(c.start+c.end)/2;$('layoutAt').append(o);}$('originalVolume').value=s.original_volume;$('narrVolume').value=s.narration_volume;$('voiceChoice').value=s.voice;$('voiceSpeed').value=(s.voice_rate/190).toFixed(2);$('voicePitch').value=s.voice_pitch||0;voiceInfo();$('cues').replaceChildren();$('narrations').replaceChildren();if(p){p.cues.forEach((c,i)=>{let row=text('div','','cue');row.append(text('div','원본 '+c.start.toFixed(2)+'–'+c.end.toFixed(2)+'초 · '+(c.speaker||'대사'),'time'));if(c.source_text)row.append(text('div',c.source_text,'source'));let ta=document.createElement('textarea');ta.rows=2;ta.value=c.text;ta.oninput=()=>{current.plan.cues[i].text=ta.value;dirty=true};row.append(ta);addRetranslate(row,ta,c,i);$('cues').append(row)});(p.narrations||[]).forEach((n,i)=>{let row=text('div','','cue');row.append(text('div',n.at.toFixed(2)+'초 시작','time'));let ta=document.createElement('textarea');ta.value=n.text;ta.oninput=()=>{current.plan.narrations[i].text=ta.value;dirty=true};row.append(ta);$('narrations').append(row)})}state(d.state||{});preview(d)}
+function addRetranslate(row,ta,c,index){
+ const pid=current.id;const hint=document.createElement('input');hint.placeholder='재번역 방향 (선택) · 더 쉽게 / 앞뒤 대사와 자연스럽게';hint.setAttribute('aria-label','자막 '+(index+1)+' 재번역 방향');
+ const ask=text('button','AI 재번역 제안','secondary');ask.style.marginTop='8px';ask.disabled=!c.source_text;const result=text('div','','muted');
+ ask.onclick=guard(async()=>{ask.disabled=true;result.textContent='앞뒤 대사를 읽고 재번역 중입니다. 직접 수정한 문장은 유지됩니다.';try{const answer=await api('/api/retranslate',{id:pid,index,current:ta.value,hint:hint.value});if(current?.id!==pid)return;result.replaceChildren(text('p','제안: '+answer.translation),text('p','뜻풀이: '+answer.explanation));const apply=text('button','이 제안 적용','secondary');apply.onclick=()=>{const before=ta.value;ta.value=answer.translation;c.text=answer.translation;dirty=true;apply.disabled=true;const undo=text('button','적용 전 문장 복원','secondary');undo.onclick=()=>{if(ta.value!==answer.translation){notice('적용 후 직접 수정한 내용이 있어 복원하지 않았어요.');return}ta.value=before;c.text=before;dirty=true;undo.remove();apply.disabled=false};result.append(undo)};result.append(apply);}catch(e){result.textContent='재번역 실패: '+e.message+' · 직접 수정은 계속 가능합니다.';}finally{ask.disabled=false}});
+ row.append(hint,ask,result);
+}
+
+let cutSelected=null,cutPosition=0,cutHistory=[],cutProject=null,cutPlayback=0,cutDragging=false,cutRendering=false;
+const timelineThumbs=new Map();
+document.querySelector('main').prepend($('cutEditor'));
+function cutRows(){const rows=current?.plan?.cut_rows||current?.plan?.keep_ranges?.map(r=>({...r,keep:true}))||[{start:0,end:current?.source_duration||0,keep:true}];return current?.source_duration?CutModel.normalize(rows,current.source_duration):[];}
+function rememberCuts(){cutHistory.push(JSON.parse(JSON.stringify(cutRows())));if(cutHistory.length>30)cutHistory.shift();}
+function syncCuts(rows){current.plan.cut_rows=rows;current.plan.keep_ranges=CutModel.merged(rows);dirty=true;cutLength();$('cutApplyState').textContent='컷 수정됨 · 적용하면 저장하고 영상을 다시 만듭니다.';}
+function cutLength(){if(!current?.plan){$('cutLength').textContent='대본과 원본을 먼저 가져오세요.';return}const rows=cutRows().filter(r=>r.keep);const body=rows.reduce((v,r)=>v+CutModel.frame(r.end)-CutModel.frame(r.start),0)/30;$('cutLength').textContent='원본 '+current.source_duration.toFixed(1)+'초 → 편집본 '+(body+current.plan.intro_seconds+current.plan.outro_seconds).toFixed(1)+'초';}
+function outputTime(t){const p=current.plan;if(!p.keep_ranges)return t+p.intro_seconds;let at=p.intro_seconds;for(const r of p.keep_ranges){if(t>=r.start&&t<r.end)return at+t-r.start;at+=r.end-r.start}return null;}
+function clockText(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(2).padStart(5,'0');}
+function showCutPosition(t){cutPosition=Math.max(0,Math.min(current?.source_duration||0,t));$('cutSeek').value=cutPosition;$('cutTime').textContent=clockText(cutPosition);const track=$('timelineTrack');$('timelineHead').style.left=(track.offsetLeft+cutPosition/(current?.source_duration||1)*track.clientWidth)+'px';}
+async function ensureCutVideo(){const v=$('cutPreview'),src=mediaPath('/media/'+current.id+'/source/source.mp4');if(v.getAttribute('src')!==src){v.src=src;v.load();}if(v.readyState<1)await new Promise((resolve,reject)=>{v.addEventListener('loadedmetadata',resolve,{once:true});v.addEventListener('error',()=>reject(Error('원본을 재생할 수 없습니다.')),{once:true})});return v;}
+async function seekCut(t){++cutPlayback;const v=await ensureCutVideo();v.pause();v.currentTime=Math.max(0,Math.min(current.source_duration-1/30,t));showCutPosition(v.currentTime);}
+async function playCut(parts,label){if(!parts.length)throw Error('사용할 구간을 선택하세요.');const v=await ensureCutVideo(),token=++cutPlayback;let i=0;v.pause();v.currentTime=parts[0].start;$('cutPreviewStatus').textContent=label;await v.play();function tick(){if(token!==cutPlayback)return;showCutPosition(v.currentTime);if(v.currentTime>=parts[i].end-.015){i++;if(i>=parts.length){v.pause();$('cutPreviewStatus').textContent=label+' · 재생 완료';return}v.currentTime=parts[i].start}requestAnimationFrame(tick)}requestAnimationFrame(tick);}
+function selectedCut(){return cutRows().find(r=>r.id===cutSelected);}
+function paintSelection(){const r=selectedCut();$('cutSelection').textContent=r?(r.keep?'사용 구간':'제외 구간')+' · '+clockText(r.start)+' – '+clockText(r.end)+' · '+(r.end-r.start).toFixed(2)+'초':'바에서 구간을 선택하세요.';$('cutToggle').textContent=r?.keep?'선택 구간 제외':'선택 구간 복원';for(const id of ['cutToggle','cutPlay'])$(id).disabled=!r;$('cutUndo').disabled=!cutHistory.length;}
+function drawTimeline(){
+ if(!current?.plan||!current.source_duration)return;
+ const rows=cutRows(),d=current.source_duration,track=$('timelineTrack');track.replaceChildren();$('timelineInner').style.width=(+$('cutZoom').value*100)+'%';$('cutSeek').max=d;
+ const ruler=$('timelineRuler');ruler.replaceChildren();const step=d>60?10:5;for(let t=0;t<=d;t+=step){const tick=text('span',clockText(t).slice(0,5),'timeline-tick');tick.style.left=(12+t/d*(track.clientWidth))+'px';ruler.append(tick);}
+ rows.forEach((r,i)=>{
+  const bar=text('div','','timeline-clip'+(r.keep?'':' excluded')+(r.id===cutSelected?' selected':''));bar.dataset.clipId=r.id;bar.style.left=(r.start/d*100)+'%';bar.style.width=((r.end-r.start)/d*100)+'%';bar.tabIndex=0;bar.setAttribute('role','button');bar.setAttribute('aria-label',(r.keep?'사용':'제외')+' 구간 '+clockText(r.start)+'부터 '+clockText(r.end));bar.append(text('span',r.keep?(r.end-r.start).toFixed(1)+'초':'제외','clip-label'));
+  bar.onclick=event=>{if(event.target.closest('.trim-handle'))return;cutSelected=r.id;drawTimeline();const rect=track.getBoundingClientRect();seekCut((event.clientX-rect.left)/rect.width*d).catch(e=>notice(e.message));};bar.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cutSelected=r.id;drawTimeline();seekCut(r.start).catch(e=>notice(e.message));}};
+  if(r.keep)for(const edge of ['start','end']){const h=text('button','','trim-handle '+edge);h.setAttribute('aria-label','구간 '+(i+1)+' '+(edge==='start'?'시작':'끝')+' 손잡이');h.onpointerdown=e=>beginTrim(e,r.id,edge);h.onkeydown=e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();rememberCuts();const delta=(e.key==='ArrowLeft'?-1:1)*(e.shiftKey?10:1)/30;cutSelected=r.id;syncCuts(CutModel.trim(cutRows(),r.id,edge,r[edge]+delta,d));drawCuts(false);};bar.append(h);}
+  track.append(bar);
+ });
+ const out=$('timelineOutput');out.replaceChildren();rows.filter(r=>r.keep).forEach((r,i)=>{const b=text('button',String(i+1)+' · '+(r.end-r.start).toFixed(1)+'초');b.style.flex=String(r.end-r.start);b.setAttribute('aria-label','완성본 '+(i+1)+'번째 구간 보기');b.onclick=guard(async()=>{cutSelected=r.id;drawTimeline();await seekCut(r.start)});out.append(b)});paintSelection();showCutPosition(cutPosition);drawSfxTrack();
+}
+function beginTrim(e,id,edge){
+ e.preventDefault();e.stopPropagation();rememberCuts();cutSelected=id;cutDragging=true;++cutPlayback;$('cutPreview').pause();const initial=cutRows(),track=$('timelineTrack');
+ function move(event){const rect=track.getBoundingClientRect(),t=(event.clientX-rect.left)/rect.width*current.source_duration;syncCuts(CutModel.trim(initial,id,edge,t,current.source_duration));drawTimeline();const r=selectedCut();if(r){showCutPosition(r[edge]);$('cutPreview').currentTime=Math.min(r[edge],current.source_duration-1/30);}}
+ function up(){cutDragging=false;document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);drawCuts(false);}
+ document.addEventListener('pointermove',move);document.addEventListener('pointerup',up,{once:true});document.addEventListener('pointercancel',up,{once:true});
+}
+function drawCuts(reset=true){
+ if(cutProject!==current?.id){cutProject=current?.id;selectedSfx=-1;sfxHistory=[];cutSelected=null;cutPosition=0;cutHistory=[];$('cutApplyState').textContent='바를 수정한 뒤 적용 버튼을 눌러 주세요.';}
+ const ready=Boolean(current?.plan&&current.source_duration);for(const id of ['cutApply','cutSplit','cutPlayAll','addCut','resetCuts'])$(id).disabled=!ready;
+ if(!ready){++cutPlayback;$('cutPreview').pause();$('cutPreview').removeAttribute('src');$('timelineTrack').replaceChildren();$('sfxTrack').replaceChildren();$('sfxInspector').hidden=true;$('timelineOutput').replaceChildren();$('cutRows').replaceChildren();$('cutSelection').textContent='원본과 대본을 먼저 가져오세요.';cutLength();return;}
+ if(reset){++cutPlayback;$('cutPreview').pause();}
+ const rows=cutRows();if(!rows.some(r=>r.id===cutSelected))cutSelected=rows.find(r=>r.keep)?.id||rows[0]?.id;cutLength();drawTimeline();
+ const v=$('cutPreview'),src=mediaPath('/media/'+current.id+'/source/source.mp4');if(v.getAttribute('src')!==src){v.src=src;v.load();}
+ const pid=current.id;if(!timelineThumbs.has(pid)){timelineThumbs.set(pid,null);api('/api/timeline/'+pid).then(r=>{timelineThumbs.set(pid,r.image);if(current?.id===pid)$('timelineTrack').style.backgroundImage='url('+r.image+')';}).catch(()=>timelineThumbs.delete(pid));}else if(timelineThumbs.get(pid))$('timelineTrack').style.backgroundImage='url('+timelineThumbs.get(pid)+')';
+ const box=$('cutRows');box.replaceChildren();rows.forEach((r,i)=>{const row=text('div','','cue'),controls=text('div','','row');const keep=document.createElement('input');keep.type='checkbox';keep.style.width='auto';keep.checked=r.keep;keep.setAttribute('aria-label','구간 '+(i+1)+' 사용');keep.onchange=()=>{rememberCuts();r.keep=keep.checked;syncCuts(CutModel.normalize(rows,current.source_duration));drawCuts(false)};controls.append(keep,text('span','구간 '+(i+1)));
+ for(const [key,label]of [['start','시작'],['end','끝']]){const input=document.createElement('input');input.type='number';input.min=0;input.step='.033333';input.value=+r[key].toFixed(3);input.style.width='105px';input.disabled=!r.keep;input.setAttribute('aria-label','구간 '+(i+1)+' '+label+' 초');input.onchange=()=>{rememberCuts();cutSelected=r.id;syncCuts(CutModel.trim(rows,r.id,key,+input.value,current.source_duration));drawCuts(false)};controls.append(text('span',label),input)}row.append(controls);box.append(row)});
+}
+$('timelineTrack').onclick=e=>{if(e.target!==$('timelineTrack'))return;const rect=e.currentTarget.getBoundingClientRect();seekCut((e.clientX-rect.left)/rect.width*current.source_duration).catch(e=>notice(e.message));};
+$('cutSeek').oninput=()=>seekCut(+$('cutSeek').value).catch(e=>notice(e.message));
+$('cutPreview').ontimeupdate=()=>{if(!cutDragging)showCutPosition($('cutPreview').currentTime);};
+$('cutZoom').oninput=drawTimeline;window.addEventListener('resize',()=>{if(current?.plan)drawTimeline()});
+$('cutSplit').onclick=guard(async()=>{if(!current?.plan)return;const rows=CutModel.split(cutRows(),cutPosition,current.source_duration);rememberCuts();syncCuts(rows);drawCuts(false)});
+$('cutToggle').onclick=guard(async()=>{const rows=cutRows(),r=rows.find(r=>r.id===cutSelected);if(!r)return;rememberCuts();r.keep=!r.keep;syncCuts(CutModel.normalize(rows,current.source_duration));drawCuts(false)});
+$('cutUndo').onclick=()=>{if(!cutHistory.length)return;syncCuts(cutHistory.pop());drawCuts(false)};
+$('cutPlay').onclick=guard(()=>playCut([selectedCut()].filter(Boolean),'선택 구간 재생'));
+$('cutPlayAll').onclick=guard(()=>playCut(cutRows().filter(r=>r.keep),'사용 구간 연결 미리보기'));
+$('cutApply').onclick=guard(async()=>{if(!current?.plan)throw Error('대본을 먼저 가져오세요.');$('cutApply').disabled=true;try{await save();await api('/api/run',{id:current.id,stage:'render'});cutRendering=true;$('cutApplyState').textContent='저장 완료 · 영상을 만들고 있어요. 오른쪽 미리보기가 갱신됩니다.';notice('컷편집을 저장하고 영상에 적용 중입니다.');}catch(e){$('cutApplyState').textContent='적용 실패: '+e.message;throw e;}finally{$('cutApply').disabled=false}});
+$('addCut').onclick=guard(async()=>{const gap=cutRows().find(r=>!r.keep);if(!gap)throw Error('전체가 사용 중이에요. 재생선을 놓고 분할하세요.');cutSelected=gap.id;drawTimeline();await seekCut(gap.start);notice('제외 구간을 선택했어요. 선택 구간 복원으로 다시 넣을 수 있습니다.')});
+$('resetCuts').onclick=guard(async()=>{if(!current?.plan)return;rememberCuts();syncCuts(CutModel.normalize([{start:0,end:current.source_duration,keep:true}],current.source_duration));drawCuts(false)});
+
+let selectedSfx=-1,sfxHistory=[];
+const sfxNames={pop:'팝',tap:'톡',swish:'전환'},sfxLengths={pop:.16,tap:.14,swish:.22};
+function sfxPlacement(e){return CutModel.effectPlacement(cutRows(),e,current.plan.intro_seconds,current.source_duration,current.plan.outro_seconds);}
+function rememberSfx(){sfxHistory.push(JSON.parse(JSON.stringify(current.plan.sound_effects||[])));if(sfxHistory.length>30)sfxHistory.shift();}
+function changedSfx(){dirty=true;$('cutApplyState').textContent='효과음 수정됨 · 아래 적용 버튼으로 영상에 반영하세요.';drawSfx();drawSfxTrack();}
+function drawSfxTrack(){
+ const track=$('sfxTrack');track.replaceChildren();if(!current?.plan||!current.source_duration){$('sfxInspector').hidden=true;return;}
+ const events=current.plan.sound_effects||[],d=current.source_duration;
+ events.forEach((e,i)=>{const pos=sfxPlacement(e),b=text('button','♪ '+(i+1),'sfx-marker'+(pos.output===null?' removed':'')+(i===selectedSfx?' selected':''));b.style.left=(Math.max(0,Math.min(d,pos.source))/d*100)+'%';b.style.top=(i%2?(matchMedia('(max-width:700px)').matches?53:29):3)+'px';b.title=(i+1)+'. '+sfxNames[e.kind]+' · 원본 '+clockText(Math.max(0,pos.source))+' · '+(pos.output===null?'컷으로 제외':('편집본 '+clockText(pos.output)));b.setAttribute('aria-label','타임라인 효과음 '+(i+1)+' '+sfxNames[e.kind]);b.onclick=()=>{selectedSfx=i;drawSfxTrack();seekCut(Math.max(0,pos.source)).catch(e=>notice(e.message));};b.onpointerdown=event=>dragSfx(event,i);b.onkeydown=event=>{if(!['ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();rememberSfx();e.at=+Math.max(current.plan.intro_seconds,Math.min(current.plan.intro_seconds+d-sfxLengths[e.kind],e.at+(event.key==='ArrowLeft'?-1:1)*(event.shiftKey?10:1)/30)).toFixed(6);selectedSfx=i;changedSfx();};track.append(b);});
+ const e=events[selectedSfx];$('sfxInspector').hidden=!e;$('sfxUndo').disabled=!sfxHistory.length;
+ if(e){const pos=sfxPlacement(e);$('sfxSelected').textContent='효과음 '+(selectedSfx+1)+' · '+(pos.output===null?'컷으로 제외됨':pos.region==='body'?'편집본 '+clockText(pos.output):pos.region==='intro'?'도입 구간':'마무리 구간');$('sfxTrackAt').value=+e.at.toFixed(3);$('sfxTrackKind').value=e.kind;$('sfxTrackGain').value=e.gain??1;
+ const a=e.at-current.plan.intro_seconds,b=a+sfxLengths[e.kind];const overlap=current.plan.cues.some(c=>a<c.end&&b>c.start)||current.plan.narrations?.some(n=>e.at<n.at+(n.duration??n.max_duration)&&e.at+sfxLengths[e.kind]>n.at);$('sfxTrackStatus').textContent=pos.output===null?'잘라낸 구간에 걸쳐 있어 완성 영상에서는 빠집니다.':overlap?'대사 또는 나레이션과 겹쳐요. 빈틈으로 옮긴 뒤 적용하세요.':'영상 바와 같은 원본 시간축입니다. 드래그하거나 방향키로 옮길 수 있어요.';
+ }else $('sfxTrackStatus').textContent=events.length?'보라색 마커를 선택해 위치·종류·음량을 조절하세요.':'효과음이 없습니다. 재생선을 놓고 효과음을 추가하세요.';
+}
+function dragSfx(event,index){
+ if(event.button!==0)return;event.preventDefault();event.stopPropagation();const rect=$('sfxTrack').getBoundingClientRect(),origin=event.clientX,initial=current.plan.sound_effects[index].at;let moved=false;selectedSfx=index;rememberSfx();
+ function move(e){if(Math.abs(e.clientX-origin)>2)moved=true;if(!moved)return;const item=current.plan.sound_effects[index];item.at=+Math.max(current.plan.intro_seconds,Math.min(current.plan.intro_seconds+current.source_duration-sfxLengths[item.kind],initial+(e.clientX-origin)/rect.width*current.source_duration)).toFixed(6);changedSfx();showCutPosition(item.at-current.plan.intro_seconds);}
+ function up(){document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);if(!moved){sfxHistory.pop();seekCut(Math.max(0,current.plan.sound_effects[index].at-current.plan.intro_seconds)).catch(e=>notice(e.message));}drawSfxTrack();}
+ document.addEventListener('pointermove',move);document.addEventListener('pointerup',up,{once:true});document.addEventListener('pointercancel',up,{once:true});
+}
+$('sfxTrackAt').onchange=()=>{const e=current.plan.sound_effects[selectedSfx],at=+$('sfxTrackAt').value;if(!Number.isFinite(at)||at<0)return;rememberSfx();e.at=at;changedSfx();};
+$('sfxTrackKind').onchange=()=>{rememberSfx();current.plan.sound_effects[selectedSfx].kind=$('sfxTrackKind').value;changedSfx();};
+$('sfxTrackGain').onchange=()=>{rememberSfx();current.plan.sound_effects[selectedSfx].gain=+$('sfxTrackGain').value;changedSfx();};
+$('sfxTrackDelete').onclick=()=>{rememberSfx();current.plan.sound_effects.splice(selectedSfx,1);selectedSfx=-1;changedSfx();};
+$('sfxUndo').onclick=()=>{if(!sfxHistory.length)return;current.plan.sound_effects=sfxHistory.pop();selectedSfx=-1;changedSfx();};
+$('sfxAddHere').onclick=guard(async()=>{if(!current?.plan)return;rememberSfx();const events=current.plan.sound_effects||(current.plan.sound_effects=[]);events.push({at:+(cutPosition+current.plan.intro_seconds).toFixed(6),kind:'tap',gain:.7});selectedSfx=events.length-1;changedSfx();});
+$('sfxScene').onclick=guard(async()=>{const e=current.plan.sound_effects[selectedSfx],t=e.at-current.plan.intro_seconds;await playCut([{start:Math.max(0,t-1),end:Math.min(current.source_duration,t+1)}],'효과음 위치 주변 원본 · 효과음은 적용 후 완성본에서 들을 수 있어요.');});
+
+function drawChecks(d){const box=$('checkDetails');box.replaceChildren();const q=d.latest?.qa;if(!q){box.append(text('p','검사할 완성 영상이 아직 없습니다.','muted'));return}box.append(text('p','검사 판정: '+q.verdict));const labels={resolution:'해상도',duration:'길이',audio_track:'오디오 존재',non_silent:'무음 여부',full_decode:'전체 파일 재생 검사',final_audio_peak:'최대 음량',subtitle_pixel_visibility:'자막 픽셀 확인',original_caption_overlap:'원본 자막 겹침',effect_tracking:'효과 추적'};for(const [k,v]of Object.entries(q.checks||{}))box.append(text('div',(v?'통과 · ':'실패 · ')+(labels[k]||k),'stage'));for(const k of q.unmeasured_required||[])box.append(text('div','미측정 · '+(labels[k]||k),'stage'));box.append(text('p','번역 정확도·이야기 해석은 직접 확인이 필요합니다. 현재 검사는 통합 음량 목표 등 지침 전체를 포함하지 않습니다.','muted'));}
+function drawSfx(){const box=$('sfxEvents');box.replaceChildren();const events=current?.plan?.sound_effects||[];$('sfxCount').value=events.length||15;box.append(text('p','현재 배치 '+events.length+'개','muted'));events.forEach((e,i)=>{let row=text('div','','row');let time=document.createElement('input');time.type='number';time.step='.01';time.min=0;time.value=e.at;time.style.width='95px';time.setAttribute('aria-label','효과음 '+(i+1)+' 시작 초');time.oninput=()=>{e.at=+time.value;dirty=true;drawSfxTrack()};let kind=document.createElement('select');kind.style.width='100px';kind.setAttribute('aria-label','효과음 '+(i+1)+' 종류');for(const [k,label] of [['pop','팝'],['tap','톡'],['swish','전환']]){let o=text('option',label);o.value=k;kind.append(o)}kind.value=e.kind;kind.onchange=()=>{e.kind=kind.value;dirty=true;drawSfxTrack()};let gain=document.createElement('input');gain.type='number';gain.min='.1';gain.max='1';gain.step='.1';gain.value=e.gain??1;gain.style.width='80px';gain.setAttribute('aria-label','효과음 '+(i+1)+' 음량');gain.oninput=()=>{e.gain=+gain.value;dirty=true;drawSfxTrack()};let remove=text('button','삭제','secondary');remove.onclick=()=>{current.plan.sound_effects.splice(i,1);dirty=true;drawSfx();drawSfxTrack()};row.append(time,kind,gain,remove);box.append(row)})}
+$('arrangeSfx').onclick=guard(async()=>{if(!current?.plan)throw Error('제목과 번역 대본을 먼저 생성하세요.');const count=+$('sfxCount').value;const r=await api('/api/sfx-arrange',{id:current.id,plan:current.plan,count});current.plan.sound_effects=r.events;dirty=true;drawSfx();drawSfxTrack();notice('효과음 '+r.events.length+'개를 배치했어요. 저장하고 다시 만들면 영상에 적용됩니다.')});
+$('continueJob').onclick=guard(async()=>{if(!current)throw Error('프로젝트를 선택하세요.');if(dirty&&current.plan)await save();await api('/api/run',{id:current.id,stage:'produce'});notice('저장된 작업부터 자동 제작을 계속합니다.')});
+$('checkVideo').onclick=guard(async()=>{if(!current?.latest)throw Error('영상을 먼저 만들어 주세요.');if(dirty)throw Error('수정 내용이 있습니다. 저장하고 다시 만든 뒤 검사하세요.');await api('/api/run',{id:current.id,stage:'check'});notice('현재 저장된 영상 파일을 다시 검사합니다.')});
+function voiceInfo(){const local=$('voiceChoice').value==='Yuna';$('voicePitch').disabled=local;if(local)$('voicePitch').value=0;$('voiceInfo').textContent=local?'맥 기본 음성 · 오프라인':'Microsoft 온라인 TTS · 나레이션 문장을 전송해 음성 생성 · 별도 API 키·결제 없이 사용';}
+function chosenVoice(){return {voice:$('voiceChoice').value,voice_rate:Math.round(+$('voiceSpeed').value*190),voice_pitch:+$('voicePitch').value};}
+$('voiceChoice').onchange=()=>{voiceInfo();dirty=true};for(const id of ['voiceSpeed','voicePitch'])$(id).oninput=()=>dirty=true;
+$('voicePreview').onclick=guard(async()=>{if(!current?.plan?.narrations?.length)throw Error('미리들을 나레이션이 없습니다.');$('voicePreview').disabled=true;try{const r=await api('/api/voice-preview',{id:current.id,text:current.plan.narrations[0].text,style:{...current.style,...chosenVoice()}});const audio=$('voiceAudio');audio.hidden=false;audio.src=r.url;await audio.play();}finally{$('voicePreview').disabled=false}});
+function layoutStyle(){return {title_font:$('titleFont').value,subtitle_font:$('subtitleFont').value,title_size:+$('titleSize').value,subtitle_size:+$('subSize').value,title_x:+$('titleX').value,title_y:+$('titleY').value,subtitle_x:+$('subX').value,subtitle_y:+$('subY').value};}
+$('layoutPreview').onclick=guard(async()=>{if(!current?.plan)throw Error('프로젝트를 먼저 선택하세요.');$('layoutPreview').disabled=true;try{const result=await api('/api/layout-preview',{id:current.id,plan:{...current.plan,title:$('title').value},style:{...current.style,...layoutStyle()},at:+$('layoutAt').value});$('layoutImage').src=result.image;$('layoutImage').hidden=false;$('layoutStatus').textContent='현재 입력값으로 만든 배치입니다. 아직 저장하거나 영상에 반영하지 않았습니다.';}finally{$('layoutPreview').disabled=false}});
+async function save(){if(!current?.plan)throw Error('대본이 아직 없습니다. AI 대본 만들기를 먼저 실행하세요.');current.plan.title=$('title').value;current.plan.sound_effects?.sort((a,b)=>a.at-b.at);selectedSfx=-1;Object.assign(current.style,{...chosenVoice(),...layoutStyle(),original_volume:+$('originalVolume').value,narration_volume:+$('narrVolume').value});await api('/api/save',{id:current.id,plan:current.plan,style:current.style});dirty=false;notice('저장했어요.')}
+async function create(stage){const r=await api('/api/new',{url:$('url').value});await select(r.id);await api('/api/run',{id:r.id,stage});notice('제작 대기열에 넣었어요.')}
+$('new').onclick=guard(async()=>{$('new').disabled=true;try{await create('produce')}finally{$('new').disabled=false}});$('importOnly').onclick=guard(()=>create('download'));$('save').onclick=guard(save);$('render').onclick=guard(async()=>{await save();await api('/api/run',{id:current.id,stage:'render'});notice('저장된 분석을 재사용해 영상을 다시 만들고 있어요.')});$('draft').onclick=guard(async()=>{if(!current)throw Error('프로젝트를 먼저 선택하세요.');if(current.plan&&!confirm('수정한 대본을 보관하고 AI 초안으로 교체할까요?'))return;await api('/api/run',{id:current.id,stage:'draft',regenerate:true});notice('로컬 AI가 대본을 만들고 있어요. 인텔 맥에서는 시간이 걸릴 수 있어요.')});
+$('sound').onclick=guard(async()=>{let v=$('preview');v.muted=false;v.volume=1;$('volume').value=1;await v.play()});$('volume').oninput=()=>{$('preview').volume=+$('volume').value;$('preview').muted=false};for(let id of ['titleFont','subtitleFont','title','titleSize','subSize','titleX','titleY','subX','subY','originalVolume','narrVolume'])$(id).oninput=()=>{dirty=true;$('layoutStatus').textContent='배치 수정됨 · 현재 배치 미리보기로 확인하세요.';$('layoutImage').hidden=true};
+$('searchBtn').onclick=guard(async()=>{$('searchBtn').disabled=true;try{let rows=await api('/api/search',{query:$('search').value});$('results').replaceChildren();for(let r of rows){let b=text('button',r.title+' · '+(r.duration||'?')+'초','secondary');b.onclick=()=>{$('url').value=r.url;notice('링크를 입력했어요. 자동 제작 또는 원본만 받기를 선택하세요.')};$('results').append(b)}if(!rows.length)$('results').append(text('p','3분 이하 후보가 없습니다. 검색어를 바꿔 주세요.','muted'))}finally{$('searchBtn').disabled=false}});
+let polling=false;async function poll(){if(polling||!studioToken)return;polling=true;try{let h=await api('/api/health');$('aiState').textContent=h.local_ai_ready?'로컬 AI 준비됨 · 외부 API 0원':'로컬 AI 준비 중 / 연결 필요';if(current){let d=await api('/api/project/'+current.id);state(d.state||{});preview(d);let phase=d.state?.phase;if(cutRendering&&['done','failed'].includes(phase)){cutRendering=false;$('cutApplyState').textContent=phase==='done'?'적용 완료 · 새 영상이 미리보기에 준비됐어요.':'영상 제작 실패 · 진행 상황에서 원인을 확인하세요.';}if(!dirty&&(phase!==lastPhase||(!current.plan&&d.plan))){current=d;draw()}lastPhase=phase}}catch(e){$('aiState').textContent='맥 연결 확인 필요';notice(e.message)}finally{polling=false}}
+(async()=>{try{let fonts=await api('/api/fonts');for(const id of ['titleFont','subtitleFont'])for(const f of fonts){let o=text('option',f.label);o.value=f.id;$(id).append(o)}let dev=await api('/api/development');for(let row of dev.rows){let e=text('p',row.step+' '+row.item+' — '+row.status,'muted');$('development').append(e)}let rows=await list();if(rows.length)await select(rows[0].id);await poll()}catch(e){notice(e.message)}})();setInterval(poll,5000);
+</script></html>

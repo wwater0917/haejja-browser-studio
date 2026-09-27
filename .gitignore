@@ -3,3 +3,5 @@ dist/
 .env*
 public/core/
 public/ort/
+__pycache__/
+*.pyc
