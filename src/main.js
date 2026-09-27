@@ -1,44 +1,855 @@
-import './style.css';import {arrangeEffects} from './sound';import {fresh,validCuts,total,mappedCues,srt,parseSrt} from './model';import {saveProject,getProject,listProjects} from './storage';import {renderVideo,extractAudio,cancelMedia} from './media';import {zipSync,unzipSync,strToU8,strFromU8} from 'fflate';
-const $=id=>document.getElementById(id),fields=['title','sourceUrl','titleSize','subtitleSize','fit','script','voice','speed','narrationStart','originalVolume','narrationVolume','bgmVolume','quality','aiNotes','pitch','titleY','subtitleY','videoX','videoY','videoW','videoH','duck'],numbers=new Set(['titleSize','subtitleSize','speed','narrationStart','originalVolume','narrationVolume','bgmVolume','quality','pitch','titleY','subtitleY','videoX','videoY','videoW','videoH']);let p=fresh(),busy=false,saveTimer,output=null,worker=null,sourceURL='',narrURL='',resultURL='',playOrder=null;
-const status=(s,error=false)=>{$('status').textContent=s;$('status').classList.toggle('error',error)};
-const el=(tag,text)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;return x};
-function stale(){if(output){$('outputState').textContent='편집 내용이 바뀌었어요. MP4를 다시 만들어 주세요.';$('download').hidden=true;$('share').hidden=true;}clearTimeout(saveTimer);if(p.video)saveTimer=setTimeout(()=>saveProject(p).catch(e=>status('기기 저장 공간이 부족해 자동 저장하지 못했습니다. 작업 백업을 받아 주세요.',true)),600)}
-function pull(){for(const k of fields)p[k]=$(k).type==='checkbox'?$(k).checked:numbers.has(k)?Number($(k).value):$(k).value;$('originalVolumeLabel').textContent=Math.round(p.originalVolume*100)+'%';}
-for(const k of fields)$(k).oninput=()=>{pull();stale();if(['script','voice','speed','pitch'].includes(k)&&p.narration)status('원고·목소리가 바뀌었어요. 음성 만들기를 다시 눌러야 출력에 반영됩니다.');};
-async function run(fn){if(busy)return;busy=true;playOrder=null;$('source').pause();for(const x of document.querySelectorAll('button,input,select,textarea'))x.disabled=true;$('cancel').hidden=false;$('cancel').disabled=false;$('progress').hidden=false;$('progress').removeAttribute('value');try{await fn()}catch(e){status(e.message||String(e),true)}finally{busy=false;for(const x of document.querySelectorAll('button,input,select,textarea'))x.disabled=false;$('cancel').hidden=true;$('progress').hidden=true}}
-let cancelReject=null,remoteAbort=null;$('cancel').onclick=()=>{remoteAbort?.abort();cancelMedia();worker?.terminate();worker=null;cancelReject?.(Error('작업을 중단했습니다. 편집 내용은 유지됩니다.'));cancelReject=null;status('작업을 중단했습니다. 편집 내용은 유지됩니다.')};
-function askWorker(type,data){return new Promise((resolve,reject)=>{cancelReject=reject;worker=type==='translate'?new Worker(new URL('./translation.worker.js',import.meta.url),{type:'module'}):type==='ai'?new Worker(new URL('./ai.worker.js',import.meta.url),{type:'module'}):type==='tts'?new Worker(new URL('./tts.worker.js',import.meta.url),{type:'module'}):new Worker(new URL('./asr.worker.js',import.meta.url),{type:'module'});worker.onmessage=({data:d})=>{if(d.progress)status(d.progress);else{worker.terminate();worker=null;cancelReject=null;d.error?reject(Error(d.error)):resolve(d.result)}};worker.onerror=e=>{worker?.terminate();worker=null;cancelReject=null;reject(Error(e.message||'음성 모델을 실행할 수 없습니다. 최신 브라우저 또는 다른 기기에서 시도해 주세요.'))};worker.postMessage(data)})}
-async function loadProject(q){clearTimeout(saveTimer);p={...fresh(),...q};p.effects??=[];playOrder=null;for(const k of fields){if($(k).type==='checkbox')$(k).checked=Boolean(p[k]);else $(k).value=p[k]??'';}if(sourceURL)URL.revokeObjectURL(sourceURL);sourceURL=p.video?URL.createObjectURL(p.video):'';if(sourceURL)$('source').src=sourceURL;else $('source').removeAttribute('src');updateNarration();$('bgmName').textContent=p.bgm?.name|| (p.bgm?'배경음악 포함':'선택 없음');output=null;$('result').hidden=true;$('download').hidden=true;$('share').hidden=true;$('outputState').textContent='';drawRows();}
-async function importVideo(file){if(file.size>250*1024*1024)throw Error('250MB 이하의 영상으로 선택해 주세요. 휴대폰에서는 더 작은 파일을 권장합니다.');const q=fresh();q.name=file.name;q.video=file;await loadProject(q);await new Promise((resolve,reject)=>{const v=$('source');if(v.readyState>=1)return resolve();v.onloadedmetadata=resolve;v.onerror=()=>reject(Error('이 브라우저에서 재생할 수 없는 영상입니다. MP4/H.264 파일을 선택해 주세요.'))});p.duration=$('source').duration;if(!Number.isFinite(p.duration)||p.duration<=0)throw Error('영상 길이를 확인할 수 없습니다.');p.cuts=[{start:0,end:p.duration,keep:true}];drawRows();await saveProject(p);await refreshProjects();status(`${p.name} · ${p.duration.toFixed(1)}초 영상을 불러왔어요.`)}
-$('videoFile').onchange=e=>{const f=e.target.files[0];if(f)run(()=>importVideo(f))};
-async function refreshProjects(){const rows=await listProjects();$('projects').replaceChildren();for(const q of rows){const b=el('button',q.title||q.name);b.className='project';b.onclick=()=>run(async()=>{await loadProject(await getProject(q.id));status('저장된 작업을 불러왔어요.')});$('projects').append(b)}}
-$('save').onclick=()=>run(async()=>{pull();if(!p.video)throw Error('먼저 영상을 선택하세요.');await saveProject(p);await refreshProjects();status('이 브라우저에 작업을 저장했어요.')});
-function timeInput(value,label,change){const box=el('div'),l=el('label',label),input=el('input');input.type='number';input.step='.01';input.min='0';input.value=value.toFixed(2);input.setAttribute('aria-label',label);input.oninput=()=>{change(Number(input.value));stale();drawDuration()};l.append(input);box.append(l);return box}
-function drawDuration(){$('duration').textContent=`원본 ${p.duration.toFixed(1)}초 · 사용할 길이 ${Math.max(0,total(p)).toFixed(1)}초`}
-function drawRows(){drawDuration();drawEffects();$('cuts').replaceChildren();p.cuts.forEach((c,i)=>{const box=el('div');box.className='cut';const top=el('div');top.className='row';const check=el('input');check.type='checkbox';check.checked=c.keep;check.setAttribute('aria-label',`${i+1}번 구간 사용`);check.onchange=()=>{c.keep=check.checked;stale();drawDuration()};top.append(check,el('b',`${i+1}번 구간`));for(const [label,action] of [['↑',()=>{if(i>0)[p.cuts[i-1],p.cuts[i]]=[p.cuts[i],p.cuts[i-1]]}],['↓',()=>{if(i<p.cuts.length-1)[p.cuts[i+1],p.cuts[i]]=[p.cuts[i],p.cuts[i+1]]}],['삭제',()=>p.cuts.splice(i,1)]]){const b=el('button',label);b.className='secondary';b.setAttribute('aria-label',`${i+1}번 구간 ${label}`);b.onclick=()=>{action();stale();drawRows()};top.append(b)}const times=el('div');times.className='time-fields';times.append(timeInput(c.start,`${i+1}번 구간 시작(초)`,v=>c.start=v),timeInput(c.end,`${i+1}번 구간 끝(초)`,v=>c.end=v));box.append(top,times);$('cuts').append(box)});$('cues').replaceChildren();p.cues.forEach((c,i)=>{const box=el('div');box.className='cue';const times=el('div');times.className='time-fields';times.append(timeInput(c.start,`${i+1}번 자막 시작`,v=>c.start=v),timeInput(c.end,`${i+1}번 자막 끝`,v=>c.end=v));const text=el('textarea');text.value=c.text;text.rows=2;text.setAttribute('aria-label',`${i+1}번 자막 내용`);text.oninput=()=>{c.text=text.value;stale()};const b=el('button','자막 삭제');b.className='secondary';b.onclick=()=>{p.cues.splice(i,1);stale();drawRows()};box.append(times,text,b);$('cues').append(box)})}
-$('addCut').onclick=()=>{if(!p.video)return status('영상을 먼저 선택하세요.',true);p.cuts.push({start:0,end:Math.min(5,p.duration),keep:true});stale();drawRows()};$('split').onclick=()=>{const t=$('source').currentTime,i=p.cuts.findIndex(c=>c.start+.05<t&&c.end-.05>t);if(i<0)return status('구간 내부의 재생 위치를 선택하세요.',true);const c=p.cuts[i];p.cuts.splice(i,1,{...c,end:t},{...c,start:t});stale();drawRows()};$('playCuts').onclick=()=>{try{playOrder={cuts:validCuts(p),index:0};$('source').currentTime=playOrder.cuts[0].start;$('source').play().catch(e=>status(e.message,true))}catch(e){status(e.message,true)}};
-$('addCue').onclick=()=>{p.cues.push({start:0,end:Math.min(3,total(p)||3),text:''});stale();drawRows()};$('srtFile').onchange=e=>{const file=e.target.files[0];if(file)run(async()=>{p.cues=parseSrt(await file.text());stale();drawRows();status('SRT 자막을 불러왔어요.')})};
-function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}
-$('exportSrt').onclick=()=>download(new Blob([srt(p.cues)],{type:'text/plain;charset=utf-8'}),'subtitles.srt');
-$('transcribe').onclick=()=>run(async()=>{if(p.duration>600)throw Error('자동 자막은 10분 이하 원본으로 사용해 주세요.');const cuts=validCuts(p),audio=await extractAudio(p,status);status('자동 자막 준비 중… 첫 실행은 모델 다운로드가 필요해요.');const result=await askWorker('asr',{audio,language:$('asrLang').value});p.cues=mappedCues(result.chunks||[{timestamp:[0,p.duration],text:result.text}],cuts);stale();drawRows();status('원본 언어의 자막을 만들었어요. 인식 결과와 시간을 확인하세요.');});
-function updateNarration(){if(narrURL)URL.revokeObjectURL(narrURL);narrURL=p.narration?URL.createObjectURL(p.narration):'';if(narrURL)$('narrationPlayer').src=narrURL;else $('narrationPlayer').removeAttribute('src');$('narrationPlayer').hidden=!narrURL;$('narrationPlayer').onloadedmetadata=()=>{p.narrationDuration=$('narrationPlayer').duration;};}
-$('tts').onclick=()=>run(async()=>{pull();if(!p.script.trim())throw Error('한국어 원고를 입력하세요.');if(p.voice.startsWith('ko-KR-')){p.narration=await helperVoice({text:p.script,voice:p.voice,speed:p.speed,pitch:p.pitch});}else{const data=await askWorker('tts',{text:p.script,voice:p.voice,speed:p.speed});p.narration=new Blob([data],{type:'audio/wav'});}p.narrationScript=p.script;p.narrationVoice=p.voice;p.narrationSpeed=p.speed;p.narrationPitch=p.pitch;updateNarration();stale();status('한국어 음성을 만들었어요. 재생해서 확인하세요.');});
-$('narrationFile').onchange=e=>{p.narration=e.target.files[0]||p.narration;p.narrationScript=null;updateNarration();stale()};$('removeNarration').onclick=()=>{p.narration=null;updateNarration();stale()};$('bgmFile').onchange=e=>{p.bgm=e.target.files[0]||p.bgm;$('bgmName').textContent=p.bgm?.name||'선택 없음';stale()};$('removeBgm').onclick=()=>{p.bgm=null;$('bgmName').textContent='선택 없음';stale()};
-$('render').onclick=()=>run(async()=>{pull();if(p.narrationScript&&p.narration&&(p.narrationScript!==p.script||(p.narrationVoice&&p.narrationVoice!==p.voice)||(p.narrationSpeed&&p.narrationSpeed!==p.speed)||(p.narrationPitch!==undefined&&p.narrationPitch!==p.pitch)))throw Error('원고가 바뀌었어요. 음성을 다시 만들거나 음성 빼기를 눌러 주세요.');await saveProject(p);output=await renderVideo(p,status,x=>{$('progress').value=Math.max(0,Math.min(1,x));$('progress').max=1});if(resultURL)URL.revokeObjectURL(resultURL);resultURL=URL.createObjectURL(output);$('result').src=resultURL;$('result').hidden=false;$('download').href=resultURL;$('download').download='haejja-reel.mp4';$('download').hidden=false;$('share').hidden=false;$('outputState').textContent=`${(output.size/1048576).toFixed(1)}MB · ${p.quality} × ${p.quality*16/9}`;status('MP4가 완성됐어요. 아래에서 재생한 뒤 저장하세요.');});
-$('share').onclick=async()=>{if(!output)return;const file=new File([output],'haejja-reel.mp4',{type:'video/mp4'});try{if(navigator.canShare?.({files:[file]}))await navigator.share({files:[file],title:'해짜 릴스'});else download(output,'haejja-reel.mp4')}catch(e){if(e.name!=='AbortError')status(e.message,true)}};
-$('backup').onclick=()=>run(async()=>{if(!p.video)throw Error('먼저 영상을 선택하세요.');pull();const data={...p};delete data.video;delete data.narration;delete data.bgm;data.videoName=p.video.name;data.videoType=p.video.type;data.narrationType=p.narration?.type;data.bgmType=p.bgm?.type;const files={'project.json':strToU8(JSON.stringify({format:'haejja-free-v1',project:data})),'video':new Uint8Array(await p.video.arrayBuffer())};if(p.narration)files.narration=new Uint8Array(await p.narration.arrayBuffer());if(p.bgm)files.bgm=new Uint8Array(await p.bgm.arrayBuffer());download(new Blob([zipSync(files,{level:0})],{type:'application/zip'}),'haejja-project.zip');status('작업 백업 ZIP을 저장했어요. 다른 기기에서 불러올 수 있어요.')});
-$('restore').onchange=e=>{const file=e.target.files[0];if(file)run(async()=>{if(file.size>400*1048576)throw Error('백업 크기가 너무 큽니다.');const files=unzipSync(new Uint8Array(await file.arrayBuffer()));const meta=JSON.parse(strFromU8(files['project.json']));if(meta.format!=='haejja-free-v1'||!files.video||!Array.isArray(meta.project.cuts)||!Array.isArray(meta.project.cues))throw Error('이 제작실의 작업 백업 파일이 아닙니다.');const q={...fresh(),...meta.project,id:crypto.randomUUID()};q.video=new File([files.video],q.videoName||'video.mp4',{type:q.videoType||'video/mp4'});if(files.narration)q.narration=new Blob([files.narration],{type:q.narrationType||'audio/wav'});if(files.bgm)q.bgm=new Blob([files.bgm],{type:q.bgmType||'audio/mpeg'});validCuts(q);await loadProject(q);await saveProject(p);await refreshProjects();status('백업을 새 작업으로 복원했어요.')})};
-$('demo').onclick=()=>run(async()=>{status('예제 영상을 불러오는 중…');const r=await fetch('/demo.mp4');if(!r.ok)throw Error('예제 영상을 불러오지 못했습니다.');await importVideo(new File([await r.blob()],'예제 영상.mp4',{type:'video/mp4'}));p.title='나만의 릴스\n여기서 시작';p.cues=[{start:0,end:3,text:'제목과 자막을 바꿔 보세요'},{start:3,end:6,text:'완성하면 MP4로 저장'}];await loadProject(p);stale();status('예제 영상 준비 완료. MP4 만들기로 바로 시험할 수 있어요.')});
-const ctx=$('canvas').getContext('2d');function paint(){const v=$('source'),c=$('canvas'),scale=c.width/1080;ctx.fillStyle='#080a08';ctx.fillRect(0,0,c.width,c.height);if(v.readyState>=2){const w=p.videoW*scale,h=p.videoH*scale,x=p.videoX*scale,y=p.videoY*scale;ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const ratio=p.fit==='cover'?Math.max(w/v.videoWidth,h/v.videoHeight):Math.min(w/v.videoWidth,h/v.videoHeight);ctx.drawImage(v,x+(w-v.videoWidth*ratio)/2,y+(h-v.videoHeight*ratio)/2,v.videoWidth*ratio,v.videoHeight*ratio);ctx.restore();}else{ctx.fillStyle='#607666';ctx.textAlign='center';ctx.font='22px sans-serif';ctx.fillText('영상을 선택하세요',360,640)}ctx.fillStyle='white';ctx.strokeStyle='black';ctx.textAlign='center';ctx.textBaseline='top';ctx.font=`bold ${p.titleSize*scale}px NanumMyeongjo`;for(const [i,line]of p.title.split('\n').entries())ctx.fillText(line,360,(p.titleY+i*p.titleSize*1.2)*scale,660);let t=0;for(const cut of p.cuts.filter(x=>x.keep)){if(v.currentTime>=cut.start&&v.currentTime<=cut.end){t+=v.currentTime-cut.start;break}t+=cut.end-cut.start}ctx.font=`bold ${p.subtitleSize*scale}px NanumMyeongjo`;ctx.textBaseline='top';ctx.lineWidth=4;for(const cue of p.cues.filter(x=>t>=x.start&&t<x.end)){const lines=cue.text.split('\n');lines.forEach((line,i)=>{const y=(p.subtitleY+i*p.subtitleSize*1.2)*scale;ctx.strokeText(line,360,y,600);ctx.fillText(line,360,y,600)})}if(playOrder&&!v.paused&&v.currentTime>=playOrder.cuts[playOrder.index].end-.025){playOrder.index++;if(playOrder.index>=playOrder.cuts.length){v.pause();playOrder=null}else v.currentTime=playOrder.cuts[playOrder.index].start}requestAnimationFrame(paint)}
-document.fonts.load('16px NanumMyeongjo').catch(()=>{});paint();refreshProjects().catch(()=>status('이 브라우저에서는 작업 보관함을 열 수 없습니다. 백업 ZIP을 이용하세요.',true));drawRows();
+import "./style.css";
+import { arrangeEffects } from "./sound";
+import { fresh, validCuts, total, mappedCues, srt, parseSrt } from "./model";
+import { saveProject, getProject, listProjects } from "./storage";
+import { renderVideo, extractAudio, cancelMedia } from "./media";
+import { zipSync, unzipSync, strToU8, strFromU8 } from "fflate";
+const $ = (id) => document.getElementById(id),
+  fields = [
+    "title",
+    "sourceUrl",
+    "titleSize",
+    "subtitleSize",
+    "fit",
+    "script",
+    "voice",
+    "speed",
+    "narrationStart",
+    "originalVolume",
+    "narrationVolume",
+    "bgmVolume",
+    "quality",
+    "aiNotes",
+    "pitch",
+    "titleY",
+    "subtitleY",
+    "videoX",
+    "videoY",
+    "videoW",
+    "videoH",
+    "duck",
+  ],
+  numbers = new Set([
+    "titleSize",
+    "subtitleSize",
+    "speed",
+    "narrationStart",
+    "originalVolume",
+    "narrationVolume",
+    "bgmVolume",
+    "quality",
+    "pitch",
+    "titleY",
+    "subtitleY",
+    "videoX",
+    "videoY",
+    "videoW",
+    "videoH",
+  ]);
+let p = fresh(),
+  busy = false,
+  saveTimer,
+  output = null,
+  worker = null,
+  sourceURL = "",
+  narrURL = "",
+  resultURL = "",
+  playOrder = null;
+const status = (s, error = false) => {
+  $("status").textContent = s;
+  $("status").classList.toggle("error", error);
+};
+const el = (tag, text) => {
+  const x = document.createElement(tag);
+  if (text !== undefined) x.textContent = text;
+  return x;
+};
+function stale() {
+  if (output) {
+    $("outputState").textContent =
+      "편집 내용이 바뀌었어요. MP4를 다시 만들어 주세요.";
+    $("download").hidden = true;
+    $("share").hidden = true;
+  }
+  clearTimeout(saveTimer);
+  if (p.video)
+    saveTimer = setTimeout(
+      () =>
+        saveProject(p).catch((e) =>
+          status(
+            "기기 저장 공간이 부족해 자동 저장하지 못했습니다. 작업 백업을 받아 주세요.",
+            true,
+          ),
+        ),
+      600,
+    );
+}
+function pull() {
+  for (const k of fields)
+    p[k] =
+      $(k).type === "checkbox"
+        ? $(k).checked
+        : numbers.has(k)
+          ? Number($(k).value)
+          : $(k).value;
+  $("originalVolumeLabel").textContent =
+    Math.round(p.originalVolume * 100) + "%";
+}
+for (const k of fields)
+  $(k).oninput = () => {
+    pull();
+    stale();
+    if (["script", "voice", "speed", "pitch"].includes(k) && p.narration)
+      status(
+        "원고·목소리가 바뀌었어요. 음성 만들기를 다시 눌러야 출력에 반영됩니다.",
+      );
+  };
+async function run(fn) {
+  if (busy) return;
+  busy = true;
+  playOrder = null;
+  $("source").pause();
+  for (const x of document.querySelectorAll("button,input,select,textarea"))
+    x.disabled = true;
+  $("cancel").hidden = false;
+  $("cancel").disabled = false;
+  $("progress").hidden = false;
+  $("progress").removeAttribute("value");
+  try {
+    await fn();
+  } catch (e) {
+    status(e.message || String(e), true);
+  } finally {
+    busy = false;
+    for (const x of document.querySelectorAll("button,input,select,textarea"))
+      x.disabled = false;
+    $("cancel").hidden = true;
+    $("progress").hidden = true;
+  }
+}
+let cancelReject = null,
+  remoteAbort = null;
+$("cancel").onclick = () => {
+  remoteAbort?.abort();
+  cancelMedia();
+  worker?.terminate();
+  worker = null;
+  cancelReject?.(Error("작업을 중단했습니다. 편집 내용은 유지됩니다."));
+  cancelReject = null;
+  status("작업을 중단했습니다. 편집 내용은 유지됩니다.");
+};
+function askWorker(type, data) {
+  return new Promise((resolve, reject) => {
+    cancelReject = reject;
+    worker =
+      type === "translate"
+        ? new Worker(new URL("./translation.worker.js", import.meta.url), {
+            type: "module",
+          })
+        : type === "ai"
+          ? new Worker(new URL("./ai.worker.js", import.meta.url), {
+              type: "module",
+            })
+          : type === "tts"
+            ? new Worker(new URL("./tts.worker.js", import.meta.url), {
+                type: "module",
+              })
+            : new Worker(new URL("./asr.worker.js", import.meta.url), {
+                type: "module",
+              });
+    worker.onmessage = ({ data: d }) => {
+      if (d.progress) status(d.progress);
+      else {
+        worker.terminate();
+        worker = null;
+        cancelReject = null;
+        d.error ? reject(Error(d.error)) : resolve(d.result);
+      }
+    };
+    worker.onerror = (e) => {
+      worker?.terminate();
+      worker = null;
+      cancelReject = null;
+      reject(
+        Error(
+          e.message ||
+            "음성 모델을 실행할 수 없습니다. 최신 브라우저 또는 다른 기기에서 시도해 주세요.",
+        ),
+      );
+    };
+    worker.postMessage(data);
+  });
+}
+async function loadProject(q) {
+  clearTimeout(saveTimer);
+  p = { ...fresh(), ...q };
+  p.effects ??= [];
+  playOrder = null;
+  for (const k of fields) {
+    if ($(k).type === "checkbox") $(k).checked = Boolean(p[k]);
+    else $(k).value = p[k] ?? "";
+  }
+  if (sourceURL) URL.revokeObjectURL(sourceURL);
+  sourceURL = p.video ? URL.createObjectURL(p.video) : "";
+  if (sourceURL) $("source").src = sourceURL;
+  else $("source").removeAttribute("src");
+  $("source").hidden = !p.video;
+  updateNarration();
+  $("bgmName").textContent =
+    p.bgm?.name || (p.bgm ? "배경음악 포함" : "선택 없음");
+  output = null;
+  $("result").hidden = true;
+  $("download").hidden = true;
+  $("share").hidden = true;
+  $("outputState").textContent = "";
+  drawRows();
+}
+async function importVideo(file) {
+  if (file.size > 250 * 1024 * 1024)
+    throw Error(
+      "250MB 이하의 영상으로 선택해 주세요. 휴대폰에서는 더 작은 파일을 권장합니다.",
+    );
+  const q = fresh();
+  q.name = file.name;
+  q.video = file;
+  await loadProject(q);
+  await new Promise((resolve, reject) => {
+    const v = $("source");
+    if (v.readyState >= 1) return resolve();
+    v.onloadedmetadata = resolve;
+    v.onerror = () =>
+      reject(
+        Error(
+          "이 브라우저에서 재생할 수 없는 영상입니다. MP4/H.264 파일을 선택해 주세요.",
+        ),
+      );
+  });
+  p.duration = $("source").duration;
+  if (!Number.isFinite(p.duration) || p.duration <= 0)
+    throw Error("영상 길이를 확인할 수 없습니다.");
+  p.cuts = [{ start: 0, end: p.duration, keep: true }];
+  drawRows();
+  await saveProject(p);
+  await refreshProjects();
+  status(`${p.name} · ${p.duration.toFixed(1)}초 영상을 불러왔어요.`);
+}
+$("videoFile").onchange = (e) => {
+  const f = e.target.files[0];
+  if (f) run(() => importVideo(f));
+};
+async function refreshProjects() {
+  const rows = await listProjects();
+  $("projects").replaceChildren();
+  for (const q of rows) {
+    const b = el("button", q.title || q.name);
+    b.className = "project";
+    b.onclick = () =>
+      run(async () => {
+        await loadProject(await getProject(q.id));
+        status("저장된 작업을 불러왔어요.");
+      });
+    $("projects").append(b);
+  }
+}
+$("save").onclick = () =>
+  run(async () => {
+    pull();
+    if (!p.video) throw Error("먼저 영상을 선택하세요.");
+    await saveProject(p);
+    await refreshProjects();
+    status("이 브라우저에 작업을 저장했어요.");
+  });
+function timeInput(value, label, change) {
+  const box = el("div"),
+    l = el("label", label),
+    input = el("input");
+  input.type = "number";
+  input.step = ".01";
+  input.min = "0";
+  input.value = value.toFixed(2);
+  input.setAttribute("aria-label", label);
+  input.oninput = () => {
+    change(Number(input.value));
+    stale();
+    drawDuration();
+  };
+  l.append(input);
+  box.append(l);
+  return box;
+}
+function drawDuration() {
+  $("duration").textContent =
+    `원본 ${p.duration.toFixed(1)}초 · 사용할 길이 ${Math.max(0, total(p)).toFixed(1)}초`;
+}
+function drawRows() {
+  drawDuration();
+  drawEffects();
+  $("cuts").replaceChildren();
+  p.cuts.forEach((c, i) => {
+    const box = el("div");
+    box.className = "cut";
+    const top = el("div");
+    top.className = "row";
+    const check = el("input");
+    check.type = "checkbox";
+    check.checked = c.keep;
+    check.setAttribute("aria-label", `${i + 1}번 구간 사용`);
+    check.onchange = () => {
+      c.keep = check.checked;
+      stale();
+      drawDuration();
+    };
+    top.append(check, el("b", `${i + 1}번 구간`));
+    for (const [label, action] of [
+      [
+        "↑",
+        () => {
+          if (i > 0) [p.cuts[i - 1], p.cuts[i]] = [p.cuts[i], p.cuts[i - 1]];
+        },
+      ],
+      [
+        "↓",
+        () => {
+          if (i < p.cuts.length - 1)
+            [p.cuts[i + 1], p.cuts[i]] = [p.cuts[i], p.cuts[i + 1]];
+        },
+      ],
+      ["삭제", () => p.cuts.splice(i, 1)],
+    ]) {
+      const b = el("button", label);
+      b.className = "secondary";
+      b.setAttribute("aria-label", `${i + 1}번 구간 ${label}`);
+      b.onclick = () => {
+        action();
+        stale();
+        drawRows();
+      };
+      top.append(b);
+    }
+    const times = el("div");
+    times.className = "time-fields";
+    times.append(
+      timeInput(c.start, `${i + 1}번 구간 시작(초)`, (v) => (c.start = v)),
+      timeInput(c.end, `${i + 1}번 구간 끝(초)`, (v) => (c.end = v)),
+    );
+    box.append(top, times);
+    $("cuts").append(box);
+  });
+  $("cues").replaceChildren();
+  p.cues.forEach((c, i) => {
+    const box = el("div");
+    box.className = "cue";
+    const times = el("div");
+    times.className = "time-fields";
+    times.append(
+      timeInput(c.start, `${i + 1}번 자막 시작`, (v) => (c.start = v)),
+      timeInput(c.end, `${i + 1}번 자막 끝`, (v) => (c.end = v)),
+    );
+    const text = el("textarea");
+    text.value = c.text;
+    text.rows = 2;
+    text.setAttribute("aria-label", `${i + 1}번 자막 내용`);
+    text.oninput = () => {
+      c.text = text.value;
+      stale();
+    };
+    const b = el("button", "자막 삭제");
+    b.className = "secondary";
+    b.onclick = () => {
+      p.cues.splice(i, 1);
+      stale();
+      drawRows();
+    };
+    box.append(times);
+    if (c.sourceText && c.sourceText !== c.text) {
+      const original = el("p", "원문: " + c.sourceText);
+      original.className = "muted";
+      box.append(original);
+    }
+    box.append(text, b);
+    $("cues").append(box);
+  });
+}
+$("addCut").onclick = () => {
+  if (!p.video) return status("영상을 먼저 선택하세요.", true);
+  p.cuts.push({ start: 0, end: Math.min(5, p.duration), keep: true });
+  stale();
+  drawRows();
+};
+$("split").onclick = () => {
+  const t = $("source").currentTime,
+    i = p.cuts.findIndex((c) => c.start + 0.05 < t && c.end - 0.05 > t);
+  if (i < 0) return status("구간 내부의 재생 위치를 선택하세요.", true);
+  const c = p.cuts[i];
+  p.cuts.splice(i, 1, { ...c, end: t }, { ...c, start: t });
+  stale();
+  drawRows();
+};
+$("playCuts").onclick = () => {
+  try {
+    playOrder = { cuts: validCuts(p), index: 0 };
+    $("source").currentTime = playOrder.cuts[0].start;
+    $("source")
+      .play()
+      .catch((e) => status(e.message, true));
+  } catch (e) {
+    status(e.message, true);
+  }
+};
+$("addCue").onclick = () => {
+  p.cues.push({ start: 0, end: Math.min(3, total(p) || 3), text: "" });
+  stale();
+  drawRows();
+};
+$("srtFile").onchange = (e) => {
+  const file = e.target.files[0];
+  if (file)
+    run(async () => {
+      p.cues = parseSrt(await file.text());
+      stale();
+      drawRows();
+      status("SRT 자막을 불러왔어요.");
+    });
+};
+function download(blob, name) {
+  const url = URL.createObjectURL(blob),
+    a = el("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+$("exportSrt").onclick = () =>
+  download(
+    new Blob([srt(p.cues)], { type: "text/plain;charset=utf-8" }),
+    "subtitles.srt",
+  );
+$("transcribe").onclick = () =>
+  run(async () => {
+    if (p.duration > 600)
+      throw Error("자동 자막은 10분 이하 원본으로 사용해 주세요.");
+    const cuts = validCuts(p),
+      audio = await extractAudio(p, status);
+    status("자동 자막 준비 중… 첫 실행은 모델 다운로드가 필요해요.");
+    const result = await askWorker("asr", {
+      audio,
+      language: $("asrLang").value,
+    });
+    p.cues = mappedCues(
+      result.chunks || [{ timestamp: [0, p.duration], text: result.text }],
+      cuts,
+    );
+    stale();
+    drawRows();
+    status("원본 언어의 자막을 만들었어요. 인식 결과와 시간을 확인하세요.");
+  });
+function updateNarration() {
+  if (narrURL) URL.revokeObjectURL(narrURL);
+  narrURL = p.narration ? URL.createObjectURL(p.narration) : "";
+  if (narrURL) $("narrationPlayer").src = narrURL;
+  else $("narrationPlayer").removeAttribute("src");
+  $("narrationPlayer").hidden = !narrURL;
+  $("narrationPlayer").onloadedmetadata = () => {
+    p.narrationDuration = $("narrationPlayer").duration;
+  };
+}
+$("tts").onclick = () =>
+  run(async () => {
+    pull();
+    if (!p.script.trim()) throw Error("한국어 원고를 입력하세요.");
+    if (p.voice.startsWith("ko-KR-")) {
+      p.narration = await helperVoice({
+        text: p.script,
+        voice: p.voice,
+        speed: p.speed,
+        pitch: p.pitch,
+      });
+    } else {
+      const data = await askWorker("tts", {
+        text: p.script,
+        voice: p.voice,
+        speed: p.speed,
+      });
+      p.narration = new Blob([data], { type: "audio/wav" });
+    }
+    p.narrationScript = p.script;
+    p.narrationVoice = p.voice;
+    p.narrationSpeed = p.speed;
+    p.narrationPitch = p.pitch;
+    updateNarration();
+    stale();
+    status("한국어 음성을 만들었어요. 재생해서 확인하세요.");
+  });
+$("narrationFile").onchange = (e) => {
+  p.narration = e.target.files[0] || p.narration;
+  p.narrationScript = null;
+  updateNarration();
+  stale();
+};
+$("removeNarration").onclick = () => {
+  p.narration = null;
+  updateNarration();
+  stale();
+};
+$("bgmFile").onchange = (e) => {
+  p.bgm = e.target.files[0] || p.bgm;
+  $("bgmName").textContent = p.bgm?.name || "선택 없음";
+  stale();
+};
+$("removeBgm").onclick = () => {
+  p.bgm = null;
+  $("bgmName").textContent = "선택 없음";
+  stale();
+};
+$("render").onclick = () =>
+  run(async () => {
+    pull();
+    if (
+      p.narrationScript &&
+      p.narration &&
+      (p.narrationScript !== p.script ||
+        (p.narrationVoice && p.narrationVoice !== p.voice) ||
+        (p.narrationSpeed && p.narrationSpeed !== p.speed) ||
+        (p.narrationPitch !== undefined && p.narrationPitch !== p.pitch))
+    )
+      throw Error(
+        "원고가 바뀌었어요. 음성을 다시 만들거나 음성 빼기를 눌러 주세요.",
+      );
+    await saveProject(p);
+    output = await renderVideo(p, status, (x) => {
+      $("progress").value = Math.max(0, Math.min(1, x));
+      $("progress").max = 1;
+    });
+    if (resultURL) URL.revokeObjectURL(resultURL);
+    resultURL = URL.createObjectURL(output);
+    $("result").src = resultURL;
+    $("result").hidden = false;
+    $("download").href = resultURL;
+    $("download").download = "haejja-reel.mp4";
+    $("download").hidden = false;
+    $("share").hidden = false;
+    $("outputState").textContent =
+      `${(output.size / 1048576).toFixed(1)}MB · ${p.quality} × ${(p.quality * 16) / 9}`;
+    status("MP4가 완성됐어요. 아래에서 재생한 뒤 저장하세요.");
+  });
+$("share").onclick = async () => {
+  if (!output) return;
+  const file = new File([output], "haejja-reel.mp4", { type: "video/mp4" });
+  try {
+    if (navigator.canShare?.({ files: [file] }))
+      await navigator.share({ files: [file], title: "해짜 릴스" });
+    else download(output, "haejja-reel.mp4");
+  } catch (e) {
+    if (e.name !== "AbortError") status(e.message, true);
+  }
+};
+$("backup").onclick = () =>
+  run(async () => {
+    if (!p.video) throw Error("먼저 영상을 선택하세요.");
+    pull();
+    const data = { ...p };
+    delete data.video;
+    delete data.narration;
+    delete data.bgm;
+    data.videoName = p.video.name;
+    data.videoType = p.video.type;
+    data.narrationType = p.narration?.type;
+    data.bgmType = p.bgm?.type;
+    const files = {
+      "project.json": strToU8(
+        JSON.stringify({ format: "haejja-free-v1", project: data }),
+      ),
+      video: new Uint8Array(await p.video.arrayBuffer()),
+    };
+    if (p.narration)
+      files.narration = new Uint8Array(await p.narration.arrayBuffer());
+    if (p.bgm) files.bgm = new Uint8Array(await p.bgm.arrayBuffer());
+    download(
+      new Blob([zipSync(files, { level: 0 })], { type: "application/zip" }),
+      "haejja-project.zip",
+    );
+    status("작업 백업 ZIP을 저장했어요. 다른 기기에서 불러올 수 있어요.");
+  });
+$("restore").onchange = (e) => {
+  const file = e.target.files[0];
+  if (file)
+    run(async () => {
+      if (file.size > 400 * 1048576) throw Error("백업 크기가 너무 큽니다.");
+      const files = unzipSync(new Uint8Array(await file.arrayBuffer()));
+      const meta = JSON.parse(strFromU8(files["project.json"]));
+      if (
+        meta.format !== "haejja-free-v1" ||
+        !files.video ||
+        !Array.isArray(meta.project.cuts) ||
+        !Array.isArray(meta.project.cues)
+      )
+        throw Error("이 제작실의 작업 백업 파일이 아닙니다.");
+      const q = { ...fresh(), ...meta.project, id: crypto.randomUUID() };
+      q.video = new File([files.video], q.videoName || "video.mp4", {
+        type: q.videoType || "video/mp4",
+      });
+      if (files.narration)
+        q.narration = new Blob([files.narration], {
+          type: q.narrationType || "audio/wav",
+        });
+      if (files.bgm)
+        q.bgm = new Blob([files.bgm], { type: q.bgmType || "audio/mpeg" });
+      validCuts(q);
+      await loadProject(q);
+      await saveProject(p);
+      await refreshProjects();
+      status("백업을 새 작업으로 복원했어요.");
+    });
+};
+$("demo").onclick = () =>
+  run(async () => {
+    status("예제 영상을 불러오는 중…");
+    const r = await fetch("/demo.mp4");
+    if (!r.ok) throw Error("예제 영상을 불러오지 못했습니다.");
+    await importVideo(
+      new File([await r.blob()], "예제 영상.mp4", { type: "video/mp4" }),
+    );
+    p.title = "나만의 릴스\n여기서 시작";
+    p.cues = [
+      { start: 0, end: 3, text: "제목과 자막을 바꿔 보세요" },
+      { start: 3, end: 6, text: "완성하면 MP4로 저장" },
+    ];
+    await loadProject(p);
+    stale();
+    status("예제 영상 준비 완료. MP4 만들기로 바로 시험할 수 있어요.");
+  });
+const ctx = $("canvas").getContext("2d");
+function paint() {
+  const v = $("source"),
+    c = $("canvas"),
+    scale = c.width / 1080;
+  ctx.fillStyle = "#080a08";
+  ctx.fillRect(0, 0, c.width, c.height);
+  if (v.readyState >= 2) {
+    const w = p.videoW * scale,
+      h = p.videoH * scale,
+      x = p.videoX * scale,
+      y = p.videoY * scale;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.clip();
+    const ratio =
+      p.fit === "cover"
+        ? Math.max(w / v.videoWidth, h / v.videoHeight)
+        : Math.min(w / v.videoWidth, h / v.videoHeight);
+    ctx.drawImage(
+      v,
+      x + (w - v.videoWidth * ratio) / 2,
+      y + (h - v.videoHeight * ratio) / 2,
+      v.videoWidth * ratio,
+      v.videoHeight * ratio,
+    );
+    ctx.restore();
+  } else {
+    ctx.fillStyle = "#607666";
+    ctx.textAlign = "center";
+    ctx.font = "22px sans-serif";
+    ctx.fillText("영상을 선택하세요", 360, 640);
+  }
+  ctx.fillStyle = "white";
+  ctx.strokeStyle = "black";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = `bold ${p.titleSize * scale}px NanumMyeongjo`;
+  for (const [i, line] of p.title.split("\n").entries())
+    ctx.fillText(line, 360, (p.titleY + i * p.titleSize * 1.2) * scale, 660);
+  let t = 0;
+  for (const cut of p.cuts.filter((x) => x.keep)) {
+    if (v.currentTime >= cut.start && v.currentTime <= cut.end) {
+      t += v.currentTime - cut.start;
+      break;
+    }
+    t += cut.end - cut.start;
+  }
+  ctx.font = `bold ${p.subtitleSize * scale}px NanumMyeongjo`;
+  ctx.textBaseline = "top";
+  ctx.lineWidth = 4;
+  for (const cue of p.cues.filter((x) => t >= x.start && t < x.end)) {
+    const lines = cue.text.split("\n");
+    lines.forEach((line, i) => {
+      const y = (p.subtitleY + i * p.subtitleSize * 1.2) * scale;
+      ctx.strokeText(line, 360, y, 600);
+      ctx.fillText(line, 360, y, 600);
+    });
+  }
+  if (
+    playOrder &&
+    !v.paused &&
+    v.currentTime >= playOrder.cuts[playOrder.index].end - 0.025
+  ) {
+    playOrder.index++;
+    if (playOrder.index >= playOrder.cuts.length) {
+      v.pause();
+      playOrder = null;
+    } else v.currentTime = playOrder.cuts[playOrder.index].start;
+  }
+  requestAnimationFrame(paint);
+}
+document.fonts.load("16px NanumMyeongjo").catch(() => {});
+paint();
+refreshProjects().catch(() =>
+  status(
+    "이 브라우저에서는 작업 보관함을 열 수 없습니다. 백업 ZIP을 이용하세요.",
+    true,
+  ),
+);
+drawRows();
 
-$('translate').onclick=()=>run(async()=>{if(!p.cues.length)throw Error('자동 자막 또는 SRT 자막을 먼저 준비하세요.');if(p.cues.length>80)throw Error('번역 초안은 80개 이하 자막으로 나눠 주세요.');p.cuesBeforeTranslation=structuredClone(p.cues);const result=await askWorker('translate',{cues:p.cues,language:{english:'en',korean:'ko',japanese:'ja'}[$('asrLang').value]});p.cues=result.cues;stale();drawRows();status('한국어 번역 초안을 만들었어요. 원문의 뜻을 대조하고 수정하세요.');});
-$('undoTranslation').onclick=()=>{if(!p.cuesBeforeTranslation)return status('복원할 번역 전 자막이 없습니다.');p.cues=structuredClone(p.cuesBeforeTranslation);stale();drawRows();status('번역 전 자막으로 복원했어요.');};
-$('draft').onclick=()=>run(async()=>{pull();const transcript=p.cues.map(c=>c.sourceText||c.text).join(' ').slice(0,6000);if(!transcript&&!p.aiNotes?.trim())throw Error('자막 또는 장면 설명을 먼저 입력하세요.');const result=await askWorker('ai',{task:'draft',transcript,notes:p.aiNotes});$('draftTitle').value=result.title;$('draftScript').value=result.script;$('draftResult').hidden=false;status('AI 초안을 만들었어요. 실제 영상과 대조한 뒤 적용하세요.');});
-$('applyDraft').onclick=()=>{p.title=$('draftTitle').value;p.script=$('draftScript').value;$('title').value=p.title;$('script').value=p.script;stale();status('제목과 원고에 적용했어요. 내레이션 음성은 새로 만들어 주세요.');};
+$("translate").onclick = () =>
+  run(async () => {
+    if (!p.cues.length)
+      throw Error("자동 자막 또는 SRT 자막을 먼저 준비하세요.");
+    if (p.cues.length > 80)
+      throw Error("번역 초안은 80개 이하 자막으로 나눠 주세요.");
+    p.cuesBeforeTranslation = structuredClone(p.cues);
+    const result = await askWorker("translate", {
+      cues: p.cues,
+      language: { english: "en", korean: "ko", japanese: "ja" }[
+        $("asrLang").value
+      ],
+    });
+    p.cues = result.cues;
+    stale();
+    drawRows();
+    status("한국어 번역 초안을 만들었어요. 원문의 뜻을 대조하고 수정하세요.");
+  });
+$("undoTranslation").onclick = () => {
+  if (!p.cuesBeforeTranslation)
+    return status("복원할 번역 전 자막이 없습니다.");
+  p.cues = structuredClone(p.cuesBeforeTranslation);
+  stale();
+  drawRows();
+  status("번역 전 자막으로 복원했어요.");
+};
+$("draft").onclick = () =>
+  run(async () => {
+    pull();
+    const transcript = p.cues
+      .map((c) => c.sourceText || c.text)
+      .join(" ")
+      .slice(0, 6000);
+    if (!transcript && !p.aiNotes?.trim())
+      throw Error("자막 또는 장면 설명을 먼저 입력하세요.");
+    const result = await askWorker("ai", {
+      task: "draft",
+      transcript,
+      notes: p.aiNotes,
+    });
+    $("draftTitle").value = result.title;
+    $("draftScript").value = result.script;
+    $("draftResult").hidden = false;
+    status("AI 초안을 만들었어요. 실제 영상과 대조한 뒤 적용하세요.");
+  });
+$("applyDraft").onclick = () => {
+  p.title = $("draftTitle").value;
+  p.script = $("draftScript").value;
+  $("title").value = p.title;
+  $("script").value = p.script;
+  stale();
+  status("제목과 원고에 적용했어요. 내레이션 음성은 새로 만들어 주세요.");
+};
 
-async function helperVoice(data){const base='https://haejja-free-helper.onrender.com';remoteAbort=new AbortController();const signal=remoteAbort.signal,timer=setTimeout(()=>remoteAbort?.abort(),210000);try{status('무료 음성 서버에 연결 중… 쉬고 있던 서버는 처음 약 1분 걸릴 수 있어요.');const r=await fetch(base+'/api/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal});const j=await r.json();if(!r.ok)throw Error(j.error||'음성 서버에 연결하지 못했습니다.');for(;;){await new Promise(resolve=>setTimeout(resolve,1800));signal.throwIfAborted();const res=await fetch(base+'/api/jobs/'+j.job,{signal});const state=await res.json();if(!res.ok||state.status==='failed')throw Error(state.error||'음성 생성에 실패했습니다.');if(state.status==='ready'){const file=await fetch(base+'/api/jobs/'+j.job+'/file',{signal});if(!file.ok)throw Error('음성 파일을 가져오지 못했습니다.');return await file.blob()}status('선택한 목소리로 한국어 음성을 만드는 중…')}}catch(e){if(e.name==='AbortError')throw Error('음성 요청을 중단했거나 연결 시간이 초과됐습니다.');throw e}finally{clearTimeout(timer);remoteAbort=null}}
+async function helperVoice(data) {
+  const base = "https://haejja-free-helper.onrender.com";
+  remoteAbort = new AbortController();
+  const signal = remoteAbort.signal,
+    timer = setTimeout(() => remoteAbort?.abort(), 210000);
+  try {
+    status(
+      "무료 음성 서버에 연결 중… 쉬고 있던 서버는 처음 약 1분 걸릴 수 있어요.",
+    );
+    const r = await fetch(base + "/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      signal,
+    });
+    const j = await r.json();
+    if (!r.ok) throw Error(j.error || "음성 서버에 연결하지 못했습니다.");
+    for (;;) {
+      await new Promise((resolve) => setTimeout(resolve, 1800));
+      signal.throwIfAborted();
+      const res = await fetch(base + "/api/jobs/" + j.job, { signal });
+      const state = await res.json();
+      if (!res.ok || state.status === "failed")
+        throw Error(state.error || "음성 생성에 실패했습니다.");
+      if (state.status === "ready") {
+        const file = await fetch(base + "/api/jobs/" + j.job + "/file", {
+          signal,
+        });
+        if (!file.ok) throw Error("음성 파일을 가져오지 못했습니다.");
+        return await file.blob();
+      }
+      status("선택한 목소리로 한국어 음성을 만드는 중…");
+    }
+  } catch (e) {
+    if (e.name === "AbortError")
+      throw Error("음성 요청을 중단했거나 연결 시간이 초과됐습니다.");
+    throw e;
+  } finally {
+    clearTimeout(timer);
+    remoteAbort = null;
+  }
+}
 
-function drawEffects(){$('effects').replaceChildren();(p.effects||[]).forEach((e,i)=>{const row=el('div');row.className='cue';const times=el('div');times.className='two';times.append(timeInput(e.at,`${i+1}번 효과음 위치(초)`,v=>e.at=v),timeInput(e.gain,`${i+1}번 효과음 음량(0~1)`,v=>e.gain=v));const sel=el('select');sel.setAttribute('aria-label',`${i+1}번 효과음 종류`);for(const [value,label]of [['pop','팝'],['tap','톡'],['swish','스윽']]){const opt=el('option',label);opt.value=value;sel.append(opt)}sel.value=e.kind;sel.onchange=()=>{e.kind=sel.value;stale()};const b=el('button','효과음 삭제');b.className='secondary';b.onclick=()=>{p.effects.splice(i,1);stale();drawEffects()};row.append(times,sel,b);$('effects').append(row)})}
-$('arrangeEffects').onclick=()=>{try{p.effects=arrangeEffects(p,Number($('effectCount').value));stale();drawEffects();status('대사와 내레이션을 피해서 효과음을 배치했어요.');}catch(e){status(e.message,true)}};
-$('addEffect').onclick=()=>{p.effects??=[];if(p.effects.length>=30)return status('효과음은 최대 30개입니다.',true);p.effects.push({at:0,kind:'pop',gain:.5});stale();drawEffects()};
+function drawEffects() {
+  $("effects").replaceChildren();
+  (p.effects || []).forEach((e, i) => {
+    const row = el("div");
+    row.className = "cue";
+    const times = el("div");
+    times.className = "two";
+    times.append(
+      timeInput(e.at, `${i + 1}번 효과음 위치(초)`, (v) => (e.at = v)),
+      timeInput(e.gain, `${i + 1}번 효과음 음량(0~1)`, (v) => (e.gain = v)),
+    );
+    const sel = el("select");
+    sel.setAttribute("aria-label", `${i + 1}번 효과음 종류`);
+    for (const [value, label] of [
+      ["pop", "팝"],
+      ["tap", "톡"],
+      ["swish", "스윽"],
+    ]) {
+      const opt = el("option", label);
+      opt.value = value;
+      sel.append(opt);
+    }
+    sel.value = e.kind;
+    sel.onchange = () => {
+      e.kind = sel.value;
+      stale();
+    };
+    const b = el("button", "효과음 삭제");
+    b.className = "secondary";
+    b.onclick = () => {
+      p.effects.splice(i, 1);
+      stale();
+      drawEffects();
+    };
+    row.append(times, sel, b);
+    $("effects").append(row);
+  });
+}
+$("arrangeEffects").onclick = () => {
+  try {
+    p.effects = arrangeEffects(p, Number($("effectCount").value));
+    stale();
+    drawEffects();
+    status("대사와 내레이션을 피해서 효과음을 배치했어요.");
+  } catch (e) {
+    status(e.message, true);
+  }
+};
+$("addEffect").onclick = () => {
+  p.effects ??= [];
+  if (p.effects.length >= 30) return status("효과음은 최대 30개입니다.", true);
+  p.effects.push({ at: 0, kind: "pop", gain: 0.5 });
+  stale();
+  drawEffects();
+};

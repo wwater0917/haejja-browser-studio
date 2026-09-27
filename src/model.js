@@ -1,10 +1,121 @@
-export const fresh=()=>({id:crypto.randomUUID(),name:'새 영상',title:'',sourceUrl:'',titleSize:100,subtitleSize:64,fit:'contain',script:'',voice:'ko-KR-InJoonNeural',speed:1.4,pitch:10,titleY:60,subtitleY:1460,videoX:135,videoY:440,videoW:810,videoH:1440,effects:[],duck:true,narrationStart:0,originalVolume:.83,narrationVolume:1,bgmVolume:.15,quality:720,cuts:[],cues:[],duration:0});
-export function validCuts(p){const c=p.cuts.filter(x=>x.keep);if(!c.length)throw Error('사용할 구간을 하나 이상 선택하세요.');for(const x of c)if(!Number.isFinite(x.start)||!Number.isFinite(x.end)||x.start<0||x.end>p.duration+.05||x.end-x.start<.05)throw Error('구간 시작·끝 시간을 확인하세요.');return c;}
-export const total=p=>p.cuts.filter(x=>x.keep).reduce((s,c)=>s+c.end-c.start,0);
-export function mappedCues(chunks,cuts){let at=0,out=[];for(const c of cuts){for(const row of chunks){const a=Math.max(c.start,row.timestamp[0]),b=Math.min(c.end,row.timestamp[1]??c.end);if(b>a)out.push({start:at+a-c.start,end:at+b-c.start,text:row.text.trim()});}at+=c.end-c.start;}return out;}
-const clock=(x,ass=false)=>{x=Math.max(0,Number(x)||0);const h=Math.floor(x/3600),m=Math.floor(x/60)%60,s=Math.floor(x)%60;return `${String(h).padStart(ass?1:2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}${ass?'.':','}${String(Math.floor((x%1)*(ass?100:1000))).padStart(ass?2:3,'0')}`};
-export function srt(cues){return cues.map((c,i)=>`${i+1}\n${clock(c.start)} --> ${clock(c.end)}\n${c.text}\n`).join('\n')}
-export function parseSrt(text){return text.replace(/\r/g,'').trim().split(/\n\s*\n/).map(b=>{const lines=b.split('\n'),i=lines.findIndex(l=>l.includes('-->'));if(i<0)throw Error('SRT 시간 형식을 확인하세요.');const parse=s=>{const m=s.trim().match(/^(\d+):(\d+):(\d+)[,.](\d+)/);if(!m)throw Error('SRT 시간 형식을 확인하세요.');return +m[1]*3600 + +m[2]*60 + +m[3] + Number('0.'+m[4])};return{start:parse(lines[i].split('-->')[0]),end:parse(lines[i].split('-->')[1]),text:lines.slice(i+1).join('\n')}})}
-const clean=s=>String(s).replace(/\\/g,'／').replace(/[{}]/g,'').replace(/\r/g,'').replace(/\n/g,'\\N');
-export function ass(p){const d=total(p);const head=`[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Title,NanumMyeongjoExtraBold,${p.titleSize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,1,0,8,50,50,${p.titleY??60},1\nStyle: Sub,NanumMyeongjoExtraBold,${p.subtitleSize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,0,8,90,90,${p.subtitleY??1460},1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n`;
-return head+(p.title?`Dialogue: 0,${clock(0,true)},${clock(d,true)},Title,,0,0,0,,${clean(p.title)}\n`:'')+p.cues.filter(c=>c.text&&c.end>c.start&&c.start<d).map(c=>`Dialogue: 1,${clock(c.start,true)},${clock(Math.min(d,c.end),true)},Sub,,0,0,0,,${clean(c.text)}\n`).join('');}
+export const fresh = () => ({
+  id: crypto.randomUUID(),
+  name: "새 영상",
+  title: "",
+  sourceUrl: "",
+  titleSize: 100,
+  subtitleSize: 64,
+  fit: "contain",
+  script: "",
+  voice: "ko-KR-InJoonNeural",
+  speed: 1.4,
+  pitch: 10,
+  titleY: 60,
+  subtitleY: 1460,
+  videoX: 135,
+  videoY: 440,
+  videoW: 810,
+  videoH: 1440,
+  effects: [],
+  duck: true,
+  narrationStart: 0,
+  originalVolume: 0.83,
+  narrationVolume: 1,
+  bgmVolume: 0.15,
+  quality: 720,
+  cuts: [],
+  cues: [],
+  duration: 0,
+});
+export function validCuts(p) {
+  const c = p.cuts.filter((x) => x.keep);
+  if (!c.length) throw Error("사용할 구간을 하나 이상 선택하세요.");
+  for (const x of c)
+    if (
+      !Number.isFinite(x.start) ||
+      !Number.isFinite(x.end) ||
+      x.start < 0 ||
+      x.end > p.duration + 0.05 ||
+      x.end - x.start < 0.05
+    )
+      throw Error("구간 시작·끝 시간을 확인하세요.");
+  return c;
+}
+export const total = (p) =>
+  p.cuts.filter((x) => x.keep).reduce((s, c) => s + c.end - c.start, 0);
+export function mappedCues(chunks, cuts) {
+  let at = 0,
+    out = [];
+  for (const c of cuts) {
+    for (const row of chunks) {
+      const a = Math.max(c.start, row.timestamp[0]),
+        b = Math.min(c.end, row.timestamp[1] ?? c.end);
+      if (b > a)
+        out.push({
+          start: at + a - c.start,
+          end: at + b - c.start,
+          text: row.text.trim(),
+        });
+    }
+    at += c.end - c.start;
+  }
+  return out;
+}
+const clock = (x, ass = false) => {
+  x = Math.max(0, Number(x) || 0);
+  const h = Math.floor(x / 3600),
+    m = Math.floor(x / 60) % 60,
+    s = Math.floor(x) % 60;
+  return `${String(h).padStart(ass ? 1 : 2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}${ass ? "." : ","}${String(Math.floor((x % 1) * (ass ? 100 : 1000))).padStart(ass ? 2 : 3, "0")}`;
+};
+export function srt(cues) {
+  return cues
+    .map(
+      (c, i) => `${i + 1}\n${clock(c.start)} --> ${clock(c.end)}\n${c.text}\n`,
+    )
+    .join("\n");
+}
+export function parseSrt(text) {
+  return text
+    .replace(/\r/g, "")
+    .trim()
+    .split(/\n\s*\n/)
+    .map((b) => {
+      const lines = b.split("\n"),
+        i = lines.findIndex((l) => l.includes("-->"));
+      if (i < 0) throw Error("SRT 시간 형식을 확인하세요.");
+      const parse = (s) => {
+        const m = s.trim().match(/^(\d+):(\d+):(\d+)[,.](\d+)/);
+        if (!m) throw Error("SRT 시간 형식을 확인하세요.");
+        return +m[1] * 3600 + +m[2] * 60 + +m[3] + Number("0." + m[4]);
+      };
+      return {
+        start: parse(lines[i].split("-->")[0]),
+        end: parse(lines[i].split("-->")[1]),
+        text: lines.slice(i + 1).join("\n"),
+      };
+    });
+}
+const clean = (s) =>
+  String(s)
+    .replace(/\\/g, "／")
+    .replace(/[{}]/g, "")
+    .replace(/\r/g, "")
+    .replace(/\n/g, "\\N");
+export function ass(p) {
+  const d = total(p);
+  const head = `[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Title,NanumMyeongjoExtraBold,${p.titleSize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,1,0,8,50,50,${p.titleY ?? 60},1\nStyle: Sub,NanumMyeongjoExtraBold,${p.subtitleSize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,0,8,90,90,${p.subtitleY ?? 1460},1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n`;
+  return (
+    head +
+    (p.title
+      ? `Dialogue: 0,${clock(0, true)},${clock(d, true)},Title,,0,0,0,,${clean(p.title)}\n`
+      : "") +
+    p.cues
+      .filter((c) => c.text && c.end > c.start && c.start < d)
+      .map(
+        (c) =>
+          `Dialogue: 1,${clock(c.start, true)},${clock(Math.min(d, c.end), true)},Sub,,0,0,0,,${clean(c.text)}\n`,
+      )
+      .join("")
+  );
+}
