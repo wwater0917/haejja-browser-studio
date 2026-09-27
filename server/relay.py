@@ -46,12 +46,15 @@ def handle(h):
   return reply({'token':client_key()})
  worker=path in {'/bridge/next','/bridge/result','/bridge/heartbeat'}
  # Media tickets are short-lived, bound to one completed asset.
- if path=='/bridge/file':
+ if path in {'/bridge/file','/bridge/save'}:
   q=parse_qs(u.query);key=q.get('id',[''])[0];exp=q.get('expires',[''])[0];sig=q.get('sig',[''])[0]
   if not exp.isdigit() or int(exp)<time.time() or not hmac.compare_digest(sig,digest('file:'+key+':'+exp)):return reply({'error':'다운로드 링크가 만료됐습니다.'},403)
   j=JOBS.get(key)
   if not j or j['status']!='done' or not j.get('file'):return reply({'error':'파일이 만료됐습니다. 다시 열어 주세요.'},404)
-  return serve_file(h,Path(j['file']),j['mime'])
+  if path=='/bridge/save':
+   body=(Path(__file__).parent/'save-video.html').read_bytes()
+   h.send_response(200);h.send_header('Content-Type','text/html; charset=utf-8');h.send_header('Content-Length',str(len(body)));h.send_header('Referrer-Policy','no-referrer');h.end_headers();h.wfile.write(body);return True
+  return serve_file(h,Path(j['file']),j['mime'],q.get('download',[''])[0]=='1')
  if not auth(h,worker):return reply({'error':'맥 연결 코드를 입력하세요.'},401)
  if path=='/bridge/heartbeat':
   clean();LAST_SEEN=time.time();return reply({'online':True})
@@ -100,7 +103,7 @@ def read_json(h,limit):
  n=int(h.headers.get('Content-Length','0'))
  if not 0<n<=limit:raise ValueError('요청 크기를 확인하세요.')
  return json.loads(h.rfile.read(n))
-def serve_file(h,path,mime):
+def serve_file(h,path,mime,download=False):
  size=path.stat().st_size;start=0;end=size-1;partial=False
  if h.headers.get('Range'):
   m=re.fullmatch(r'bytes=(\d+)-(\d*)',h.headers['Range'])
@@ -113,6 +116,7 @@ def serve_file(h,path,mime):
    h.json({'error':'무료 웹 전송 보호 한도에 도달했습니다. 영상은 맥 작업 폴더에 보존돼 있습니다.'},429);return True
   TRANSFERS.append((now,end-start+1))
  h.send_response(206 if partial else 200);h.send_header('Content-Type',mime);h.send_header('Content-Length',str(end-start+1));h.send_header('Accept-Ranges','bytes');h.send_header('Referrer-Policy','no-referrer')
+ if download:h.send_header('Content-Disposition','attachment; filename="haejja-reel.mp4"')
  if partial:h.send_header('Content-Range',f'bytes {start}-{end}/{size}')
  h.end_headers()
  try:

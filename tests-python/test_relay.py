@@ -1,4 +1,4 @@
-import io,json,sys,unittest
+import io,json,sys,unittest,time,tempfile
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'server'))
 import relay
@@ -28,4 +28,18 @@ class RelayTest(unittest.TestCase):
   h=Handler('/bridge/pair','POST',{'code':relay.pair_code()},'');relay.handle(h);self.assertEqual(h.result[1]['token'],relay.client_key())
  def test_media_requires_bound_ticket_even_for_signed_in_client(self):
   h=Handler('/bridge/file?id=guess&expires=9999999999&sig=bad',token=relay.client_key());relay.handle(h);self.assertEqual(h.result[0],403)
+ def test_save_page_requires_valid_ticket(self):
+  h=Handler('/bridge/save?id=guess&expires=9999999999&sig=bad');relay.handle(h);self.assertEqual(h.result[0],403)
+ def test_download_header_and_preview_range(self):
+  class MediaHandler(Handler):
+   def __init__(self):super().__init__('/');self.wfile=io.BytesIO();self.response_headers={}
+   def send_response(self,n):self.code=n
+   def send_header(self,k,v):self.response_headers[k]=v
+   def end_headers(self):pass
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'media';p.write_bytes(b'0123456789');relay.TRANSFERS.clear()
+   h=MediaHandler();relay.serve_file(h,p,'video/mp4',True)
+   self.assertEqual(h.response_headers['Content-Disposition'],'attachment; filename="haejja-reel.mp4"');self.assertEqual(h.wfile.getvalue(),p.read_bytes())
+   h=MediaHandler();h.headers['Range']='bytes=2-5';relay.serve_file(h,p,'video/mp4')
+   self.assertEqual(h.code,206);self.assertEqual(h.wfile.getvalue(),b'2345');self.assertNotIn('Content-Disposition',h.response_headers)
 if __name__=='__main__':unittest.main()
