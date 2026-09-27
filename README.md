@@ -1,3 +1,24 @@
+# 해짜 릴스 제작실 · 맥 연결 자동 제작
+
+현재 기본 웹 화면은 **링크 → 자동 제작 → 결과 확인 → 필요한 부분만 수정** 흐름이다. 사용자가 2026-09-27에 무료 우선이며 제작할 때 맥을 켜도 된다고 선택하여, 기존 로컬 제작 엔진을 인증된 웹 연결로 제공한다.
+
+- 웹: https://haejja-reel-studio.onrender.com
+- 맥: 기존 릴스 제작실의 다운로드·Whisper·OCR·로컬 AI·TTS·FFmpeg를 실행한다.
+- 맥 연결: `mac/start.py`, `mac/worker.py`; `127.0.0.1:8766` 제작 API만 중계한다. 외부에서 맥의 포트로 직접 접속하지 않는다.
+- 중계 서버: `server/relay.py`를 `server/app.py`에 연결한다. `RELAY_WORKER_KEY` 환경변수가 필요하며 값은 코드에 저장하지 않는다.
+- 첫 연결: 맥의 `웹 연결 시작.command`에서 코드 확인 → 웹에서 한 번 입력. 브라우저가 연결 토큰을 기억한다.
+- 이후 사용: 링크를 넣고 자동 완성 버튼을 누른다. 제작은 맥에서 계속 진행하므로 웹 탭을 닫아도 맥은 켜 두어야 한다.
+- 수정: 제목·번역·글꼴·배치·컷·음향·내레이션을 수정하고 다시 만들 수 있다. 저장된 사람 수정은 자동 재생성으로 덮어쓰지 않는다.
+- 기존 브라우저 파일 편집기는 `/manual.html`에 보존한다. 해당 IndexedDB 작업도 유지된다.
+
+보안·프로세스·임시 보관 범위는 [mac/README.md](mac/README.md)를 따른다. 원본과 결과는 맥 채널 폴더가 원본 저장소이며, 웹 미리보기를 위해 Render에 임시 전송한다. 공개 사이트 주소만 알아서는 개인 작업이나 영상을 읽을 수 없다. 제작 중 오류는 해당 단계에서 실패로 표시한다. 단위 검사나 모델 응답 성공을 편집 품질 검수 통과로 간주하지 않는다.
+
+빌드: `npm ci && npm run build`. 정적 게시 경로 `dist`. 서버: `pip install -r server/requirements.txt && python server/app.py`. 검증: `npm test`, `python3 -m unittest discover -s tests-python`. 맥 제작 엔진 검사는 해당 저장소의 unittest를 사용한다.
+
+## 이전 브라우저 편집기 기록
+
+아래 설명은 `/manual.html`에 남겨 둔 이전 기기 내 편집기에 대한 기록이며 현재 기본 자동 제작 화면의 제한을 뜻하지 않는다.
+
 # 해짜 릴스 제작실 — 무료 웹 에디션
 
 주소: https://haejja-reel-studio.onrender.com
