@@ -28,7 +28,11 @@
   if(!live.base)return;
   const s=layoutStyle(),base=live.style,ctx=canvas.getContext('2d');ctx.clearRect(0,0,540,960);ctx.drawImage(live.base,0,0,540,960);
   for(const layer of live.layers){
-   if(layer.name==='paper'){const sx=(s.paper_width||100)/(base.paper_width||100),sy=(s.paper_height||100)/(base.paper_height||100),ox=540+(base.paper_x||0),oy=498+(base.paper_y||0)+(base.vocabEn_y||514)-514;ctx.save();ctx.translate((540+(s.paper_x||0))/2,(498+(s.paper_y||0)+(s.vocabEn_y||514)-514)/2);ctx.scale(sx,sy);ctx.translate(-ox/2,-oy/2);ctx.drawImage(layer.image,0,0,540,960);ctx.restore();continue;}
+   if(layer.name==='paper'){
+    const before=HaejjaPaperLayout.box(live.plan,base,live.sourceAt),after=HaejjaPaperLayout.box(live.plan,s,live.sourceAt);
+    if(!before||!after)continue;
+    ctx.save();ctx.translate(after.x/2,after.y/2);ctx.scale(after.width/before.width,after.height/before.height);ctx.translate(-before.x/2,-before.y/2);ctx.drawImage(layer.image,0,0,540,960);ctx.restore();continue;
+   }
    const title=layer.name.startsWith('title_'),role=title?'title':layer.name,ratio=s[role+'_size']/base[role+'_size'];
    const gapKey=role==='english'?'bilingual_gap':role==='vocabKo'?'vocabulary_gap':null;const gap=gapKey?(s[gapKey]||0):0,oldGap=gapKey?(base[gapKey]||0):0;const ox=base[role+'_x']??540,oy=base[role+'_y']+oldGap;let image=layer.image;
    if(layer.name==='title_first')image=tint(image,s.title_first_color);
@@ -37,17 +41,17 @@
   }
   canvas.hidden=false;q('positionImage').hidden=true;if(q('positionResult'))q('positionResult').hidden=true;
  }
- function changes(){dirty=true;positionSync();paint();q('positionStatus').textContent=live.base?'실시간 미리보기 · 아직 영상에 적용하지 않았어요.':'미리보기를 준비하고 있어요…';clearTimeout(live.timer);live.timer=setTimeout(refresh,650);}
+ function changes(){live.generation++;dirty=true;positionSync();paint();q('positionStatus').textContent=live.base?'실시간 미리보기 · 아직 영상에 적용하지 않았어요.':'미리보기를 준비하고 있어요…';clearTimeout(live.timer);live.timer=setTimeout(refresh,650);}
  async function refresh(){
   if(!q('positionDialog').open||live.rendering)return;
   if(live.busy){live.pending=true;return;}
-  live.busy=true;live.pending=false;const generation=live.generation,values=layoutStyle();
+  live.busy=true;live.pending=false;const generation=live.generation,values=layoutStyle(),sourceAt=+q('layoutAt').value,previewPlan=structuredClone({...current.plan,title:q('title').value});
   if(!live.base)q('positionStatus').textContent='실시간 편집 화면을 준비하고 있어요…';
   try{
-   const r=await api('/api/layout-preview',{id:positionProject,plan:{...current.plan,title:q('title').value},style:{...current.style,...values},at:+q('layoutAt').value,role:q('positionRole').value,layers:true});
+   const r=await api('/api/layout-preview',{id:positionProject,plan:previewPlan,style:{...current.style,...values},at:sourceAt,role:q('positionRole').value,layers:true});
    const images=await Promise.all([loadImage(r.base_image),...r.layers.map(x=>loadImage(x.image))]);
    if(generation!==live.generation||!q('positionDialog').open){live.pending=q('positionDialog').open;return;}
-   if(generation!==live.generation){live.pending=true;return;}live.base=images[0];live.layers=r.layers.map((x,i)=>({name:x.name,image:images[i+1]}));live.style=r.style;live.at=r.output_at??0;paint();
+   live.plan=previewPlan;live.sourceAt=sourceAt;live.base=images[0];live.layers=r.layers.map((x,i)=>({name:x.name,image:images[i+1]}));live.style=r.style;live.at=r.output_at??0;paint();
    if(!live.rendering)q('positionStatus').textContent='실시간 미리보기 · 위치·크기·색상을 바로 조절하세요.';
   }catch(e){if(generation===live.generation)q('positionStatus').textContent='미리보기: '+e.message+' · 입력값을 조절하거나 다시 확인해 주세요.';}
   finally{live.busy=false;if(live.pending){live.pending=false;refresh();}}
