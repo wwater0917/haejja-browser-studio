@@ -4,7 +4,7 @@
  const css=document.createElement('style');css.textContent='.editor-section>summary{font-size:17px;font-weight:750;cursor:pointer;padding:8px 0;list-style:disclosure-closed}.editor-section[open]>summary{list-style:disclosure-open;margin-bottom:16px}.editor-section>summary::after{content:"열기";float:right;font-size:12px;color:#65756b}.editor-section[open]>summary::after{content:"접기"}.editor-apply-bar{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 20px;background:#f7faf6;border-top:1px solid #c6d2c7;box-shadow:0 -3px 18px #0001}.editor-apply-bar[hidden]{display:none}.editor-apply-bar p{margin:0;max-width:55%;font-size:13px}.sound-apply-row{position:sticky;top:0;z-index:3;background:#f7faf6;padding:12px 0;margin-bottom:12px}body:has(.editor-apply-bar:not([hidden])){padding-bottom:100px}@media(max-width:600px){.editor-apply-bar{flex-wrap:wrap;gap:6px}.editor-apply-bar p{max-width:100%}}';document.head.append(css);
  const sections=[];
  for(const card of [...editor.querySelectorAll(':scope > .card'),q('cutEditor')]){
-  if(!card)continue;let details=card.querySelector(':scope > details');
+  if(!card)continue;let details=card.children.length===1?card.querySelector(':scope > details'):null;
   if(!details){const heading=card.querySelector('h2');if(!heading)continue;details=document.createElement('details');const summary=document.createElement('summary');summary.textContent=heading.textContent;heading.remove();details.append(summary);while(card.firstChild)details.append(card.firstChild);card.append(details);}
   details.classList.add('editor-section');details.open=false;sections.push(details);
  }
