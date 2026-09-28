@@ -67,7 +67,7 @@
   finally{live.rendering=false;if(!watched)q('positionApply').disabled=false;}
  };
  const oldCancel=positionCancel;
- positionCancel=()=>{clearTimeout(live.timer);live.generation++;oldCancel();};
+ positionCancel=()=>{clearTimeout(live.timer);live.generation++;oldCancel();extraProject=null;};
  q('positionCancel').onclick=()=>positionCancel();
 
  // A run is complete only when its own terminal history event confirms it.
