@@ -43,7 +43,7 @@
  }
  function changes(){live.generation++;dirty=true;positionSync();paint();q('positionStatus').textContent=live.base?'실시간 미리보기 · 아직 영상에 적용하지 않았어요.':'미리보기를 준비하고 있어요…';clearTimeout(live.timer);live.timer=setTimeout(refresh,650);}
  async function refresh(){
-  if(!q('positionDialog').open||live.rendering)return;
+  if(!q('positionDialog').open||live.rendering||watched?.dialog==='position')return;
   if(live.busy){live.pending=true;return;}
   live.busy=true;live.pending=false;const generation=live.generation,values=layoutStyle(),sourceAt=+q('layoutAt').value,previewPlan=structuredClone({...current.plan,title:q('title').value});
   if(!live.base)q('positionStatus').textContent='실시간 편집 화면을 준비하고 있어요…';
@@ -96,6 +96,7 @@
     if(last?.terminal){
      if(last.phase!=='done')throw Error(last.error||last.reason||'영상 제작에 실패했습니다.');
      if(!d.latest)throw Error('완성 영상을 찾을 수 없습니다.');
+     if(token.dialog==='position'){live.generation++;live.pending=false;clearTimeout(live.timer);}
      report('제작 완료 · 수정 영상을 화면으로 불러오고 있어요…');
      const src=await relayMedia('/media/'+id+'/output/'+d.latest.file);
      if(current?.id===id){current.latest=d.latest;current.state=d.state;preview(d);}
