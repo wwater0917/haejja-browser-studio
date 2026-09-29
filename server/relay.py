@@ -9,7 +9,7 @@ def client_key():return digest('studio-client-v1')
 def pair_code():return digest('pair-'+time.strftime('%Y-%m-%d',time.gmtime()))[:12].upper()
 def allowed(path,method):
  if method=='GET':return bool(path in {'/api/projects','/api/sfx-library','/api/fonts','/api/development','/api/health'} or re.fullmatch(r'/api/(project|timeline)/[A-Za-z0-9_-]{1,80}',path) or re.fullmatch(r'/media/[A-Za-z0-9_-]{1,80}/(source/source\.mp4|output/reel-[0-9a-f]{12}\.mp4|voice/voice-[0-9a-f]{20}\.(mp3|wav|aiff))',path))
- return method=='POST' and path in {'/api/new','/api/run','/api/save','/api/layout-preview','/api/voice-preview','/api/sfx-preview','/api/retranslate','/api/sfx-arrange'}
+ return method=='POST' and path in {'/api/new','/api/run','/api/save','/api/export','/api/layout-preview','/api/voice-preview','/api/sfx-preview','/api/retranslate','/api/sfx-arrange'}
 def auth(h,worker=False):
  token=h.headers.get('Authorization','').removeprefix('Bearer ')
  return bool(KEY) and hmac.compare_digest(token,KEY if worker else client_key())
