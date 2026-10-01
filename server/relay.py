@@ -8,8 +8,8 @@ def digest(label):return hmac.new(KEY.encode(),label.encode(),hashlib.sha256).he
 def client_key():return digest('studio-client-v1')
 def pair_code():return digest('pair-'+time.strftime('%Y-%m-%d',time.gmtime()))[:12].upper()
 def allowed(path,method):
- if method=='GET' and (path in {'/api/food/health','/api/food/projects'} or re.fullmatch(r'/api/food/project/[a-f0-9]{32}',path) or re.fullmatch(r'/food-media/[a-f0-9]{32}/(reel\.mp4|captions\.srt|review\.txt|manifest\.json|sound-preview-[a-f0-9]{16}\.mp3)',path)):return True
- if method=='POST' and path in {'/api/food/new','/api/food/clip','/api/food/chunk','/api/food/finish','/api/food/generate','/api/food/render','/api/food/sfx-preview'}:return True
+ if method=='GET' and (path in {'/api/food/health','/api/food/projects'} or re.fullmatch(r'/api/food/project/[a-f0-9]{32}',path) or re.fullmatch(r'/food-media/[a-f0-9]{32}/(reel\.mp4|captions\.srt|review\.txt|manifest\.json|sound-preview-[a-f0-9]{16}\.mp3|face-preview-[a-f0-9]{32}\.jpg)',path)):return True
+ if method=='POST' and path in {'/api/food/new','/api/food/clip','/api/food/chunk','/api/food/finish','/api/food/generate','/api/food/render','/api/food/sfx-preview','/api/food/face-save','/api/food/face-frame'}:return True
  if method=='GET':return bool(path in {'/api/projects','/api/sfx-library','/api/fonts','/api/development','/api/health'} or re.fullmatch(r'/api/(project|timeline)/[A-Za-z0-9_-]{1,80}',path) or re.fullmatch(r'/media/[A-Za-z0-9_-]{1,80}/(source/source\.mp4|output/reel-[0-9a-f]{12}\.mp4|voice/voice-[0-9a-f]{20}\.(mp3|wav|aiff))',path))
  return method=='POST' and path in {'/api/new','/api/run','/api/save','/api/export','/api/layout-preview','/api/voice-preview','/api/sfx-preview','/api/retranslate','/api/sfx-arrange'}
 def auth(h,worker=False):

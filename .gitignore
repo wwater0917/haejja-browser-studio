@@ -10,3 +10,5 @@ food-data/
 server/food-sounds/
 
 server/food-sounds/
+
+node_modules

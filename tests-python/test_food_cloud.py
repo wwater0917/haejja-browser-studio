@@ -14,7 +14,7 @@ class Request:
 class CloudTest(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.old_data=food.DATA;food.DATA=Path(self.tmp.name)
-        relay.KEY='test-food-owner';relay.LAST_SEEN=0;food.BUSY.clear();food.REQUESTS.clear()
+        relay.KEY='test-food-owner';relay.LAST_SEEN=0;relay.JOBS.clear();food.BUSY.clear();food.REQUESTS.clear()
     def tearDown(self):food.DATA=self.old_data;self.tmp.cleanup()
     def req(self,path,method='GET',data=None,token=None,origin=app.ORIGIN):
         h=Request(path,method,data,relay.client_key() if token is None else token,origin);self.assertTrue(h.food_request());return h
