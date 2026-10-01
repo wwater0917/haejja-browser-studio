@@ -8,6 +8,15 @@ class Handler:
  def json(self,value,status=200):self.result=(status,value)
 class RelayTest(unittest.TestCase):
  def setUp(self):relay.KEY='test-worker';relay.PAIR_ATTEMPTS.clear();relay.JOBS.clear()
+ def test_food_upload_requires_owner_token(self):
+  relay.LAST_SEEN=time.time()
+  h=Handler('/bridge/request','POST',{'path':'/api/food/chunk','method':'POST','body':{'chunk':'AA=='}},'invalid')
+  relay.handle(h);self.assertEqual(h.result[0],401);self.assertFalse(relay.JOBS)
+ def test_food_media_is_allowlisted_without_arbitrary_files(self):
+  pid='a'*32
+  self.assertTrue(relay.allowed('/food-media/'+pid+'/reel.mp4','GET'))
+  for path in ['/food-media/'+pid+'/source.mp4','/food-media/'+pid+'/../../.env','/api/food/health?path=/etc/passwd','/api/food/delete','/food-media/'+pid+'/manifest.json/extra']:
+   self.assertFalse(relay.allowed(path,'GET'));self.assertFalse(relay.allowed(path,'POST'))
  def test_no_arbitrary_network_or_local_file_paths(self):
   for path in ['http://evil.test','/api/../etc/passwd','/media/../../etc/passwd','/api/search','/api/exclude','/api/run?evil=1']:
    self.assertFalse(relay.allowed(path,'GET'));self.assertFalse(relay.allowed(path,'POST'))

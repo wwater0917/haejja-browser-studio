@@ -8,6 +8,11 @@ from pathlib import Path
 import asyncio, collections, json, os, re, secrets, shutil, subprocess, sys, tempfile, threading, time
 import edge_tts, imageio_ffmpeg
 import relay
+os.environ.setdefault('FOOD_MODE', 'cloud')
+from food_assets import ensure_assets
+ensure_assets()
+import food
+food.recover()
 ROOT=Path(tempfile.mkdtemp(prefix='haejja-'))
 ORIGIN=os.environ.get('WEB_ORIGIN','https://haejja-reel-studio.onrender.com')
 POOL=ThreadPoolExecutor(max_workers=1)
@@ -71,10 +76,32 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Vary','Origin');self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff');super().end_headers()
     def json(self,data,status=200):
         b=json.dumps(data,ensure_ascii=False).encode();self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(b)));self.end_headers();self.wfile.write(b)
+    send_json = json
+    def food_request(self):
+        if not self.path.startswith('/cloud/'): return False
+        if self.headers.get('Origin') not in {None,ORIGIN}: self.json({'error':'Origin denied'},403); return True
+        if not relay.auth(self): self.json({'error':'제작실 접속 코드를 입력하세요.'},401); return True
+        path = self.path.removeprefix('/cloud')
+        allowed = (path.startswith(('/api/food/', '/food-media/')) and relay.allowed(path,self.command)) or (path == '/api/food/delete' and self.command == 'POST')
+        if not allowed: self.json({'error':'허용되지 않은 제작 요청입니다.'},404); return True
+        if path.startswith('/food-media/'):
+            with relay.LOCK:
+                now=time.time();relay.TRANSFERS[:]=[(t,n) for t,n in relay.TRANSFERS if now-t<31*86400]
+                try: size=(food.folder(path.split('/')[2])/path.split('/')[3]).stat().st_size
+                except (OSError,ValueError): self.json({'error':'임시 파일이 만료됐습니다. 다시 제작하세요.'},404); return True
+                if sum(n for t,n in relay.TRANSFERS)+size>relay.MAX_BYTES: self.json({'error':'무료 전송 한도에 도달했습니다. 다음 기간에 다시 이용해 주세요.'},429); return True
+                relay.TRANSFERS.append((now,size))
+        self.path = path
+        try:
+            if self.command == 'GET': food.Handler.do_GET(self)
+            else: food.Handler.do_POST(self)
+        finally: self.path = '/cloud' + path
+        return True
     def do_OPTIONS(self):
         if self.headers.get('Origin')!=ORIGIN:return self.json({'error':'Origin denied'},403)
         self.send_response(204);self.send_header('Access-Control-Allow-Methods','GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Headers','Content-Type, Authorization');self.end_headers()
     def do_POST(self):
+        if self.food_request():return
         if self.path.startswith("/bridge/"):
             try: relay.handle(self)
             except (ValueError,TypeError,KeyError) as e:self.json({"error":str(e)},400)
@@ -95,6 +122,7 @@ class Handler(BaseHTTPRequestHandler):
             POOL.submit(work,key,kind,data);self.json({'job':key},202)
         except (ValueError,TypeError,KeyError,json.JSONDecodeError) as e:self.json({'error':str(e)},400)
     def do_GET(self):
+        if self.food_request():return
         if self.path.startswith("/bridge/"):
             try: relay.handle(self)
             except (ValueError,TypeError,KeyError) as e:self.json({"error":str(e)},400)

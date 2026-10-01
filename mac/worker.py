@@ -14,7 +14,8 @@ def process(j):
  try:
   if not allowed(j['path'],j['method']):raise ValueError('Rejected path')
   data=json.dumps(j['body'],ensure_ascii=False).encode() if j['method']=='POST' else None
-  req=urllib.request.Request(LOCAL+j['path'],data=data,headers={'Content-Type':'application/json'},method=j['method'])
+  local='http://127.0.0.1:8767' if j['path'].startswith(('/api/food/','/food-media/')) else LOCAL
+  req=urllib.request.Request(local+j['path'],data=data,headers={'Content-Type':'application/json'},method=j['method'])
   try:r=urllib.request.urlopen(req,timeout=1200)
   except urllib.error.HTTPError as e:r=e
   with r:

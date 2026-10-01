@@ -1,0 +1,3101 @@
+{
+  "source": "사용자 제공 홍님 효과음 전체 라이브러리",
+  "count": 337,
+  "sounds": [
+    {
+      "id": "sound-1264b4057e62a0aaa0dc",
+      "name": "우쉬_띠링1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.2051,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1264b4057e62a0aaa0dc.wav",
+      "sha256": "9f3a997eeee10b51107e6a2e95f658ee09cd13e45acefc266efcc531886a6d3a"
+    },
+    {
+      "id": "sound-1c1e045dca57e3fadae7",
+      "name": "우쉬_띠링2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 2.2356,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1c1e045dca57e3fadae7.wav",
+      "sha256": "aa6d5f67b81286c8e2cda619a68b8d77459c73a5d6e89d865e82256e4559507e"
+    },
+    {
+      "id": "sound-7c9c8ca2a4e3fa5e4c98",
+      "name": "우쉬_띠링3",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 2.238,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7c9c8ca2a4e3fa5e4c98.mp3",
+      "sha256": "afd84e78fe76e9366fe306d9788b14de8accfc60e8656105a960a859b800e3a2"
+    },
+    {
+      "id": "sound-08a9d9230c592e4d1ad1",
+      "name": "우쉬_치이잉",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.3276,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-08a9d9230c592e4d1ad1.wav",
+      "sha256": "af3e7608249732bc73a52dd52a0f7cf8537c2240a369b94d2b28c075a6fb9878"
+    },
+    {
+      "id": "sound-4430f0cb8bbdcb452013",
+      "name": "우쉬_화면조정",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.7487,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-4430f0cb8bbdcb452013.mp3",
+      "sha256": "a9261c468bd2897344319e1366a3acfa459d5314136e3ec5ce90b1349d054ad1"
+    },
+    {
+      "id": "sound-6793d54c66598f86528b",
+      "name": "우쉬_후욱1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.5632,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6793d54c66598f86528b.mp3",
+      "sha256": "2064828a5bbed444b8e8cd77f90acb855ea8e4571f463a77e497a1fff743eb90"
+    },
+    {
+      "id": "sound-9efe000c30a40dfb8081",
+      "name": "우쉬_훅1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 0.4528,
+      "duration": 0.4528,
+      "file": "server/food-sounds/sound-9efe000c30a40dfb8081.mp3",
+      "sha256": "f91dc46729ea4db36a67c511f4e9a39cb149b6eed6c89fffc078dfd4c8c64cb0"
+    },
+    {
+      "id": "sound-a414c76328bc2f116c83",
+      "name": "우쉬_훅2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 0.389,
+      "duration": 0.389,
+      "file": "server/food-sounds/sound-a414c76328bc2f116c83.mp3",
+      "sha256": "2421bd661c82dbb7eb9c9f7189945e710fecdd6e9d33ff344c164b92ea761a5d"
+    },
+    {
+      "id": "sound-112bfc08f00a435a7eb9",
+      "name": "우쉬_훅3",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 0.453,
+      "duration": 0.453,
+      "file": "server/food-sounds/sound-112bfc08f00a435a7eb9.mp3",
+      "sha256": "8b414cfaab8cd86f6899f526381b1dde978fd16d7fd0aa965af12120a77226e0"
+    },
+    {
+      "id": "sound-020a9de8bad443caa531",
+      "name": "우쉬_훅4",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.7017,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-020a9de8bad443caa531.wav",
+      "sha256": "4dad471acd981e4a5de0df3b0a108a5a21dbe850a57eff027edf18586a2d3f5c"
+    },
+    {
+      "id": "sound-ba4e194db702a92a2b8c",
+      "name": "우쉬_훅5",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 2.1306,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ba4e194db702a92a2b8c.wav",
+      "sha256": "e48dc2233c15cae64749c90a8c851dbf152c954df8cf9d9f6077d45883f33b9d"
+    },
+    {
+      "id": "sound-b41e6309b6f2da6d237c",
+      "name": "우쉬_훅6",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 13.5969,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b41e6309b6f2da6d237c.wav",
+      "sha256": "803ad314faa71ab4ca82e76a3f3b3bf8265c75b5094496ca712df3fc118c4313"
+    },
+    {
+      "id": "sound-1c9083ccb0b8d9f50c85",
+      "name": "우쉬_휘이이이익1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 11.28,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1c9083ccb0b8d9f50c85.wav",
+      "sha256": "3eb7ac51e197345d63904d573d251d033b59c3fb9fe29db17a4b2af5ab4cac6c"
+    },
+    {
+      "id": "sound-f0bfd0182fed01d0e603",
+      "name": "우쉬_휘이이익1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 4.077,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f0bfd0182fed01d0e603.wav",
+      "sha256": "70348994d7139dc0c0ca9c9dfa192ae0e256bcd1949a532318e27870dd6e37c2"
+    },
+    {
+      "id": "sound-e2b3e5cc8af9cfffb74b",
+      "name": "우쉬_휘이이익2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 4.9613,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e2b3e5cc8af9cfffb74b.wav",
+      "sha256": "a0ca14ac4f78ea3d759acd4048ec28834a07b5ec0afd640925482f1aa7e8d626"
+    },
+    {
+      "id": "sound-5425f2a8ec7c48ff2fc9",
+      "name": "우쉬_휘이이익3",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 4.0519,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5425f2a8ec7c48ff2fc9.wav",
+      "sha256": "faa4394d0cdeb5ffad1ade304d469921ac70e6b6150f2e4f9973260edc901df6"
+    },
+    {
+      "id": "sound-b6a0b2827ace99d4be38",
+      "name": "우쉬_휘이이익4",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.6028,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b6a0b2827ace99d4be38.wav",
+      "sha256": "0049151a96f695edff96e1501e26034f217318ab36f0e7c17ed8203a2e38854f"
+    },
+    {
+      "id": "sound-0e3f04ea9c4825a62cc1",
+      "name": "우쉬_휘이익1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.7312,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0e3f04ea9c4825a62cc1.mp3",
+      "sha256": "7146aabf6da664d3e460730fb77f73e0cdf6d9c2715b341cc95736f6e626cf93"
+    },
+    {
+      "id": "sound-e403a816cf3da38c3e07",
+      "name": "우쉬_휘이익2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.1798,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e403a816cf3da38c3e07.wav",
+      "sha256": "6a5924f3b9aea7020284a757f2a2a00ec46a05dd72375c0489bde684cc6a1707"
+    },
+    {
+      "id": "sound-bcef5cde4be06d6ba6eb",
+      "name": "우쉬_휘익1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 4.0352,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bcef5cde4be06d6ba6eb.mp3",
+      "sha256": "1894f823a3ffb55b6eb0b9647b2ff7ffad291743ffe62c97d5725e49819e4fe4"
+    },
+    {
+      "id": "sound-00ff62ee1b4a44b71867",
+      "name": "우쉬_휘익2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.0605,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-00ff62ee1b4a44b71867.wav",
+      "sha256": "89bf83c2a69c42a8673de0153d92c7ec41cae6f80d88da091a74db57deb7e866"
+    },
+    {
+      "id": "sound-1f5ccf23562aaca27714",
+      "name": "우쉬_휘익3",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.4286,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1f5ccf23562aaca27714.wav",
+      "sha256": "17ee4a84c1417e62103f7700dc2f885047c81df9d3c896663d6245c97c691ee8"
+    },
+    {
+      "id": "sound-6a33d16da1a4e5bef827",
+      "name": "우쉬_휘익4",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 2.0,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6a33d16da1a4e5bef827.mp3",
+      "sha256": "adc5bffbf679bbda8f80d762251dccbcf1208b861719f6d1e6e2fe269bdb6520"
+    },
+    {
+      "id": "sound-870a3cfb11ecc78129fa",
+      "name": "우쉬_휘익5",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.3992,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-870a3cfb11ecc78129fa.wav",
+      "sha256": "6d0039d03f68bc4b7d580e978074b4842f5485889f20d7da6a1db14eff08ef48"
+    },
+    {
+      "id": "sound-891553e44251c1ccf98e",
+      "name": "우쉬_휙1",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.9853,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-891553e44251c1ccf98e.mp3",
+      "sha256": "0790a7cc112aa9fa28e9d9ddc56b145cf14b56875307dacc547807d52afc8105"
+    },
+    {
+      "id": "sound-935298e45f3e7e219b9a",
+      "name": "우쉬_휙2",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 0.1828,
+      "duration": 0.1828,
+      "file": "server/food-sounds/sound-935298e45f3e7e219b9a.mp3",
+      "sha256": "67b5ce04218ac2292d01e3f6e1192c1df322c77a68d7755db094d07776f068f8"
+    },
+    {
+      "id": "sound-364d8a6d3b1fc3f30ddf",
+      "name": "우쉬_휙3",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 0.8,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-364d8a6d3b1fc3f30ddf.wav",
+      "sha256": "c270adbaca3985d0c0fd5349f63f39440e4f8681219868ba7066fcfe8d6e61b0"
+    },
+    {
+      "id": "sound-66bb7b749413ce6cc22e",
+      "name": "우쉬_휙4",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 1.2408,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-66bb7b749413ce6cc22e.mp3",
+      "sha256": "371d3d604f16684b8c47fbdaffb542e8e586d062862f83cfc41f78135917f5c6"
+    },
+    {
+      "id": "sound-94b2da775a70d1d72d36",
+      "name": "우쉬_휙5",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 22.0,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-94b2da775a70d1d72d36.wav",
+      "sha256": "5b66244dc54e012a599d7f7443e047f8c4f47d7b5957f05300c163b12b494359"
+    },
+    {
+      "id": "sound-07cc58b2055f134e2678",
+      "name": "우쉬_휙6",
+      "category": "1. 화면 움직임(movement)",
+      "sourceDuration": 3.7707,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-07cc58b2055f134e2678.wav",
+      "sha256": "b436a3f424da39dbae0adcf2561177c01d20eee8d20e27e9c0174d144e9b7b8b"
+    },
+    {
+      "id": "sound-03d6d3d18c09e8f512dd",
+      "name": "비주얼_가래 기침",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.3812,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-03d6d3d18c09e8f512dd.mp3",
+      "sha256": "4dca0a282ab3541102ef1d98d27003c3e92ba2dd95c9fc06a0287374a7fe4ab2"
+    },
+    {
+      "id": "sound-1d2e6a17da2c3a47ece9",
+      "name": "비주얼_게임클리어",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8845,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1d2e6a17da2c3a47ece9.mp3",
+      "sha256": "b6da932aaf20b7d19900102bdaf128b739b8c03a27288ec19dd5eeaa768d7a45"
+    },
+    {
+      "id": "sound-97d8feee3d20d099bcd8",
+      "name": "비주얼_계산대1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.7819,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-97d8feee3d20d099bcd8.mp3",
+      "sha256": "2f71096cc8a7c2adad5ca29e6d69cdd50730b3b3d67c575693b67029a260ccb9"
+    },
+    {
+      "id": "sound-a64c7fd06a3d10025c26",
+      "name": "비주얼_계산대2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.2485,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a64c7fd06a3d10025c26.mp3",
+      "sha256": "6c50c6008e5758eecaf79d4f3a60b98b779846b88fcab5b4204ef11b0d211b51"
+    },
+    {
+      "id": "sound-aba6f3386df7e8af82eb",
+      "name": "비주얼_기침",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8359,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-aba6f3386df7e8af82eb.mp3",
+      "sha256": "22d85a6c055cdb18cf9e047b9a2a8f34ea73b37f92ba61aa6ef5a2cd7e6b9d5b"
+    },
+    {
+      "id": "sound-6e1b9e6981adb441ff63",
+      "name": "비주얼_깨달음",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.7343,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6e1b9e6981adb441ff63.mp3",
+      "sha256": "58064a02a55584ebca41fbf5534e6ade2e580b8f9e115cd8a0e68974acd4414b"
+    },
+    {
+      "id": "sound-95252d5a3578dada399f",
+      "name": "비주얼_넷플렉스_오프닝",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 4.0635,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-95252d5a3578dada399f.mp3",
+      "sha256": "6691b8ce9d18b65fb5f4bc65b65a9b34e3248f3e28dd7d61c85a00fd0fd50c3d"
+    },
+    {
+      "id": "sound-6cdaeeee9319ca372405",
+      "name": "비주얼_노크(서라운드)",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.2767,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6cdaeeee9319ca372405.mp3",
+      "sha256": "ee89e429cab1df9261b718a46e9cc51fa56fcf70af4831d48ce9fd35c4efe9c5"
+    },
+    {
+      "id": "sound-9245945b66a4ca8505e1",
+      "name": "비주얼_되감기1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.9643,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9245945b66a4ca8505e1.mp3",
+      "sha256": "5d16821b53ff244eb74524e894d607413f2d5a15ead0cdfd9ccd8a987fd0b297"
+    },
+    {
+      "id": "sound-944276f9da3eef6c713d",
+      "name": "비주얼_되감기2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.4539,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-944276f9da3eef6c713d.mp3",
+      "sha256": "b17796312fc199b60c6eace0304c7dd42503c0f15f5946384e3344ab82191eee"
+    },
+    {
+      "id": "sound-2401035c84e913f55ab0",
+      "name": "비주얼_두둥탁",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.1262,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2401035c84e913f55ab0.mp3",
+      "sha256": "71b3a543483cb3ab9439730e4ce71d59c90bffb4d895a717fbd854b880069ba0"
+    },
+    {
+      "id": "sound-df1941c5df5d2fd5c7e9",
+      "name": "비주얼_디스코드_입장",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.2771,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-df1941c5df5d2fd5c7e9.mp3",
+      "sha256": "d717318680cc9664001571868d6cabc2622980bc1cc503a185a0d0a41aab0054"
+    },
+    {
+      "id": "sound-0ffc64993725895ff364",
+      "name": "비주얼_디스코드_콜링",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.6163,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0ffc64993725895ff364.mp3",
+      "sha256": "1dab60b407c5338a1eaf4df68f92bbaed3fc6160c77ba3b14ba6034d23e4a642"
+    },
+    {
+      "id": "sound-5028ac08bf886f0febfe",
+      "name": "비주얼_디스코드_퇴장",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.161,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5028ac08bf886f0febfe.mp3",
+      "sha256": "842f59528a10f5a274bf95d7e8d7db15b5810845129850e32871cfb1d9fce6ad"
+    },
+    {
+      "id": "sound-6f73c1ede9fb4d6eb00e",
+      "name": "비주얼_디스코드_핑",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.7198,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6f73c1ede9fb4d6eb00e.mp3",
+      "sha256": "89e22cfa49331122899d586bcdcf41461b415b9cea34163d84708e68f6492101"
+    },
+    {
+      "id": "sound-bd1676220cf55171c0f6",
+      "name": "비주얼_디지털_글리치",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.2,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bd1676220cf55171c0f6.wav",
+      "sha256": "bfc6c541527c7db39ff9d41a450c367903377e3f80def41022d7b1ff03b18a7c"
+    },
+    {
+      "id": "sound-582114d7b5fb2e864e6e",
+      "name": "비주얼_디지털_동전먹기",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.9451,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-582114d7b5fb2e864e6e.mp3",
+      "sha256": "0e0b0f431907ee75da2f722b1e4e1af0e1aa9b7781ccbd7309c93e634f061682"
+    },
+    {
+      "id": "sound-2fcba2baef31226d347b",
+      "name": "비주얼_디지털_됴링",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.0112,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2fcba2baef31226d347b.mp3",
+      "sha256": "3388d676ba2dd3d6436adf2a693499a1f3c872d537c0392f0dcc35b2de89ccde"
+    },
+    {
+      "id": "sound-a9257ea3f1ad7fbe4f79",
+      "name": "비주얼_디지털_디릭",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8912,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a9257ea3f1ad7fbe4f79.mp3",
+      "sha256": "50962041d254d79f1b2b353db012d6c857c2d28596db69050bd2fd363e4472da"
+    },
+    {
+      "id": "sound-6778298256ef90dccb58",
+      "name": "비주얼_디지털_디스코드",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.7712,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6778298256ef90dccb58.mp3",
+      "sha256": "891f712e530896631411a2c9f9db30b1214ad1ce53166144d1fb983a5d0de930"
+    },
+    {
+      "id": "sound-e33b9350d0302bce95e2",
+      "name": "비주얼_디지털_딕딕",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3392,
+      "duration": 0.3392,
+      "file": "server/food-sounds/sound-e33b9350d0302bce95e2.mp3",
+      "sha256": "a929267085b5947546b910b712152258b5ee03be1cc3735280fb1c9dc4e7fcd2"
+    },
+    {
+      "id": "sound-47a9113ea5697a9ef1a9",
+      "name": "비주얼_디지털_띠릭",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.2192,
+      "duration": 0.2192,
+      "file": "server/food-sounds/sound-47a9113ea5697a9ef1a9.mp3",
+      "sha256": "d585dd84bd82ad05473fd919954d750859cbd3dbbe15a5c7a2cfffb541e8c25b"
+    },
+    {
+      "id": "sound-94e3cf3ce3bb733b32ba",
+      "name": "비주얼_디지털_삐리리리",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 4.3619,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-94e3cf3ce3bb733b32ba.wav",
+      "sha256": "cd691b67a1ec3cfb2f0dd8e7d571bb6b52ea4aa05ca990eee7646e8c51f4b886"
+    },
+    {
+      "id": "sound-939f8a077d610a12bbfa",
+      "name": "비주얼_디지털_삐릭",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.6791,
+      "duration": 0.6791,
+      "file": "server/food-sounds/sound-939f8a077d610a12bbfa.mp3",
+      "sha256": "b4f6f585fbf7cfb5256df286cfb30b703acdadc72f4340bf344451c3f39624ba"
+    },
+    {
+      "id": "sound-31fa5ec7df3a2d16530b",
+      "name": "비주얼_딩동댕동",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.8139,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-31fa5ec7df3a2d16530b.mp3",
+      "sha256": "12f01a49148517fffbaaebb9e1d2edeaf6f10e3b13fdb6aa87de9854f150189b"
+    },
+    {
+      "id": "sound-2a2ae6d8edc34e17c887",
+      "name": "비주얼_떠오옵",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.0946,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2a2ae6d8edc34e17c887.mp3",
+      "sha256": "0e85afa163c7c1ea319ad176309638b8b05bbf1f6a2ad06540f30cc46498d651"
+    },
+    {
+      "id": "sound-b05669fbb5dce2d0a228",
+      "name": "비주얼_떵",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.4861,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b05669fbb5dce2d0a228.mp3",
+      "sha256": "6efdf730b7b911a442111644a28623a7c18fd010489b91a2ca040042897b0e59"
+    },
+    {
+      "id": "sound-1400650e3e0c41126adb",
+      "name": "비주얼_또잇",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.1333,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1400650e3e0c41126adb.wav",
+      "sha256": "638d6959dfa62cf29d56a3f0c27b889cd95c355aea3bfb262a142bcb9b92b158"
+    },
+    {
+      "id": "sound-c132aaadb9c4c71b6fcd",
+      "name": "비주얼_띠!링",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.9463,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c132aaadb9c4c71b6fcd.mp3",
+      "sha256": "e9ec85a0135dc6a36e5585b621dc763133699546b322c1446e5ff914c8faefd5"
+    },
+    {
+      "id": "sound-87f7d854fdb40a6d60b4",
+      "name": "비주얼_띠로록",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3918,
+      "duration": 0.3918,
+      "file": "server/food-sounds/sound-87f7d854fdb40a6d60b4.mp3",
+      "sha256": "74e7cc0251c5f8fc9ca21bcdac05de69cc104fae098f4a651f8f209668e49a67"
+    },
+    {
+      "id": "sound-819c585967db91c32f86",
+      "name": "비주얼_띠리링1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.7993,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-819c585967db91c32f86.wav",
+      "sha256": "8c512c217b6ede7ff3f057fd5e49c56d89185991e2e31554cb4d5cc1bfecfa66"
+    },
+    {
+      "id": "sound-2e386113fe125487d16f",
+      "name": "비주얼_띠리링2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.6535,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2e386113fe125487d16f.mp3",
+      "sha256": "18c576fb2b184d4da94852e34c0c9e4b89902376b4d9a2df1f3dc00f49f95610"
+    },
+    {
+      "id": "sound-029d5ce666b9eacc9589",
+      "name": "비주얼_띠링1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.3061,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-029d5ce666b9eacc9589.mp3",
+      "sha256": "2742f7eae8727d5d48bc2d6a87f9fdda6fa2cdea24bb7aaee356e572ee9c1d70"
+    },
+    {
+      "id": "sound-b3b9851b7f30d67aa035",
+      "name": "비주얼_띠링2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.8875,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b3b9851b7f30d67aa035.wav",
+      "sha256": "957062163747751066c203302f4ab0ac3cbb71dc7bbde0cc677f9371aa6bca48"
+    },
+    {
+      "id": "sound-3e8805a90aaa6b14b39f",
+      "name": "비주얼_띠옹2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.3322,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3e8805a90aaa6b14b39f.mp3",
+      "sha256": "4971bb43b28b1f0eb6dfba746780d8ba1024c2c553e46132c0c20dc016c0d7fe"
+    },
+    {
+      "id": "sound-0edab41af4a4b6e8b71e",
+      "name": "비주얼_띠용1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.6255,
+      "duration": 0.6255,
+      "file": "server/food-sounds/sound-0edab41af4a4b6e8b71e.mp3",
+      "sha256": "cb470183981768f7f485eebf3525035f19ad50b9e2f49a84a26721bee624c876"
+    },
+    {
+      "id": "sound-aaa439d0e49e7ae39b85",
+      "name": "비주얼_띠용3",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.933,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-aaa439d0e49e7ae39b85.mp3",
+      "sha256": "0ff7e6c675acc0ecd97d428b5f294c52bde3de60a7c96753496dc383781ddeaa"
+    },
+    {
+      "id": "sound-95810ef04c01d3f94a5b",
+      "name": "비주얼_띵1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.0112,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-95810ef04c01d3f94a5b.mp3",
+      "sha256": "13238c9a50fc38b300c2d78167cae0af24389cd2ed90e46a464d69378efd21d1"
+    },
+    {
+      "id": "sound-92266b5e4e5332d386b8",
+      "name": "비주얼_띵2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.3468,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-92266b5e4e5332d386b8.m4a",
+      "sha256": "9f1cb7f08dda003cd1b5b5829d9adf8c89113ec710c5db4a3294d1dd4e10615b"
+    },
+    {
+      "id": "sound-1da8a021c7e47b05c496",
+      "name": "비주얼_띵동1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8652,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1da8a021c7e47b05c496.mp3",
+      "sha256": "e411f3780004a1f311d44fce69eccce4485cb18c756f4dccca7e705a70d0f2af"
+    },
+    {
+      "id": "sound-32f1d7cd8febbb927574",
+      "name": "비주얼_띵동2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.5671,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-32f1d7cd8febbb927574.wav",
+      "sha256": "e1590cf8908f8a2d8482d83acf7e9533fed57f1184fa8f622ce4d7b9ad5f749d"
+    },
+    {
+      "id": "sound-91ef701cb7fe35401035",
+      "name": "비주얼_띵띵허무",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.5912,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-91ef701cb7fe35401035.wav",
+      "sha256": "084dd5652029ceb7b91c599f44f2db3a3c1d60653110006c59da74542ba806fd"
+    },
+    {
+      "id": "sound-c37d57af4b89a63da570",
+      "name": "비주얼_맑음",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 3.3322,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c37d57af4b89a63da570.wav",
+      "sha256": "67bcf8ff696c41efee2ddf002719241484d321d4be2ce982635d33701b8eff8a"
+    },
+    {
+      "id": "sound-8848652110a32cf10f59",
+      "name": "비주얼_멜로디1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.2277,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-8848652110a32cf10f59.mp3",
+      "sha256": "b41e7477adfb402c9873573d649d35e658c93919896651b2a8da8693141fffe4"
+    },
+    {
+      "id": "sound-a47e34b31b36c1d7c086",
+      "name": "비주얼_멜로디2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.4294,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a47e34b31b36c1d7c086.mp3",
+      "sha256": "65a5b81a4c9a137f8d06179a2543258247ef7921c082bc546f7b0f07fd259d0f"
+    },
+    {
+      "id": "sound-9218815c457713809d86",
+      "name": "비주얼_물방울_난감",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.741,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9218815c457713809d86.mp3",
+      "sha256": "86bfb7a2cedb3345c8e79c297dc1a466c30dac9cf92d4fab5756d0d9e001eecd"
+    },
+    {
+      "id": "sound-0628db5a0238ea552f85",
+      "name": "비주얼_물방울_뽁1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3135,
+      "duration": 0.3135,
+      "file": "server/food-sounds/sound-0628db5a0238ea552f85.mp3",
+      "sha256": "5de96876fbc5ae75b5d696804e702b86e3c03bec1800751341619654797d6a1e"
+    },
+    {
+      "id": "sound-8328acf3eda51d0726f6",
+      "name": "비주얼_물방울_뽁2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3831,
+      "duration": 0.3831,
+      "file": "server/food-sounds/sound-8328acf3eda51d0726f6.wav",
+      "sha256": "3c3ce08b115e47e4204588863e7a2dfbb5e79be6d2792697ed992100353f7601"
+    },
+    {
+      "id": "sound-2cf89cb0f77f79cf165e",
+      "name": "비주얼_물방울_뽁3",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.58,
+      "duration": 0.58,
+      "file": "server/food-sounds/sound-2cf89cb0f77f79cf165e.mp3",
+      "sha256": "403c3bf5d32814c26ecaedc2f64bc7521ae5894c6507035e8a844661c862812f"
+    },
+    {
+      "id": "sound-8ea687bd8e4813016492",
+      "name": "비주얼_물방울_뾰옥1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.6856,
+      "duration": 0.6856,
+      "file": "server/food-sounds/sound-8ea687bd8e4813016492.mp3",
+      "sha256": "ded89d129234c2194227fabf82c7c61cc0faa62be4ff8d2742c2998376e3a8a4"
+    },
+    {
+      "id": "sound-fb80b87c9cec8d46bd49",
+      "name": "비주얼_물방울_뾰옥2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.3907,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fb80b87c9cec8d46bd49.wav",
+      "sha256": "b28a6d96c35c66433fad14d167dc46c5695490cd98446ecc72fbcd11a9028e49"
+    },
+    {
+      "id": "sound-e2c8152d7ba5df14e728",
+      "name": "비주얼_물음표1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.9984,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e2c8152d7ba5df14e728.mp3",
+      "sha256": "7f15cf851ffa073da9c8ee061329379db5324d9c9ea562bab4913369aad54bda"
+    },
+    {
+      "id": "sound-5e6f59fe16f9e957e4e4",
+      "name": "비주얼_물음표2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.3995,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5e6f59fe16f9e957e4e4.wav",
+      "sha256": "166d243dfce82332fc7867af9aecd74b9873cebab69b8dce5c586520f9f07423"
+    },
+    {
+      "id": "sound-e570b1a077cd8a5790b2",
+      "name": "비주얼_병뚜껑",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 601.5869,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e570b1a077cd8a5790b2.mp3",
+      "sha256": "4f8671776316658c12cd2a2602fe09cd8d3705b7f6d23df38d46c5536d2986bd"
+    },
+    {
+      "id": "sound-74373ac9f04d91cb53e5",
+      "name": "비주얼_복싱 경기 시작",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 8.5088,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-74373ac9f04d91cb53e5.mp3",
+      "sha256": "bba5b244c102b398413f88e95b0d163317502b47bbbc764e683ac4f671b30548"
+    },
+    {
+      "id": "sound-337967c484153f6eb7ce",
+      "name": "비주얼_블록소리",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.7837,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-337967c484153f6eb7ce.mp3",
+      "sha256": "3ddf50dedec929bed5c0e6c54a8b014c06f09a21df99e6952e40ddd185eeb0f5"
+    },
+    {
+      "id": "sound-fddd564f262701afbdfa",
+      "name": "비주얼_빠른심장박동",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 6.8963,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fddd564f262701afbdfa.mp3",
+      "sha256": "64b12fe2b86cf6e4ed29382e7963a12e27d8914cbfe61a5660fd56f11b4ea636"
+    },
+    {
+      "id": "sound-ada78cdd9c22f1d94f17",
+      "name": "비주얼_뾱뾱걷기",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.9574,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ada78cdd9c22f1d94f17.mp3",
+      "sha256": "e9c6e485aba9e761511f2757b1f15430b274defe27a85e1f8ad3136192641fcf"
+    },
+    {
+      "id": "sound-38e2db2042e72a6b0013",
+      "name": "비주얼_손가락 튕기기",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.872,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-38e2db2042e72a6b0013.mp3",
+      "sha256": "7e559da8889b8dad413ce4bb1edf434412eab51df29683374cc97fc7d9e668d3"
+    },
+    {
+      "id": "sound-c3f3682c3b9ed4fb8481",
+      "name": "비주얼_아날로그_기어1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.698,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c3f3682c3b9ed4fb8481.mp3",
+      "sha256": "f1d59b4e72ba8a845a399f62ba7c57d4844b4ce957e160f60fcc3413a9d3779d"
+    },
+    {
+      "id": "sound-0726d2be6a5c724bf4e5",
+      "name": "비주얼_아날로그_기어2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.6269,
+      "duration": 0.6269,
+      "file": "server/food-sounds/sound-0726d2be6a5c724bf4e5.mp3",
+      "sha256": "7a006ec06e706c595b02add7a511af762683df125c7dc0b3af825c4844cef938"
+    },
+    {
+      "id": "sound-5de561caad971973e978",
+      "name": "비주얼_아이폰_알림음",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8109,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5de561caad971973e978.mp3",
+      "sha256": "01c77d3e22bd2f51e07521ef9fe374b84c34965adebbcd360be7cb8ee028a61f"
+    },
+    {
+      "id": "sound-754dd1e9e3da4a79062a",
+      "name": "비주얼_애플페이",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.4106,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-754dd1e9e3da4a79062a.mp3",
+      "sha256": "44425ec60c9694f7882f3d75ca166463c7ee4619284d32bfc878936878f90bdb"
+    },
+    {
+      "id": "sound-d8392cb4a97391e2fd92",
+      "name": "비주얼_야구방망이_ 깡!",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 3.7849,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d8392cb4a97391e2fd92.mp3",
+      "sha256": "46f554d334c1e86c014e368e384d3062ee1b0288162ea8a57f549b6008df9967"
+    },
+    {
+      "id": "sound-8b8953ccf4e0ba806617",
+      "name": "비주얼_야구방망이_뚱",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.4441,
+      "duration": 0.4441,
+      "file": "server/food-sounds/sound-8b8953ccf4e0ba806617.mp3",
+      "sha256": "5b7f625db835d79c3b6d5a42c79ab0a1cfb1b96496876cf8b3d491060eb5a46f"
+    },
+    {
+      "id": "sound-dfe03c53f4e901f625df",
+      "name": "비주얼_어이없는 띠용",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.009,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-dfe03c53f4e901f625df.mp3",
+      "sha256": "6fd352cbf49d3e588921681a90806304255c9ac561705c9ca8c72d0e1524fc20"
+    },
+    {
+      "id": "sound-99cf0d1ee65e351c44a2",
+      "name": "비주얼_엘베 도착",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.6885,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-99cf0d1ee65e351c44a2.mp3",
+      "sha256": "7fc0ef000f3f52f3e31e3426052b33a06211265b66393f969378ea81f078b4fc"
+    },
+    {
+      "id": "sound-a413daa97a039d3929e6",
+      "name": "비주얼_여자기침소리",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8359,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a413daa97a039d3929e6.mp3",
+      "sha256": "22d85a6c055cdb18cf9e047b9a2a8f34ea73b37f92ba61aa6ef5a2cd7e6b9d5b"
+    },
+    {
+      "id": "sound-00c1250fc275884061ec",
+      "name": "비주얼_오답",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.2973,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-00c1250fc275884061ec.wav",
+      "sha256": "e33b211d610999dad1227f18858af289ce543a395f00348420793c87d95b7bc1"
+    },
+    {
+      "id": "sound-96055c1245d1f26ea52e",
+      "name": "비주얼_요정등장",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 4.7729,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-96055c1245d1f26ea52e.mp3",
+      "sha256": "3673859f4401a3528fdf28a8616986e860698bea2a1a0fdd3e7168f5e638290f"
+    },
+    {
+      "id": "sound-6cf6543978aa9a759182",
+      "name": "비주얼_욕 삐",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.6626,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6cf6543978aa9a759182.mp3",
+      "sha256": "5936d493c4a8f658a6206d0753ab2baca97a7b6104d798a5a75c3a25222ff4f2"
+    },
+    {
+      "id": "sound-5f3cbeffae9b40489102",
+      "name": "비주얼_우우우웅",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.2482,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5f3cbeffae9b40489102.wav",
+      "sha256": "0ec46879f46725a7acbb08f272de40f3ffe5642d49056c6ef5b14a02d2d99634"
+    },
+    {
+      "id": "sound-b3cf7d311fe469a72d8b",
+      "name": "비주얼_장례식_띠잉",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 3.5296,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b3cf7d311fe469a72d8b.mp3",
+      "sha256": "a872d7c69f4c7caaf5dcfcc4b0ee68a6a687e9dde0f705a68cfd8a729c52ab87"
+    },
+    {
+      "id": "sound-24a42e2f86a5f3852c07",
+      "name": "비주얼_종이 넘기기",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.864,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-24a42e2f86a5f3852c07.mp3",
+      "sha256": "20dd638f0505d0d258f6d1e26de23e90aa957950c72ec702ac4bb4df8eb15210"
+    },
+    {
+      "id": "sound-cba9bb76108467fa8635",
+      "name": "비주얼_짜잔",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.9389,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-cba9bb76108467fa8635.wav",
+      "sha256": "4fa114d1ac15f29fd8d9d3ab74e8146fce32c1261904355670255e59891df23a"
+    },
+    {
+      "id": "sound-8f4f655556da906c84eb",
+      "name": "비주얼_채찍",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.1214,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-8f4f655556da906c84eb.mp3",
+      "sha256": "73f5bf287424f051f6551846026d5a3008fc825c368d64c99e9eb322ec4b0ca7"
+    },
+    {
+      "id": "sound-020c84c58b7660f55486",
+      "name": "비주얼_천사강림",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 5.3601,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-020c84c58b7660f55486.mp3",
+      "sha256": "ce585baa8d4cb628fa15b2017d1acdf56bfe6686a6284689f376d2415a936d01"
+    },
+    {
+      "id": "sound-0e9ae503a97482de9c06",
+      "name": "비주얼_카메라_찰칵1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.5682,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0e9ae503a97482de9c06.wav",
+      "sha256": "4b4929ad937450c99560eb51c87cd623576934cc516ae963b093590e4e78c3be"
+    },
+    {
+      "id": "sound-a75bc2761488eca47599",
+      "name": "비주얼_카메라_찰칵10",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.0201,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a75bc2761488eca47599.mp3",
+      "sha256": "58f18e86e44bfeff7f980abbb29e1050edc4b66f0c3dbda376b224b772ff0b20"
+    },
+    {
+      "id": "sound-82e5b34bd968e39b9b8f",
+      "name": "비주얼_카메라_찰칵2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.8567,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-82e5b34bd968e39b9b8f.mp3",
+      "sha256": "1a6f6b5c6f6cbd47ce174ad0fd692929fefa51f017a404b5d21bd8f5aef9df33"
+    },
+    {
+      "id": "sound-10cb47b4a00a32389f1e",
+      "name": "비주얼_카메라_찰칵3",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.7864,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-10cb47b4a00a32389f1e.mp3",
+      "sha256": "f5ca9aa61c4160ad5797d1a2bf528339117eb3f7d9aba3d51ddd0b9a0da62ee3"
+    },
+    {
+      "id": "sound-f826ae198f7483781edb",
+      "name": "비주얼_카메라_찰칵4",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.882,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f826ae198f7483781edb.mp3",
+      "sha256": "6c48ad3fcf1f7d4fda1842bd3e8501d312d3dbb57ee9f9c395ad2302a9eb197b"
+    },
+    {
+      "id": "sound-bf699b1d35fb608a525c",
+      "name": "비주얼_카메라_찰칵5",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.4556,
+      "duration": 0.4556,
+      "file": "server/food-sounds/sound-bf699b1d35fb608a525c.mp3",
+      "sha256": "428c841844af17499cb298267b22d547e86ac9a5b39140e9f00036b3fef878e2"
+    },
+    {
+      "id": "sound-9bd58fa8f736116f58c7",
+      "name": "비주얼_카메라_찰칵6",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.8591,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9bd58fa8f736116f58c7.mp3",
+      "sha256": "08196e134e177974c0ea628bbcb39c5578b3b7657dbcbd947f8ad59301d0e9cb"
+    },
+    {
+      "id": "sound-9f7c906d70bf18d95b73",
+      "name": "비주얼_카메라_찰칵7(아이폰)",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.912,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9f7c906d70bf18d95b73.mp3",
+      "sha256": "9328f32e3a67a0a2f1a6b53a273451c937c66e76d0f5121acba2570f423e7708"
+    },
+    {
+      "id": "sound-4f3fbdb2faf9df7d659c",
+      "name": "비주얼_카메라_찰칵8",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.2278,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-4f3fbdb2faf9df7d659c.mp3",
+      "sha256": "56126a80ae98a9767eb8b07b788105916f9aa4f5f0c958814905f71d0e8964c6"
+    },
+    {
+      "id": "sound-ce5c9f13bccf14f28ee0",
+      "name": "비주얼_카메라_찰칵9",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.1494,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ce5c9f13bccf14f28ee0.mp3",
+      "sha256": "80920d31d999d06413fe5712ef2c8fc98a4ad809519be299566d7d8d31862fbb"
+    },
+    {
+      "id": "sound-26be4f50b7ac935175a5",
+      "name": "비주얼_카톡",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.5486,
+      "duration": 0.5486,
+      "file": "server/food-sounds/sound-26be4f50b7ac935175a5.mp3",
+      "sha256": "bc2563681a2b8d2905b25411157f6584f4fe5c182201e80bd85fe956fbefd31c"
+    },
+    {
+      "id": "sound-03c4780e962dda32cce1",
+      "name": "비주얼_카톡_벨소리",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 15.526,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-03c4780e962dda32cce1.mp3",
+      "sha256": "65db08f8b539d4c9703b048ad8b58bb22f7bb080116f5aa6873fc1ab8338d43b"
+    },
+    {
+      "id": "sound-1faf74c2336ce1e8b4a6",
+      "name": "비주얼_카툰 팝",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.768,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1faf74c2336ce1e8b4a6.mp3",
+      "sha256": "42fea04e4f45adaebdd0f205f7c0bd35e201da29b656470b65704a6febe4843e"
+    },
+    {
+      "id": "sound-a43506525f6a349b48ca",
+      "name": "비주얼_코골이",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 36.7569,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a43506525f6a349b48ca.mp3",
+      "sha256": "b217f9ba0aed7393e4edd3390cb9c36b14892c4b54fdc38c3ddf42aa7901d3b5"
+    },
+    {
+      "id": "sound-f8aa3ad0a33e6fa8dca0",
+      "name": "비주얼_클릭1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3134,
+      "duration": 0.3134,
+      "file": "server/food-sounds/sound-f8aa3ad0a33e6fa8dca0.mp3",
+      "sha256": "53ddc11bd4c0278b78ebd22c367c77834c9dfb4aaf22297152085855b1aad6db"
+    },
+    {
+      "id": "sound-c410c2e9c894abf47f67",
+      "name": "비주얼_클릭2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.1329,
+      "duration": 0.1329,
+      "file": "server/food-sounds/sound-c410c2e9c894abf47f67.mp3",
+      "sha256": "7efe02b231d314585e6e12873c2826ff563976230db8a42a5879fa1d5dca86e3"
+    },
+    {
+      "id": "sound-2276350620d10209ac0c",
+      "name": "비주얼_키보드1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 23.7892,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2276350620d10209ac0c.mp3",
+      "sha256": "4895e7c969f82a9f8a287f1677ea30f750a418fd8c707d31da4005cd77356a8d"
+    },
+    {
+      "id": "sound-18637ed593c78e7e6fa8",
+      "name": "비주얼_키보드2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 46.344,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-18637ed593c78e7e6fa8.mp3",
+      "sha256": "d954e8b5f5bc26489f1a552e3569b04c37b50d0c8a53deb6028d8ebd6b141a76"
+    },
+    {
+      "id": "sound-fb8fc78045694915265a",
+      "name": "비주얼_키보드3",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 6.192,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fb8fc78045694915265a.mp3",
+      "sha256": "0494d152f0461c9b6aac35c9fcfb773027c519734a1888d80d1ac6753070e48f"
+    },
+    {
+      "id": "sound-2d7787a217ac1f8b756d",
+      "name": "비주얼_키보드4",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 10.0571,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2d7787a217ac1f8b756d.mp3",
+      "sha256": "2417972175a6a1bd1cf117262c5587b53bcbddef2d9ff396668d94065882a6a7"
+    },
+    {
+      "id": "sound-59f11f721264f0ff7e0e",
+      "name": "비주얼_틱",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3451,
+      "duration": 0.3451,
+      "file": "server/food-sounds/sound-59f11f721264f0ff7e0e.wav",
+      "sha256": "da9fe612943491a9f036672ddcdeedc5e3941b4b97bb9fdae03b84340fc90507"
+    },
+    {
+      "id": "sound-f11193c4c791aeae4582",
+      "name": "비주얼_펀치1",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.058,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f11193c4c791aeae4582.mp3",
+      "sha256": "6ce3bba09c6dfbe642eee8e55908123a839aac6279a2f84af001eac2c5c2272c"
+    },
+    {
+      "id": "sound-2c57a546dad26ff14216",
+      "name": "비주얼_펀치2",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.3775,
+      "duration": 0.3775,
+      "file": "server/food-sounds/sound-2c57a546dad26ff14216.mp3",
+      "sha256": "f2e0c974ae526b352f179c0b22752e11b9338c04f8ace0423471a345489114f8"
+    },
+    {
+      "id": "sound-bbaddc0dcf522e0bfbfa",
+      "name": "비주얼_풍선불기",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 2.0,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bbaddc0dcf522e0bfbfa.mp3",
+      "sha256": "a42479fd947f64d46d00ad4fcac1d6e17fba8fa1e6c647f53310fbf78f18bef8"
+    },
+    {
+      "id": "sound-f8deb15fcd78fc6e3d94",
+      "name": "비주얼_헉!",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.296,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f8deb15fcd78fc6e3d94.mp3",
+      "sha256": "f5e0f9db255203a2710bf84b9455bba340eb51a72ce17a6cdc05596212fef49f"
+    },
+    {
+      "id": "sound-96f58fbcd95a0eadd6b0",
+      "name": "비주얼_형광펜밑줄_긴사운드",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.0188,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-96f58fbcd95a0eadd6b0.mp3",
+      "sha256": "cc377afe997f31a5822440066b3593991bc373eda75b621a839f4feff8338cf6"
+    },
+    {
+      "id": "sound-aca38f72363f58b62ba1",
+      "name": "비주얼_형광펜밑줄_짧은사운드",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 0.6269,
+      "duration": 0.6269,
+      "file": "server/food-sounds/sound-aca38f72363f58b62ba1.mp3",
+      "sha256": "c5b2095adb166eaf18b5b311ed9aedcb24d9f51003193fdc9ffdd9ff02cdb021"
+    },
+    {
+      "id": "sound-f35cd5474e70fb064fc5",
+      "name": "비주얼_휘요오오옹",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.8808,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f35cd5474e70fb064fc5.mp3",
+      "sha256": "5de75f571c930af43ad8df0b676d4906f1af5893ed722e2a9e5de41fc955f489"
+    },
+    {
+      "id": "sound-03bfc64ccf1ffadb1574",
+      "name": "비주얼_힝",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.3061,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-03bfc64ccf1ffadb1574.mp3",
+      "sha256": "5132a04793b36b88a714b6233b3aaae31a084f2aaf673fe6b4df3212808beff4"
+    },
+    {
+      "id": "sound-831074ddc8571797027f",
+      "name": "비주얼_ㅌㅌㅌ",
+      "category": "2. 시각 효과(visuals)",
+      "sourceDuration": 1.4106,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-831074ddc8571797027f.mp3",
+      "sha256": "46854535768f85f5fddfc4299fe367c0fca01b4a53d1e29f104754fbdc06ec84"
+    },
+    {
+      "id": "sound-7a31bda731866291ea83",
+      "name": "기타_드럼",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 4.7543,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7a31bda731866291ea83.mp3",
+      "sha256": "f1f8cf896df1400796b47bc66071ca5c60c5da3b8f1d460d4b157a338e4463c1"
+    },
+    {
+      "id": "sound-3ce52ee998bdaaf8ba94",
+      "name": "기타_어이없음",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 6.288,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3ce52ee998bdaaf8ba94.mp3",
+      "sha256": "c61bd1b0726dc8e213e817a0a788972f273db554a48459616c1971f8a4db4141"
+    },
+    {
+      "id": "sound-961d630d3657c66ab80f",
+      "name": "드론_꾸루룩꾸루룩",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 4.3771,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-961d630d3657c66ab80f.wav",
+      "sha256": "260af8dca59fbfcf1975744697115d9e3420a1537a114abc7824dbafc1d5441f"
+    },
+    {
+      "id": "sound-9e04ffcabc435f0b73f2",
+      "name": "드론_꾸룩꾸룩",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 11.5,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9e04ffcabc435f0b73f2.wav",
+      "sha256": "0230212d9dd252ddc53eedef486285fcc058e13def04978ff5aad3e159ed2036"
+    },
+    {
+      "id": "sound-81eebb00fcd44e25cd4d",
+      "name": "드론_약한 우웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.6923,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-81eebb00fcd44e25cd4d.wav",
+      "sha256": "acb9f7e0887d8a52fd447f0d24b3134b6746c2282b955e8037539518a2f0d9db"
+    },
+    {
+      "id": "sound-47e5f79b55bc0758ba72",
+      "name": "드론_우우우우웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 43.9712,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-47e5f79b55bc0758ba72.wav",
+      "sha256": "2e097a13c48a9f269ff7f06e66aac147bc7914735864a1a8c27f6b24bb0e2a47"
+    },
+    {
+      "id": "sound-f77d91b12c582e4a9c69",
+      "name": "드론_우우우웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 7.6799,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f77d91b12c582e4a9c69.wav",
+      "sha256": "37b3260d3019256253866af4d7770f42ed4af33789f0861d3fbd80e2b0f966e9"
+    },
+    {
+      "id": "sound-5280315317281a0cf8bb",
+      "name": "드론_우우우웅우우우웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 5.0524,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5280315317281a0cf8bb.wav",
+      "sha256": "03f12db9054dd746554484a5d5a243771a3cd0b9043b295800955eefca86d7c6"
+    },
+    {
+      "id": "sound-3293e5fb15a85bd76de0",
+      "name": "드론_웅웅웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 26.6939,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3293e5fb15a85bd76de0.wav",
+      "sha256": "bc8e4b09226d83f7f7be48a49d7a495dd310b452fd34dcb11a39e07d7c393388"
+    },
+    {
+      "id": "sound-855345dade7f2b69ce66",
+      "name": "라이저_중간부터 고조",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 7.0875,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-855345dade7f2b69ce66.wav",
+      "sha256": "0abf137e01e41b750cee9ce9d6b643e69b800c18889ad6d7dd72636fe203b32b"
+    },
+    {
+      "id": "sound-21ac7f9988d1d29f09e1",
+      "name": "라이저_짧게 위잉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 0.8864,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-21ac7f9988d1d29f09e1.wav",
+      "sha256": "a209cc0145e682b569473dab07e8aa5fb839971e0d444c9523183417118c33ce"
+    },
+    {
+      "id": "sound-bb306be00663311cb4d4",
+      "name": "라이저_처음부터 고조되다가 끝남",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 4.6683,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bb306be00663311cb4d4.wav",
+      "sha256": "f1d5aa5ca1b034129fbc154b384ddb065f4a373caadc74748c4fefe17a2b0ece"
+    },
+    {
+      "id": "sound-5b28804e38bed8537785",
+      "name": "라이저_처음부터 점점 고조",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 7.8554,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5b28804e38bed8537785.wav",
+      "sha256": "84e03b202ba8efe6329688f9e989255d91f30f80f8d51bd370ee0c287ac6d4cb"
+    },
+    {
+      "id": "sound-53b6d632c313115208fc",
+      "name": "라이저_휘이이이이이이잉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.2032,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-53b6d632c313115208fc.wav",
+      "sha256": "c69140d6f2f0b1d8515c6e679e1773b5081d6f7f5823b4b67a203246b739d06d"
+    },
+    {
+      "id": "sound-b24fc174d0524744432f",
+      "name": "라이저_휘이이잉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 5.1356,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b24fc174d0524744432f.wav",
+      "sha256": "53dddcdc6a96b7798dd2a6f799108f2a08dc8214f52360016c2a56d6ad9f6d3d"
+    },
+    {
+      "id": "sound-d3a63b84070c90b88b9e",
+      "name": "임팩트_부아아아ㅏㅇ",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.0302,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d3a63b84070c90b88b9e.mp3",
+      "sha256": "9224939dbb0b2eb703844aa373f4b33b7474ca97f881b689c678b47f5de55227"
+    },
+    {
+      "id": "sound-bdb453e5f7e0d8cd1c43",
+      "name": "임팩트_부앙!",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 1.2549,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bdb453e5f7e0d8cd1c43.mp3",
+      "sha256": "c4dadbc0b9cd21b1313ec11845a00d9401bc208ae0f59f54a0282b8cb89d56c2"
+    },
+    {
+      "id": "sound-578302f6a46f6a23aafe",
+      "name": "임팩트_붐",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 1.148,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-578302f6a46f6a23aafe.wav",
+      "sha256": "f31382da49de4616435275e81da9e8d158e5bbfa08bdc334f90563140a551f89"
+    },
+    {
+      "id": "sound-d752a05d0adafeebd3a0",
+      "name": "임팩트_폭발1",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.3555,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d752a05d0adafeebd3a0.mp3",
+      "sha256": "2c6e099abb64eb2b8d658baa58f95c468435203ebe728a724c0e575c1243fc37"
+    },
+    {
+      "id": "sound-88e346281023c64931c7",
+      "name": "임팩트_폭발2",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 2.5544,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-88e346281023c64931c7.mp3",
+      "sha256": "c8e95d7108d7e87d02a5e1531bb6fca1c896479f211f97efd91ef09c51ff1516"
+    },
+    {
+      "id": "sound-fbcb4102308098b3afd5",
+      "name": "임팩트_폭발_큰",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 10.552,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fbcb4102308098b3afd5.mp3",
+      "sha256": "da0604508e91b524779e33066de278c1acc25c0c909c799de78e330cf4dfa10e"
+    },
+    {
+      "id": "sound-151182437d4a02ba1c89",
+      "name": "충격음_뚜훅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 2.968,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-151182437d4a02ba1c89.wav",
+      "sha256": "f689a62d084a133c6215d26cde9ad01b4eb3993f5c0e56e1cbdf3b97235312ed"
+    },
+    {
+      "id": "sound-3e0da71748f01392b96f",
+      "name": "충격음_우웅 우웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 16.0,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3e0da71748f01392b96f.wav",
+      "sha256": "eb88a3ebf3b78969a2201ebcd0c9ded4ef4829df83b623479564875c48adb724"
+    },
+    {
+      "id": "sound-08653dc661357d735276",
+      "name": "충격음_전구깨지는소리",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 0.9926,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-08653dc661357d735276.mp3",
+      "sha256": "3351b0309903f9e8b1f3c6eaded47e0d52d576112f9e5e4284f440fb5d1bc0cb"
+    },
+    {
+      "id": "sound-2870491a4c1b74d6f769",
+      "name": "충격음_쿠웅",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 7.75,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2870491a4c1b74d6f769.wav",
+      "sha256": "fe6dbcf9bddceea623ebbaafff0398681f2e316e45ad7c95369cf3bc0f6e4d35"
+    },
+    {
+      "id": "sound-0f7e4f2fffb484d30a84",
+      "name": "충격음_쿵쿵쿵",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 28.5406,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0f7e4f2fffb484d30a84.wav",
+      "sha256": "4823b6d94bbe362a848700113fdb0243f135ed437db5be11d9988bcc846907ae"
+    },
+    {
+      "id": "sound-eadb63c90fafd38bdf2f",
+      "name": "충격음_퀴잉 퀴이잉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.9974,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-eadb63c90fafd38bdf2f.wav",
+      "sha256": "4e8da3bb18a97c5ea395ec41e9654ca9316a46ba1718e95a70d37d7f250a13d4"
+    },
+    {
+      "id": "sound-8d28173b2beb798c9fab",
+      "name": "충격음_터어엉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 0.8914,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-8d28173b2beb798c9fab.mp3",
+      "sha256": "3ffd00dcf1ff2ccf433702fe6bd25215122d24a38d021ac49c9b969b861a5f17"
+    },
+    {
+      "id": "sound-b1c0b8c9cf20b1100910",
+      "name": "충격음_터어엉",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 6.5863,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b1c0b8c9cf20b1100910.wav",
+      "sha256": "5657ffa45b5a6185b4b375ec7530e616062655cdcf3a83ea70ec0caa3251d0fb"
+    },
+    {
+      "id": "sound-f9d15cc6329b371037a5",
+      "name": "충격음_프라이팬",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 0.6563,
+      "duration": 0.6563,
+      "file": "server/food-sounds/sound-f9d15cc6329b371037a5.mp3",
+      "sha256": "79149330e8a3d4d4f5da34e487689ab117d5e36bdab4250eda86b2f30a0ecb90"
+    },
+    {
+      "id": "sound-60b2302de68c10178eef",
+      "name": "텐션_슬로우 모션 투 패스트 모션",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 5.2145,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-60b2302de68c10178eef.mp3",
+      "sha256": "b7d0db4b92ceba5154f191e6d3a6dabaa99eebd8e3a54b4b6f61088da31d7882"
+    },
+    {
+      "id": "sound-f8395ddcb52bb7173c98",
+      "name": "텐션_시간폭탄",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 6.2469,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f8395ddcb52bb7173c98.mp3",
+      "sha256": "baea03412d96e6751bda58cc88951a737eabfd3b8ce97251fce38e89bee2549a"
+    },
+    {
+      "id": "sound-5667e8cda53c8bb2a6bf",
+      "name": "텐션_심장박동",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 0.7168,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5667e8cda53c8bb2a6bf.mp3",
+      "sha256": "1f4bb716b4ef5b6e28aff63ef877e90cc0c5856d05736348d026d579ce5d48e3"
+    },
+    {
+      "id": "sound-7a925dfd391cdff6c07a",
+      "name": "텐션_알람",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 26.6667,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7a925dfd391cdff6c07a.mp3",
+      "sha256": "3c719748a31642a4af6ce100214639239344e99c44532c295faad62eda50ba8a"
+    },
+    {
+      "id": "sound-71dbc77740cd3328449f",
+      "name": "텐션_째깍째깍",
+      "category": "3. 텐션 조절(tension)",
+      "sourceDuration": 3.5539,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-71dbc77740cd3328449f.mp3",
+      "sha256": "b4da0fb1f11c03e9c5d2ba998dd572fb64ad3a8881e5f4badd61418bea2ae426"
+    },
+    {
+      "id": "sound-f4babdf049839acd9977",
+      "name": "01. 1박2일 - 오프닝",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.6656,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f4babdf049839acd9977.mp3",
+      "sha256": "a5649de49aa930c968c6d1fabe761964b6edec011fc63b6afbf4cd899e9dc155"
+    },
+    {
+      "id": "sound-644f424de0a64e832fa4",
+      "name": "02. 1박2일 - 도입부",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.8137,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-644f424de0a64e832fa4.mp3",
+      "sha256": "43187a7b5dd1350a2e1b608ed34537fe0d9f1e7d2eab7843fda6a9ef30f759a3"
+    },
+    {
+      "id": "sound-ff389ef0af660176597a",
+      "name": "03. 1박2일 - 씬 변경",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.9088,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ff389ef0af660176597a.mp3",
+      "sha256": "0d123e20d4a594df29bbc37d3f45cefa3da88281449af28fdf069e7146292e0b"
+    },
+    {
+      "id": "sound-d3db2294ef3faa854b13",
+      "name": "04. 1박2일 - 잠시후",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.5435,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d3db2294ef3faa854b13.mp3",
+      "sha256": "766d566a649250cb09069977c7f8b980dde00193253ebeaf10d522561defbd6e"
+    },
+    {
+      "id": "sound-775e37626a36865b832c",
+      "name": "05. 1박2일 - 결정, 결과",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.674,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-775e37626a36865b832c.mp3",
+      "sha256": "778afce914b6ef22273a41a21c8a3e25282c72f643229e887f21907b3b4a00cf"
+    },
+    {
+      "id": "sound-5b011613e94200cb6779",
+      "name": "06. 1박2일 - 패배, 결과",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.2143,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5b011613e94200cb6779.mp3",
+      "sha256": "6faa6d3f531e5b035d5ce3b52ccbe21e1fa97781419277aff15b0adb390b6769"
+    },
+    {
+      "id": "sound-a9704f941ef5c448023c",
+      "name": "07. 1박2일 - 복불복 결과",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.1007,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a9704f941ef5c448023c.mp3",
+      "sha256": "b19f78a48cb0a78da723c89ee7b7929e457876059facd3e3956c361ad6da6d87"
+    },
+    {
+      "id": "sound-d5c8cca9b502625b6cc4",
+      "name": "09. 1박2일 - 두 번째 미션",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.6656,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d5c8cca9b502625b6cc4.mp3",
+      "sha256": "5f6b7b5d6999aa5167e35e519c16d4de0be844437ce9815e4bade186e6a481fb"
+    },
+    {
+      "id": "sound-98be3e367eaf758ecd4d",
+      "name": "10. 1박2일 - 이겨야한다(방청객소리포함)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 7.7278,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-98be3e367eaf758ecd4d.mp3",
+      "sha256": "cff2b338d171f7dad4a83439a27bc81deb22442ea254a858150ae373761df344"
+    },
+    {
+      "id": "sound-eca64381338be7f54ce2",
+      "name": "11. 1박2일 - 과연",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.4568,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-eca64381338be7f54ce2.mp3",
+      "sha256": "e2c9fab7fbe1e965cc4effcda9b0b28d183c43d57164ff499edd26e11e3456e3"
+    },
+    {
+      "id": "sound-6077c4bada52cb356935",
+      "name": "12. 1박2일 - 복불복 당첨",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.5696,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6077c4bada52cb356935.mp3",
+      "sha256": "b03a537d2a81a253e7680c8b6add701632bf64d738c34f418f1c79a6edc52de2"
+    },
+    {
+      "id": "sound-82cebfb1b2af75c1469c",
+      "name": "13. 1박2일 - 포기,절망(방청객소리포함)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.5267,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-82cebfb1b2af75c1469c.mp3",
+      "sha256": "fbcad67bb7ee0b8c6f631788df377ec1202af89a54097464c25ed51b3b6e73e6"
+    },
+    {
+      "id": "sound-2a5fbdcf618f31eee173",
+      "name": "14. 1박2일 - 미션 도전",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.3356,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2a5fbdcf618f31eee173.mp3",
+      "sha256": "84dfb6df494e3c3036eabf651167c2774303422b04ae0825454c2b4761702aa8"
+    },
+    {
+      "id": "sound-435ac30eb2f1592be5bb",
+      "name": "15. 1박2일 - 어이없음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.7699,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-435ac30eb2f1592be5bb.mp3",
+      "sha256": "e2bb6f3da671aa5af2d697b5db7f4f4e642f3f9fe581ce2b272f8f1bcd53e680"
+    },
+    {
+      "id": "sound-c534ac292cc6f0984a07",
+      "name": "16. 1박2일 - 기약",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.2396,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c534ac292cc6f0984a07.mp3",
+      "sha256": "955bee20c3c993296a0c34fa7517edbf308cc7e404597a93a54a327547859e63"
+    },
+    {
+      "id": "sound-54614084e51448f26f10",
+      "name": "17. 1박2일 - 공지사항",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7346,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-54614084e51448f26f10.mp3",
+      "sha256": "83217bda69fddf98540da0516a9512e135ef310fc6dcabf8107f03c579fa07f3"
+    },
+    {
+      "id": "sound-5a43e7894ca5421a5853",
+      "name": "18. 1박2일 - 자막 효과음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8651,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5a43e7894ca5421a5853.mp3",
+      "sha256": "6d6fcd1495bb2323d406edf59d3fa34c209862ca85e43f25203292fe8d2b9a6f"
+    },
+    {
+      "id": "sound-c779c362d0dda893763b",
+      "name": "19. 1박2일 - 자막 효과음-2",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.5259,
+      "duration": 0.5259,
+      "file": "server/food-sounds/sound-c779c362d0dda893763b.mp3",
+      "sha256": "e2b88f27ec0aabaa863c83c2f0f2deb4c0c5a4d2cc98642893cab0f2928f7252"
+    },
+    {
+      "id": "sound-561a6ad81b182dd633d1",
+      "name": "20. 1박2일 - 자막 효과음-3(느낌표)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.839,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-561a6ad81b182dd633d1.mp3",
+      "sha256": "1efd48a0cebaf90467145fe8add13341100d7f7636665de0eaa846cf727aac65"
+    },
+    {
+      "id": "sound-1b8fa04eac52af4e9559",
+      "name": "21. 1박2일 - 자막 효과음-4",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.5259,
+      "duration": 0.5259,
+      "file": "server/food-sounds/sound-1b8fa04eac52af4e9559.mp3",
+      "sha256": "90c6a7d28223d41d4b0846a4d3b145ed5bee3c273dafe1ad2878b7a3b3b9d176"
+    },
+    {
+      "id": "sound-56e9c124792bccee2cea",
+      "name": "22. 1박2일 - 자막 효과음-5(절망)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.5259,
+      "duration": 0.5259,
+      "file": "server/food-sounds/sound-56e9c124792bccee2cea.mp3",
+      "sha256": "b5eee31275d5546fb408c945248055115fe0ddb7a86f2674a95460a74e298669"
+    },
+    {
+      "id": "sound-be6e4903b35a05d6a2a9",
+      "name": "23. 1박2일 - 자막 효과음-6(오잉)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.5259,
+      "duration": 0.5259,
+      "file": "server/food-sounds/sound-be6e4903b35a05d6a2a9.mp3",
+      "sha256": "660d7a763983fac4f5f363c0bdbf53b6458bccb21108f46efdd1a610f908af0d"
+    },
+    {
+      "id": "sound-b98478f06b6683889ab2",
+      "name": "24. 1박2일 - 자막 효과음-7(의아함)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7346,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b98478f06b6683889ab2.mp3",
+      "sha256": "cbf30412463443c7980ccd6afd1f04841e48cc326c16f627c642419d98c124cf"
+    },
+    {
+      "id": "sound-f51fcf933741e75579c5",
+      "name": "25. 1박2일 - 자막 효과음-8",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.2043,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f51fcf933741e75579c5.mp3",
+      "sha256": "6f4806138a9e90764a26310e449fd0fc0a1535dfb90308942f3be4019c30ea77"
+    },
+    {
+      "id": "sound-1e3f60e2e753c21ce3ca",
+      "name": "26. 1박2일 - 자막 효과음-9",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.3087,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1e3f60e2e753c21ce3ca.mp3",
+      "sha256": "ff57443763781331b2f5082823268666c29cbd69f909c51d718e65b43abebb70"
+    },
+    {
+      "id": "sound-ad20c8d9b2c21a2a56e8",
+      "name": "27. 1박2일 - 자막 효과음-10(성공가능)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8651,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ad20c8d9b2c21a2a56e8.mp3",
+      "sha256": "7cce3e3a71a4e20766c03c8cb384113d7834278a6cc9d6317a24f79121617610"
+    },
+    {
+      "id": "sound-d762663c77af5eee749a",
+      "name": "28. 1박2일 - 자막 효과음-10(정신줄)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.9956,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d762663c77af5eee749a.mp3",
+      "sha256": "2eebbf6e5686b0472251fa81417d26637e6c2ab2bb21563df1003efc068c16d3"
+    },
+    {
+      "id": "sound-e338656140ff04abff93",
+      "name": "29. 1박2일 - 자막 효과음-11",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.4737,
+      "duration": 0.4737,
+      "file": "server/food-sounds/sound-e338656140ff04abff93.mp3",
+      "sha256": "84a678bbe96ab5b720b4625f857a76039484cad19e84b1b155174715e81e143b"
+    },
+    {
+      "id": "sound-efa381a7e5180fa9b8f0",
+      "name": "30. 1박2일 - 자막 효과음-12",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.4737,
+      "duration": 0.4737,
+      "file": "server/food-sounds/sound-efa381a7e5180fa9b8f0.mp3",
+      "sha256": "55d4342a523f7d16f8f7344af64e40450e7075cfe4fd5e13919408eddb3a11c7"
+    },
+    {
+      "id": "sound-18a863a94ec371f80c97",
+      "name": "31. 1박2일 - 시간은 흘러",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.8567,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-18a863a94ec371f80c97.mp3",
+      "sha256": "f13f8184ab42b31cb0c2b47015b2520e56849daa6c741b9ac41f9f7d5b2e55e9"
+    },
+    {
+      "id": "sound-afb8519d3927ac999e96",
+      "name": "32. 1박2일 - 효과음(경쾌)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.5781,
+      "duration": 0.5781,
+      "file": "server/food-sounds/sound-afb8519d3927ac999e96.mp3",
+      "sha256": "f7ee8edaeed71bca2e4d38ba63861e5944bdf2cb29c090b4f4cf03397aa87a41"
+    },
+    {
+      "id": "sound-38aef54be33b8caa5346",
+      "name": "33. 1박2일 - 효과음(가능함)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.0477,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-38aef54be33b8caa5346.mp3",
+      "sha256": "c3e1692857271ab30afe93dc0f4f930c977c180e857e125c65dc460adc80f367"
+    },
+    {
+      "id": "sound-50e5095bad2d0c3e5d1f",
+      "name": "34. 1박2일 - 효과음(같은마음)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.2304,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-50e5095bad2d0c3e5d1f.mp3",
+      "sha256": "717c5cf40cc665d98e03657ac9367a9ad19afeb928b1258fc0a7e354e2c792af"
+    },
+    {
+      "id": "sound-ce5fa928155d8ca15a6d",
+      "name": "35. 1박2일 - 효과음(빠밤)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8129,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ce5fa928155d8ca15a6d.mp3",
+      "sha256": "e1e2076deb34589f307081a9f4f48068cc6bb2fcd747c4d160e05b450cc8b2d1"
+    },
+    {
+      "id": "sound-e3ae4fbbd009bd8786b2",
+      "name": "36. 1박2일 - 효과음(알림)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8651,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e3ae4fbbd009bd8786b2.mp3",
+      "sha256": "e34bdcdeae604d6788686063abc412e0165a00f776de8d91f30fe84f2b2a7d17"
+    },
+    {
+      "id": "sound-3417700ab831cf429e23",
+      "name": "37. 1박2일 - 효과음(에이설마)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.8045,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3417700ab831cf429e23.mp3",
+      "sha256": "4baf196f5ac667538267c4c4aee20838ba8f21099b03076c233aa048d2621d1d"
+    },
+    {
+      "id": "sound-d70e70cc75164a649f3a",
+      "name": "38. 1박2일 - 효과음(의문)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8129,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d70e70cc75164a649f3a.mp3",
+      "sha256": "c36cc81af5977bfa349573c79b5818b6d2c0ce112a1f3f1de3893e1cd80aff2f"
+    },
+    {
+      "id": "sound-a522caf64c63f32b4dfc",
+      "name": "39. 1박2일 - 효과음(헐)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.3693,
+      "duration": 0.3693,
+      "file": "server/food-sounds/sound-a522caf64c63f32b4dfc.mp3",
+      "sha256": "fb1e43f0edeaf34071f1f62e1959781da60f8ca39126d6ea59525bd46c4ed377"
+    },
+    {
+      "id": "sound-fc8c09966f7fc55129ee",
+      "name": "40. 1박2일 - 효과음(화이팅)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7346,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fc8c09966f7fc55129ee.mp3",
+      "sha256": "57105ab1108fbbb65553b1aea1dedc6757d44efce4264e20044c16785c5b5ec2"
+    },
+    {
+      "id": "sound-df5243bed9c520c5437a",
+      "name": "nice-throw-mp3cut_dWipb6H",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.5219,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-df5243bed9c520c5437a.mp3",
+      "sha256": "1fd63bbbc5d7811d166f4fa9de22c6c76672ff276c01027aee31d0da892c76a5"
+    },
+    {
+      "id": "sound-178fb74ade1626e4a7a3",
+      "name": "맘_게임_마인크래프트_돼지소리",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.9195,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-178fb74ade1626e4a7a3.mp3",
+      "sha256": "b959a52d5f64fee14d4ae3bd89fc321c8b96c55cabc5620c903e84c3f2b7fe28"
+    },
+    {
+      "id": "sound-8bb51e928dbb0f87bf40",
+      "name": "밈_fah",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.9272,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-8bb51e928dbb0f87bf40.mp3",
+      "sha256": "f65311d5eea216616cde00edc9e0ee0e2be1f5a03aeeb5aef8b23d55f676826a"
+    },
+    {
+      "id": "sound-137bb7455f99f1f02d51",
+      "name": "밈_게임_hmm-rblx-se",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.888,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-137bb7455f99f1f02d51.mp3",
+      "sha256": "68daecf55aaf1582b46619232fa6c49b460fbf13d2049ec0bbf4210b514d5ea8"
+    },
+    {
+      "id": "sound-980dff0f425492cd966a",
+      "name": "밈_게임_겔러그",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.9576,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-980dff0f425492cd966a.wav",
+      "sha256": "cc605e10539ca0d081b7fea827334aae4d8fe358b3a020d4dfef9c466b64abca"
+    },
+    {
+      "id": "sound-fa191a2c068022f9ad94",
+      "name": "밈_게임_로블록스_우!",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.0,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fa191a2c068022f9ad94.mp3",
+      "sha256": "fd51f1f5b2d1293cf1466a5f5a912c05db77fde5c511a743da76211c98c0db8b"
+    },
+    {
+      "id": "sound-800c1032156e677c9ba5",
+      "name": "밈_게임_롤_물음표핑",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.9883,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-800c1032156e677c9ba5.mp3",
+      "sha256": "7a5333baa2627bd1316f4125321e60604d3153a4458eaf91fd0c932061ba01e8"
+    },
+    {
+      "id": "sound-fbe9431930400c4194bd",
+      "name": "밈_게임_롤_미처날뛰고있습니다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.8328,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fbe9431930400c4194bd.mp3",
+      "sha256": "86f1c9727a066888e4f25974ac238b3278fdb8b738c390a85e9afc6782429f1a"
+    },
+    {
+      "id": "sound-36e8308ff0ee01eaa272",
+      "name": "밈_게임_롤_불좀꺼줄래",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.0217,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-36e8308ff0ee01eaa272.mp3",
+      "sha256": "8bd8687161029127fcd6e4a006944efbe15ede6544b1041dc61b01fec9e3d2be"
+    },
+    {
+      "id": "sound-6d65c029de2e938b47a4",
+      "name": "밈_게임_롤_소환사의협곡에오신것을",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.5743,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6d65c029de2e938b47a4.mp3",
+      "sha256": "d12cb0cd3ef0ebbc1ac26c9164f384f625900c06f4940404601d831a65c9a402"
+    },
+    {
+      "id": "sound-6ce3b986d02ea0014dcc",
+      "name": "밈_게임_롤_적을처치했습니다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.3684,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6ce3b986d02ea0014dcc.mp3",
+      "sha256": "c5aaabdcde967b55efcca859e226adda171dda31ac4a13f7a543e175ecd347ee"
+    },
+    {
+      "id": "sound-c7ffc9ba219051b1c3bd",
+      "name": "밈_게임_롤_티모웃음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.8996,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c7ffc9ba219051b1c3bd.mp3",
+      "sha256": "15bef99fc71941d972514c7281ebfde6983a905e79530c5af673909bc67ec55d"
+    },
+    {
+      "id": "sound-2b7ed8f04d17c8050405",
+      "name": "밈_게임_롤_펜타킬",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.2291,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2b7ed8f04d17c8050405.mp3",
+      "sha256": "a7b7a5a9801dd9733154beedac4d4e2d2ba4188794d8b20b88cb646d82214484"
+    },
+    {
+      "id": "sound-e1ebab590c226e842bf0",
+      "name": "밈_게임_리신_이쿠",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.6718,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e1ebab590c226e842bf0.mp3",
+      "sha256": "9eb0be8e160bed1cd545ebc49febd1b2214b1e06c9e9a1b3969d7f056b39ad33"
+    },
+    {
+      "id": "sound-7dbce1d5e14f7a150c4b",
+      "name": "밈_게임_마인크래프트_경험치",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.75,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7dbce1d5e14f7a150c4b.mp3",
+      "sha256": "76d667bcfaf9caa2105dbc6c32cbbb9dd6aa5e9bba48fe8678d3188743fa7875"
+    },
+    {
+      "id": "sound-7bef1e0d780188a6b84a",
+      "name": "밈_게임_마인크래프트_먹는 소리",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.68,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7bef1e0d780188a6b84a.mp3",
+      "sha256": "1b0a694259b150e2a21c14118dbdc9b31802bb1b9e403a64584595ab4a4f950b"
+    },
+    {
+      "id": "sound-82207f569db736b39b5d",
+      "name": "밈_게임_마인크래프트_주민",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.3322,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-82207f569db736b39b5d.mp3",
+      "sha256": "36c5eabcab5c2439a863b129c046d3b9cefa275651cc378913fd01840a662c7e"
+    },
+    {
+      "id": "sound-3fd2d2838583e95a612c",
+      "name": "밈_게임_마크_클릭",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.837,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3fd2d2838583e95a612c.mp3",
+      "sha256": "974bbbbf4b9de2ef3097b80e15b07bbf795145219cc5abca4aa7a04f6dd2bc7b"
+    },
+    {
+      "id": "sound-e1231507c0a2ad116c14",
+      "name": "밈_게임_마크_포션",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.3205,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e1231507c0a2ad116c14.mp3",
+      "sha256": "af03da4e29d4635c55882040bd09d6850588a150f9e571e38b731c744f4bfc74"
+    },
+    {
+      "id": "sound-871f83e52bc3f1d4386f",
+      "name": "밈_게임_메이플_몬스터컬렉션 효과음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.5964,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-871f83e52bc3f1d4386f.mp3",
+      "sha256": "51486a4e736839e872c53f2d1f7a98f7818bc84ead10db1a4bb92a02d0208390"
+    },
+    {
+      "id": "sound-540bcb856a90d04b7f5b",
+      "name": "밈_게임_메탈기어솔리드(발각음)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.5417,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-540bcb856a90d04b7f5b.mp3",
+      "sha256": "df89699fef0bbcaeb998a246baaaa9ac950d99111ccf87d44f031bb4ee9e76ab"
+    },
+    {
+      "id": "sound-ee5bf61e39c5628079c8",
+      "name": "밈_게임_메탈슬러그 철컥ok 효과음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.4629,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ee5bf61e39c5628079c8.mp3",
+      "sha256": "ebf1427d659f96d3c06a6cc46660c512e0ef7f89431657e24e49029997fad85e"
+    },
+    {
+      "id": "sound-a2c75c23d18ccfb3d259",
+      "name": "밈_게임_메탈슬러그_철컥ok 효과음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.4629,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a2c75c23d18ccfb3d259.mp3",
+      "sha256": "ebf1427d659f96d3c06a6cc46660c512e0ef7f89431657e24e49029997fad85e"
+    },
+    {
+      "id": "sound-431c8b0e733e01e12380",
+      "name": "밈_게임_슈퍼마리오_동전",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.3356,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-431c8b0e733e01e12380.mp3",
+      "sha256": "7466fd55bc2ad6f38f4cd466be97768fa9a612b3d98c82c591d7d490932399e4"
+    },
+    {
+      "id": "sound-e0c4799eabd94231afcd",
+      "name": "밈_게임_슈퍼마리오_죽음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 9.8231,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-e0c4799eabd94231afcd.mp3",
+      "sha256": "6ba10759cbc2472af32e9e2752e1709e414870dc80dffdf7acf05a62164834fd"
+    },
+    {
+      "id": "sound-9eaeeeafcea371b9a02f",
+      "name": "밈_게임_어몽어스",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.5511,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9eaeeeafcea371b9a02f.mp3",
+      "sha256": "56b571802a52c60df950c78154ae1a5ea031e4428ce371a8ba77d5f7e6782b13"
+    },
+    {
+      "id": "sound-30c8f5e064f22a3bdcb0",
+      "name": "밈_게임_언더터일_샌즈말 짧",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.1412,
+      "duration": 0.1412,
+      "file": "server/food-sounds/sound-30c8f5e064f22a3bdcb0.mp3",
+      "sha256": "40c4ace7354a498c89dcff2cb03e8fdb1025aa380cb3b05e7f58fd039c511dff"
+    },
+    {
+      "id": "sound-2351a46c50607a78d5f3",
+      "name": "밈_게임_언더테일_샌즈말",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 8.8932,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2351a46c50607a78d5f3.mp3",
+      "sha256": "60822baae50ccea8fe0a85c6dca95a7f1823b872bf8eded48056e8b423498da9"
+    },
+    {
+      "id": "sound-a6e6e92671b2b655aa22",
+      "name": "밈_게임_위_나이스샷",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.0329,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-a6e6e92671b2b655aa22.mp3",
+      "sha256": "cec1b499a890c947cfeff7953e0e3534debcad940d773ce38185921805dc20a8"
+    },
+    {
+      "id": "sound-28169c5158723c959377",
+      "name": "밈_게임_위_메뉴",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.024,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-28169c5158723c959377.mp3",
+      "sha256": "d892d26ce3ccb263d33901d68ed269846855b06cb4f8363a6dfd79886b5854d7"
+    },
+    {
+      "id": "sound-3824626bc63eead0b39e",
+      "name": "밈_게임_위_설정",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 14.08,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3824626bc63eead0b39e.mp3",
+      "sha256": "1f31856d5b07a832329406fec590d2343fd384db6d423d7ba80c5fc555018695"
+    },
+    {
+      "id": "sound-d554fd7c1161bfe66632",
+      "name": "밈_게임_위_채널뮤직",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 17.04,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d554fd7c1161bfe66632.mp3",
+      "sha256": "5342c50571d1aa29867ccd9a6b367775c3cb69f534f014a7ced3edcb1b26a7d9"
+    },
+    {
+      "id": "sound-7d1218b8858a26047ade",
+      "name": "밈_게임_위_키보드",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.1208,
+      "duration": 0.1208,
+      "file": "server/food-sounds/sound-7d1218b8858a26047ade.mp3",
+      "sha256": "38968f4e925f4764eac7c790502270c239b7531f65e51fa529d966ee39fea375"
+    },
+    {
+      "id": "sound-11f106f4569bf264455a",
+      "name": "밈_게임_위_홈버튼1",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.6207,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-11f106f4569bf264455a.mp3",
+      "sha256": "91fdbc3fbef43beca5c2fea4bcaad28796a95fb0aa303f90aff3f77fe7cbd15e"
+    },
+    {
+      "id": "sound-82f51f8dd44b52aa90e3",
+      "name": "밈_게임_위_홈버튼2",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.5292,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-82f51f8dd44b52aa90e3.mp3",
+      "sha256": "d41719e34bac968678ef8f09ce805ab71eef4e8cd0d304ef7340c4ef13989d6d"
+    },
+    {
+      "id": "sound-136692447ca122e09867",
+      "name": "밈_게임_커비_흡수",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.7368,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-136692447ca122e09867.mp3",
+      "sha256": "80114d1d96ed4d8ad39705c3461dfed3fbd005e56214c6ffab9027a0fcc810a4"
+    },
+    {
+      "id": "sound-07abbccc30dbbb16885e",
+      "name": "밈_게임_포켓몬_배틑",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 14.6365,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-07abbccc30dbbb16885e.mp3",
+      "sha256": "e45afa95ecbc00b69c9112b0dc3c01251e7e5066aef880fdc79f517b492c7046"
+    },
+    {
+      "id": "sound-843b6815300c0f0ef97a",
+      "name": "밈_게임_포켓몬_아이템발견",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.0751,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-843b6815300c0f0ef97a.mp3",
+      "sha256": "567c1dbb235407e0fcb2a3f34102812559499b49066e3a319e4515fc0f23dcd2"
+    },
+    {
+      "id": "sound-25cd4684fe2626bcc2ae",
+      "name": "밈_고양이_허?",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.161,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-25cd4684fe2626bcc2ae.mp3",
+      "sha256": "b02bde40353d889f8194e280b722fdc12b47a433278aba4212f2213aa3f2bfc4"
+    },
+    {
+      "id": "sound-569ed5da885a2ddd0ebc",
+      "name": "밈_고양이_ㅜㅜ",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.9692,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-569ed5da885a2ddd0ebc.mp3",
+      "sha256": "d74d30fe36eccb805e1fdffeb4f815ec2dd1c353b9b26fcb6de79ec14b1d5bd9"
+    },
+    {
+      "id": "sound-17a69a63be07767d41de",
+      "name": "밈_공습경보",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 5.016,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-17a69a63be07767d41de.mp3",
+      "sha256": "0a298c64324a077336d73bb77e510db566e547fc11c42c5c0507ac5c9b3a58be"
+    },
+    {
+      "id": "sound-aa64b88f4907770307cd",
+      "name": "밈_꺼저",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.335,
+      "duration": 0.335,
+      "file": "server/food-sounds/sound-aa64b88f4907770307cd.mp3",
+      "sha256": "47f21532e04ffb87d2796a0653526575d0dfc945061a05f50bd64e600ae04a8a"
+    },
+    {
+      "id": "sound-29ae3477e3a7a0d7ccd3",
+      "name": "밈_나니(뭐야)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.0164,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-29ae3477e3a7a0d7ccd3.mp3",
+      "sha256": "6da7e0a56c83eed3f832d96a24e86be0235a5febb94b40822ffebdc6bf354f10"
+    },
+    {
+      "id": "sound-3892c854d7a7fa4b72c2",
+      "name": "밈_나무 위의 닭",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 5.736,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3892c854d7a7fa4b72c2.mp3",
+      "sha256": "419e073ebfbd286a614d8e70611a63d8120ed56a3ccad9fcd8430fc03d9289b8"
+    },
+    {
+      "id": "sound-4cbb526f240c46a781c0",
+      "name": "밈_노래_강남스타일_에ㅔㅔㅔㅔ",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.04,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-4cbb526f240c46a781c0.mp3",
+      "sha256": "bdd18fb44c4c82d678e21e8d7f71f1ce253a5604cbeb8457fff12568f2497c37"
+    },
+    {
+      "id": "sound-8e649a9c498ebf6965aa",
+      "name": "밈_노래_강남스타일_여자",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.624,
+      "duration": 0.624,
+      "file": "server/food-sounds/sound-8e649a9c498ebf6965aa.mp3",
+      "sha256": "1303a488a047d4d278208aaad2a596541c3691cd59ab9e32bab9d0fb3812943a"
+    },
+    {
+      "id": "sound-b14d300436ed11d0d10c",
+      "name": "밈_노래_강남스타일_옵",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.3473,
+      "duration": 0.3473,
+      "file": "server/food-sounds/sound-b14d300436ed11d0d10c.mp3",
+      "sha256": "2e3a544706b0243a0619b75f6ecae52bada5482d202db59352970302bb5f7aa4"
+    },
+    {
+      "id": "sound-93fcff26154629633cce",
+      "name": "밈_노래_강남스타일_인간여자",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.5357,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-93fcff26154629633cce.mp3",
+      "sha256": "2d0be35345022f2f7fa8fe4d1b8352628583dd2b883ca161efef8b6dd611248d"
+    },
+    {
+      "id": "sound-29c14b61c79275f17621",
+      "name": "밈_노래_강낭스타일_풀버전",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 30.5633,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-29c14b61c79275f17621.mp3",
+      "sha256": "f8a72b8263d3eec60ebfbbf0574de188291c8577047ba14db5552b20bccc41a6"
+    },
+    {
+      "id": "sound-221b37d8aa715186dac1",
+      "name": "밈_노래_쇽더월드",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 15.456,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-221b37d8aa715186dac1.mp3",
+      "sha256": "2f5196c2d104ad3a1b35a6f238052dbfa74acfd251a850f330d112c31084879b"
+    },
+    {
+      "id": "sound-603f7df4d46ddeeb306c",
+      "name": "밈_놀람",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.6139,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-603f7df4d46ddeeb306c.mp3",
+      "sha256": "cbcb8a28f83aade0da6c351b6dc124013ebf7b561538f82a3557fd9be1dad1a7"
+    },
+    {
+      "id": "sound-239cd1d39b4fad445237",
+      "name": "밈_놉",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.3705,
+      "duration": 0.3705,
+      "file": "server/food-sounds/sound-239cd1d39b4fad445237.mp3",
+      "sha256": "0d9b9ca5ade1470a9b70fdf312a2cbb3bd01b69e51946993cf8d128ed7226b03"
+    },
+    {
+      "id": "sound-67d22f0b048084569033",
+      "name": "밈_닌텐도_클릭음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.828,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-67d22f0b048084569033.mp3",
+      "sha256": "0268e2f613ad26f7ae9a0e316f8ba51d57ab1a761b43c29b7d590e2907d4b3b6"
+    },
+    {
+      "id": "sound-4e27827bdef4df1f30bb",
+      "name": "밈_더블킬",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.2771,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-4e27827bdef4df1f30bb.mp3",
+      "sha256": "7ccab1ee5ae5773070db0e5924adf0471cdb8401320362ef41d9075331049767"
+    },
+    {
+      "id": "sound-654ef1651fea464568cc",
+      "name": "밈_만화_건담_띠리링",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.769,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-654ef1651fea464568cc.mp3",
+      "sha256": "cb5252acb83b67c6d5d85985e9491f2239123c4ad10a602a5779bdddba7b18d8"
+    },
+    {
+      "id": "sound-3a695fd52ebc84b003ad",
+      "name": "밈_만화_스폰지밥_걷는소리",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 5.6773,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3a695fd52ebc84b003ad.mp3",
+      "sha256": "2adcdd167f1483be18731a8500b7dc38caec1df9893d4097c4ce468fbe5898ab"
+    },
+    {
+      "id": "sound-c2719039c508da454449",
+      "name": "밈_만화_스폰지밥_실패",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.384,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c2719039c508da454449.mp3",
+      "sha256": "7a21ade91762874e2b21be21efa15436bcc49e88ffb98d16cf597618caebfa93"
+    },
+    {
+      "id": "sound-038ab4ca6f9dea2bf03f",
+      "name": "밈_문자 전송음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.044,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-038ab4ca6f9dea2bf03f.mp3",
+      "sha256": "4e0cbe58c87cfbe01ae145c62ed80e25ba74dd56d3dc2d805a265b4e04e73a31"
+    },
+    {
+      "id": "sound-99b580904b7bda51c919",
+      "name": "밈_밥로스_웰컴백",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.3893,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-99b580904b7bda51c919.mp3",
+      "sha256": "6f85c5441970ac01d9a7555a95cf609cf6c82931b0022a8830ed3180d02a8ac6"
+    },
+    {
+      "id": "sound-b1fa2188758c1232e791",
+      "name": "밈_방구",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.3135,
+      "duration": 0.3135,
+      "file": "server/food-sounds/sound-b1fa2188758c1232e791.mp3",
+      "sha256": "11c2bbd0505f013f928c21bff7c202b62ac3da5c67db16f8b7a489f653e304c8"
+    },
+    {
+      "id": "sound-6a7277784cb00f705416",
+      "name": "밈_배달의민족주문",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.688,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6a7277784cb00f705416.mp3",
+      "sha256": "92f8d7006ce611df11c7756b4cc97c87b6cabf8758053febba6e7363262fbfad"
+    },
+    {
+      "id": "sound-f92efe35bbdea526e302",
+      "name": "밈_빰빠빰",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.9445,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f92efe35bbdea526e302.mp3",
+      "sha256": "83e6eee35ba589f8796a924838685c28040cfa5f1f9d662193c9e3e9492be605"
+    },
+    {
+      "id": "sound-ac2607f4ae97bd37ad18",
+      "name": "밈_소리주의_아아아아아아아",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 9.9149,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ac2607f4ae97bd37ad18.mp3",
+      "sha256": "c470e4bb87d07de95cfce9a3f264d449bf1d8d9ba0f12e08491454e10cee7017"
+    },
+    {
+      "id": "sound-d70f1f3e82b89acf0f16",
+      "name": "밈_스파이더맨",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 12.4,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d70f1f3e82b89acf0f16.mp3",
+      "sha256": "a029a61b6563178e2a2fb322d10afabb38359a5e0d4a3fa486a5a86b3655605a"
+    },
+    {
+      "id": "sound-5c533b8fad5d527c7f15",
+      "name": "밈_스포츠_시우",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.4629,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-5c533b8fad5d527c7f15.mp3",
+      "sha256": "d00ccf1e67c93db106243fce13ea5d7f25c9e7992b604e5add618f50a8821f2e"
+    },
+    {
+      "id": "sound-2ff19608de28873458af",
+      "name": "밈_슬픈브금",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 8.8004,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-2ff19608de28873458af.mp3",
+      "sha256": "ec29727ee8314daa2be7c3dc8cbe38bc709ff76faa18c7086d87cb67c8ee0df7"
+    },
+    {
+      "id": "sound-22487f37787c884805c5",
+      "name": "밈_아하하하하오호호호호호",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 8.6988,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-22487f37787c884805c5.mp3",
+      "sha256": "9d1dc143a89892ffa2b9a18fc1678f52b74b4c0540bb885c81115ea0e41fb135"
+    },
+    {
+      "id": "sound-46d230af9fda67c23340",
+      "name": "밈_악!",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 5.0155,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-46d230af9fda67c23340.mp3",
+      "sha256": "6247b97b6e1614ca16325d28ad0d82dd6aee58cf73f68aca6f4f24205a228708"
+    },
+    {
+      "id": "sound-ef3746d7d6ee473745df",
+      "name": "밈_애니_나루토_전투",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 10.019,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ef3746d7d6ee473745df.mp3",
+      "sha256": "0779c2aa8f799025e27e6929f029a67b611949ea31bd55b518f78f5a5be97f84"
+    },
+    {
+      "id": "sound-9ae018ff52c2287d64d9",
+      "name": "밈_애니_스폰지밥_어퓨미닛레이터",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.2756,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9ae018ff52c2287d64d9.mp3",
+      "sha256": "82765e081ceae04fd22d73d7eae3129a1448fc29826d529662a259a486755f15"
+    },
+    {
+      "id": "sound-756b80b10f5b52398346",
+      "name": "밈_애니_심슨 하하",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.9069,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-756b80b10f5b52398346.mp3",
+      "sha256": "e20196d2000cd078523906e017968907ea2762daeee3c9ffbfca3dd1713ac96b"
+    },
+    {
+      "id": "sound-733732523c5bcc071c80",
+      "name": "밈_애니_이누야사_안녕히계세요(풀버전)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 11.6125,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-733732523c5bcc071c80.mp3",
+      "sha256": "974bb394fcb3a0d5caf77434e7369701f998538d7a6bcf62b94eb23954d741fb"
+    },
+    {
+      "id": "sound-d4b0fda35f63a94a8dd3",
+      "name": "밈_애니_이니셜D_데자뷰(부분)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.233,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d4b0fda35f63a94a8dd3.mp3",
+      "sha256": "47c60a77db6495c54a3892fa5451a75d87ba4a3dba38e978d5fa35ba33daf0af"
+    },
+    {
+      "id": "sound-dfa69c88a608fbf5f667",
+      "name": "밈_애니_조조_노래",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 18.9388,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-dfa69c88a608fbf5f667.mp3",
+      "sha256": "e03b27d5f4a59e95ff2234d399b96bc2843aff296668bac3f8548d90296f278d"
+    },
+    {
+      "id": "sound-1993e94bda7ed716b6fd",
+      "name": "밈_에러",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.9927,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1993e94bda7ed716b6fd.mp3",
+      "sha256": "e5c633eda2370c0e08b4289dbf990d5aa180c00a4cc27de46d9d45b0df3795e8"
+    },
+    {
+      "id": "sound-992ed8ec1d6103e99fd5",
+      "name": "밈_엔딩크레딧",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 10.177,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-992ed8ec1d6103e99fd5.mp3",
+      "sha256": "d0441222c2e0c8d76899754c777c14a2ad548cf1b4cfef460d6af2f4b2c852ed"
+    },
+    {
+      "id": "sound-4608956757ed50e85033",
+      "name": "밈_영화_괴물",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.5093,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-4608956757ed50e85033.mp3",
+      "sha256": "7b6adb9d8f5d9b04854b5de61b1c01072b7e986385169f7f78adaa7a5fd5e9dc"
+    },
+    {
+      "id": "sound-90c5f15153beaf833d38",
+      "name": "밈_예!",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.2335,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-90c5f15153beaf833d38.mp3",
+      "sha256": "4c61fd83b8103ec42fa35e3d8c0e2d57c773c819393918fdd64d95108a582559"
+    },
+    {
+      "id": "sound-9d348265b3aafce2e008",
+      "name": "밈_와우",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.8141,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-9d348265b3aafce2e008.wav",
+      "sha256": "07b26fc601924b03b8b3dbd8ddb0198796888b4fd3582fad1d6a47b554cd9403"
+    },
+    {
+      "id": "sound-12f7d88947f9c11e2742",
+      "name": "밈_우위이이이",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 15.4884,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-12f7d88947f9c11e2742.mp3",
+      "sha256": "09340960b718dcaac2bb8cc754cb0a5455cd6437bb5c59b8ee8a3a03e9983448"
+    },
+    {
+      "id": "sound-fb3e2c735828a436c74e",
+      "name": "밈_이랬는데요래됐습니당",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.7804,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-fb3e2c735828a436c74e.mp3",
+      "sha256": "2532d449a8c6ab0ee607f043884e4fea4108175f7f78a8b8b69e816d9ca4f2ce"
+    },
+    {
+      "id": "sound-c36ff0c7d2a0891737ca",
+      "name": "밈_인물_감스트_너 개새끼 열매 먹었어",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.2827,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c36ff0c7d2a0891737ca.mp3",
+      "sha256": "31f0c8d91ac3f59e94366bab79251688b8800e039e02d999a8daf745fac1049f"
+    },
+    {
+      "id": "sound-ba7a5e7d65ed0119aa5c",
+      "name": "밈_인물_밥로스 붓질",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.2655,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ba7a5e7d65ed0119aa5c.mp3",
+      "sha256": "aa1edbcfa09c4c1938c747904bd271d9b4ae634d45dea746ce3bb5e293d2466d"
+    },
+    {
+      "id": "sound-307fb2baced8a446576d",
+      "name": "밈_인물_이소룡 와돠",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.86,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-307fb2baced8a446576d.mp3",
+      "sha256": "83f0ee141cb332e1a35d4e3d460cc9a32ee7c278b3a18cf317f7ebb7b1ad9c24"
+    },
+    {
+      "id": "sound-909e838958a665774f83",
+      "name": "밈_제로투",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 34.1105,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-909e838958a665774f83.mp3",
+      "sha256": "13b1b6ee434a167a813d45408ed9cc507e085b3768ab967a78f05674cb55e281"
+    },
+    {
+      "id": "sound-f278f4d1c2858c113f04",
+      "name": "밈_지하철_상행",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 7.897,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f278f4d1c2858c113f04.mp3",
+      "sha256": "ab36c32248df58590df3304f8e996b06e19a7af6ee9a347e4e4aa357a09725ec"
+    },
+    {
+      "id": "sound-39328deb3633b1e831c8",
+      "name": "밈_지하철_서울상행선진입음",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 7.7845,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-39328deb3633b1e831c8.mp3",
+      "sha256": "23536fa3d7ae936af288173326cdfb0b63fcb4ef612014764e5feb3fc53191d8"
+    },
+    {
+      "id": "sound-20e7a760b6a759bc28d8",
+      "name": "밈_카페베네",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 12.3962,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-20e7a760b6a759bc28d8.mp3",
+      "sha256": "b7dcd677136edcccee330f56cf84f77bab7f23a2fe5a567779c2dd2aa917c143"
+    },
+    {
+      "id": "sound-83529041d0e766c6e0cf",
+      "name": "밈_키보드분노",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 7.7202,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-83529041d0e766c6e0cf.mp3",
+      "sha256": "149c46348fc685c0cd848f7b43a0bb2c6a7b4993b1a1870e9c7a6b6b178751ac"
+    },
+    {
+      "id": "sound-f1f0803631e4e27ef414",
+      "name": "밈_팝캣",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 3.4366,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f1f0803631e4e27ef414.mp3",
+      "sha256": "6a7c94382a3bced5c2ce0391070e18f37b832ddb2e3d260783fb0c7c38724051"
+    },
+    {
+      "id": "sound-3bede9ef92b0d81d781e",
+      "name": "밈_폰허브",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.168,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3bede9ef92b0d81d781e.mp3",
+      "sha256": "17b1fa74915e5a9d40824e92f7cee2121b96b7a1cd0f735b7e5b26340a2d351f"
+    },
+    {
+      "id": "sound-d21dee76b8fe8429ae8f",
+      "name": "밈_학교종소리",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 11.4523,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d21dee76b8fe8429ae8f.mp3",
+      "sha256": "924cbccba861ba40f8f59a0c9906bba4a34e94d7cf341dcb538d97c68baaa4e2"
+    },
+    {
+      "id": "sound-bb22e6c25fcc5d52230e",
+      "name": "밈_해피해피해ㅐㅐㅐㅐㅐ",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 6.1013,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-bb22e6c25fcc5d52230e.mp3",
+      "sha256": "a50e32335e85b503846fcdadda6be65b5f53e26c6fb11a9edcdecabac78bd90e"
+    },
+    {
+      "id": "sound-57e4cbb9762f705343b4",
+      "name": "밈_허엉",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 602.7363,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-57e4cbb9762f705343b4.mp3",
+      "sha256": "42be854b917c1a5046895aa2a6a36e978a25e22e31a360ca37b0a28a1574be4b"
+    },
+    {
+      "id": "sound-7e394f793a41da27221e",
+      "name": "밈_헬로우마더퍼커",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.1039,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7e394f793a41da27221e.mp3",
+      "sha256": "85c74f1084b986cd585eafa652d3c8e9e57bf5457713b8a95c33bac6f592396a"
+    },
+    {
+      "id": "sound-d0939ac21d3d910687a0",
+      "name": "밈_혼란",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 4.2052,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d0939ac21d3d910687a0.wav",
+      "sha256": "3f3c6d270e028204bc4e952630f5e2bd9e300932fd09e9bf01743715e763a1a6"
+    },
+    {
+      "id": "sound-351eed8ffb94ff1c4f25",
+      "name": "1 뒤로 물러서",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7899,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-351eed8ffb94ff1c4f25.mp3",
+      "sha256": "e69ca38881f27c313258691001961d21cc3437dfe93562aed45fae451f41dabc"
+    },
+    {
+      "id": "sound-107b337d4222d9a61917",
+      "name": "10 으아아아아아",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.7185,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-107b337d4222d9a61917.mp3",
+      "sha256": "edd1433ab73865a4bdb6234309faab1043532fc5ed64a26bcd5a6b5270cf1510"
+    },
+    {
+      "id": "sound-156c89390522cbb4e7a6",
+      "name": "11 공격중지 우리편이다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.6239,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-156c89390522cbb4e7a6.mp3",
+      "sha256": "bd55433fa74aae4af2bc3ffa51b2f25d026fc29dfe927cc2994bb8573bdeb66b"
+    },
+    {
+      "id": "sound-16458fdcc7774caf3c56",
+      "name": "12 그래서",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7638,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-16458fdcc7774caf3c56.mp3",
+      "sha256": "39209bdf5ffa4a369d0ff67e779d9c7ba470f9c8f004eeff20f475412594b86a"
+    },
+    {
+      "id": "sound-b49fce6451e5da10f535",
+      "name": "13 그런것같지않은데",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.1287,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-b49fce6451e5da10f535.mp3",
+      "sha256": "b1dde357351f1f15d6697f84e21080a6c186b929946cb7aa86c0c98ee9a62e68"
+    },
+    {
+      "id": "sound-eced2148689c230abfe9",
+      "name": "14 그럼 시작하지, 지금그를 들어오게하세",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.9009,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-eced2148689c230abfe9.mp3",
+      "sha256": "781c119addfc869615601f0700a987c75c261257d179ae4088b3e2016e834953"
+    },
+    {
+      "id": "sound-ed38a53d102ad4100e98",
+      "name": "15 그리고 어쩌면 가장 불안정하기도하지",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.5882,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ed38a53d102ad4100e98.mp3",
+      "sha256": "7885e0bd93cf8ba22f2ccb823ab74b32e691efb9474511ddfc7374adb658d9d6"
+    },
+    {
+      "id": "sound-18c18c59370ad12fdcb5",
+      "name": "16 도대체 장비가 왜이러는거지",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.1191,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-18c18c59370ad12fdcb5.mp3",
+      "sha256": "aa9f8c0cf18c01669d696a177ac83b2d88fdd77b626011780ee177a82c40543e"
+    },
+    {
+      "id": "sound-f5f533ed1315f7d2b759",
+      "name": "17 바보짓하지마",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.9984,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f5f533ed1315f7d2b759.mp3",
+      "sha256": "2a8d6d7a9e3c5d4b5e323670454d5766cf3a9780b11dd8aaa8df80d1230ce8b7"
+    },
+    {
+      "id": "sound-abcea998d5b1dad3ab59",
+      "name": "18 실례합니다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8681,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-abcea998d5b1dad3ab59.mp3",
+      "sha256": "5e15ff4cd0052f502276482516408beb6cbd88d719142006f41f010e3180a6ac"
+    },
+    {
+      "id": "sound-da6948b59fbc2284dd22",
+      "name": "19 아아아앙아(에코)",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.7281,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-da6948b59fbc2284dd22.mp3",
+      "sha256": "cabf4d32f57a6e5c9a13ecb22e96704c908a9e9c8de777c2c1639f458bc51730"
+    },
+    {
+      "id": "sound-6666c1ffc6b89afc5e6d",
+      "name": "2 마침내 구조된거야",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.259,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6666c1ffc6b89afc5e6d.mp3",
+      "sha256": "ee21a65871e92dc8c2eba1dd8964aee51c3a33f39736a64b19919121e769c9ac"
+    },
+    {
+      "id": "sound-ba6ecae46e43fb7ee12c",
+      "name": "20 이제 기분이 좀 좋아질겁니다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.6499,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ba6ecae46e43fb7ee12c.mp3",
+      "sha256": "90d3e31ef8482e3409d0c4d3064c34cc55914bf055a966ec509ab03df54b6a66"
+    },
+    {
+      "id": "sound-0d3212ef13317fb0e590",
+      "name": "3 멈춰",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7899,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0d3212ef13317fb0e590.mp3",
+      "sha256": "0cca99350d10020b1889a605e28b3b6b70b05564921cd63f0396ff8374778a0f"
+    },
+    {
+      "id": "sound-c8ce6d64d824065b91f2",
+      "name": "4 쉿, 여깁니다",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.259,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c8ce6d64d824065b91f2.mp3",
+      "sha256": "fc558377da86eb299abd7a24b4b404e7ae5246d21a1a068af47c2d7a990a0b1b"
+    },
+    {
+      "id": "sound-63cad8175e5a25bdfa45",
+      "name": "5 쏘지마세요",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.8159,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-63cad8175e5a25bdfa45.mp3",
+      "sha256": "a8acd171cca88f3b5a50a39bd4614fcd2a813aafac13cf3301a8c941fad826cc"
+    },
+    {
+      "id": "sound-d6b2ffa055b7ffa15bfd",
+      "name": "6 안녕하세요",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 0.7899,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-d6b2ffa055b7ffa15bfd.mp3",
+      "sha256": "19d34d101018c34c29a388c1126b4bf53fe5140ee034eb22bf2a411a9cadf7eb"
+    },
+    {
+      "id": "sound-3836c1893e70cf7febb5",
+      "name": "7 예상한대로군",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.1547,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-3836c1893e70cf7febb5.mp3",
+      "sha256": "08232fdd4e22ad31597a26ccca8377c731f4d3649c7d01da2d079afbecd0c3e6"
+    },
+    {
+      "id": "sound-0c4552a9b21e23bd9d72",
+      "name": "8 왜 나한테 묻는거지",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 1.5978,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-0c4552a9b21e23bd9d72.mp3",
+      "sha256": "68f6b3821e6230622b671c78b5cf6ece346bcae6353ffefc8b062d86072c58e4"
+    },
+    {
+      "id": "sound-8414ff8717506d97b7d1",
+      "name": "9 여기서 꽤 역겨운 냄새가 나는것 같은데",
+      "category": "4. 밈(meme)",
+      "sourceDuration": 2.51,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-8414ff8717506d97b7d1.mp3",
+      "sha256": "913945df86cfd23b48f75043d96a4a6b12601dae30a2205e84d730e7afa6e518"
+    },
+    {
+      "id": "sound-7de1be068580f553c3e7",
+      "name": "박수",
+      "category": "5. 인간 리액션(reaction)",
+      "sourceDuration": 2.5412,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-7de1be068580f553c3e7.wav",
+      "sha256": "343931523e6d74c6a52b2a4d629a98478178fbaecca3b641927a164d8f5c2021"
+    },
+    {
+      "id": "sound-1bafe708a382c8b33f04",
+      "name": "예에에",
+      "category": "5. 인간 리액션(reaction)",
+      "sourceDuration": 2.2335,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-1bafe708a382c8b33f04.mp3",
+      "sha256": "4c61fd83b8103ec42fa35e3d8c0e2d57c773c819393918fdd64d95108a582559"
+    },
+    {
+      "id": "sound-f3fab1724c0598567eae",
+      "name": "와우",
+      "category": "5. 인간 리액션(reaction)",
+      "sourceDuration": 4.1796,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f3fab1724c0598567eae.mp3",
+      "sha256": "5118c619f0ab62e181f32d9eacd490441b49aaa7bb8e1be1b6b51e7a3c25debc"
+    },
+    {
+      "id": "sound-c66cd4c1cff8f88811ee",
+      "name": "유튜브_음향효과_Waves Crashing on Rock Beach",
+      "category": "7. 유튜브 음원(free music)",
+      "sourceDuration": 231.6587,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-c66cd4c1cff8f88811ee.mp3",
+      "sha256": "fe9051da1640e6779d54c83d23edf70925f228834ed8a11dbf68617c0327bde0"
+    },
+    {
+      "id": "sound-6759c33e165b82c2a109",
+      "name": "MP_저녁숲 (개구리와 곤충울음)",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 4.6948,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-6759c33e165b82c2a109.mp3",
+      "sha256": "122d70844500bbf33c1298f9a8b82081b31f46608ddf5632071c5a6907b53810"
+    },
+    {
+      "id": "sound-97fd985726cb73f88e50",
+      "name": "까악까악",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 1.752,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-97fd985726cb73f88e50.mp3",
+      "sha256": "734dd5ada60e7f9eff471d2217c4358b37a6d5e9f244364101cebebc5df32b48"
+    },
+    {
+      "id": "sound-f107666a4e1dd907054b",
+      "name": "닭",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 7.0531,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-f107666a4e1dd907054b.mp3",
+      "sha256": "61b341eed55d525e2723b69747d7ef6c4e969d84ea1bc9ec23ef6234c9c6dc3b"
+    },
+    {
+      "id": "sound-ac6b8c1385c090d81a0c",
+      "name": "매미소리",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 9.4242,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-ac6b8c1385c090d81a0c.mp3",
+      "sha256": "8a0733b9828d18d77277e1524dd8999ed10d249e928d174b525e849b0bb76b4a"
+    },
+    {
+      "id": "sound-74580b458d816dc32324",
+      "name": "악마웃음소리 효과음",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 2.5542,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-74580b458d816dc32324.mp3",
+      "sha256": "6113f1dc44501e7a57b6d6e78e982865b8ef5757875cfe007b009c8763770b63"
+    },
+    {
+      "id": "sound-da2db849fa99a34ca669",
+      "name": "앙팡치즈 아기 웃음소리",
+      "category": "8. 그 외(etc)",
+      "sourceDuration": 1.3111,
+      "duration": 0.7,
+      "file": "server/food-sounds/sound-da2db849fa99a34ca669.mp3",
+      "sha256": "2ae5b5ce46d06700b60bebc95aec5bdf62593674c134a04e547d8509ee50cb57"
+    }
+  ],
+  "presets": [
+    {
+      "id": "pop",
+      "name": "비주얼_물방울_뽁1 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.25,
+      "duration": 0.25,
+      "file": "server/food-sounds/pop.wav",
+      "sha256": "dd4814d356f3d98d030579fc667392e5742c93bb2e20959614aad2d5e5c2c25e",
+      "originalId": "sound-0628db5a0238ea552f85"
+    },
+    {
+      "id": "tap",
+      "name": "비주얼_클릭2 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.2,
+      "duration": 0.2,
+      "file": "server/food-sounds/tap.wav",
+      "sha256": "df163f3884e23fd3bd488e3b10143bc602c9d70c017a7281010b7b190570dd27",
+      "originalId": "sound-c410c2e9c894abf47f67"
+    },
+    {
+      "id": "swish",
+      "name": "우쉬_휙1 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.35,
+      "duration": 0.35,
+      "file": "server/food-sounds/swish.wav",
+      "sha256": "d6ea1dea29a91a1c1fbead5132e7da6d218db1a3d6f84cbf4e7527b9b003455f",
+      "originalId": "sound-891553e44251c1ccf98e"
+    },
+    {
+      "id": "signature",
+      "name": "비주얼_깨달음 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.7,
+      "duration": 0.7,
+      "file": "server/food-sounds/signature.wav",
+      "sha256": "f956b9f352e3046ce91e84d5973f0b39a05ef5593a5dbaaa34fa9885d0d607cd",
+      "originalId": "sound-6e1b9e6981adb441ff63"
+    },
+    {
+      "id": "chime",
+      "name": "비주얼_띠링1 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.45,
+      "duration": 0.45,
+      "file": "server/food-sounds/chime.wav",
+      "sha256": "e7e5fef75a7d128da232dacef46c0eaf2c6e9a3c47f1f3e76a79fa8e30e4400b",
+      "originalId": "sound-029d5ce666b9eacc9589"
+    },
+    {
+      "id": "bubble",
+      "name": "비주얼_물방울_뾰옥1 (기본 짧은 편집본)",
+      "category": "기본 프리셋",
+      "sourceDuration": 0.32,
+      "duration": 0.32,
+      "file": "server/food-sounds/bubble.wav",
+      "sha256": "4de3287d37e8ee98d136240f10d5759e2f26c77a3bb9276c1fa9d12e11fd888e",
+      "originalId": "sound-8ea687bd8e4813016492"
+    }
+  ]
+}

@@ -22,6 +22,9 @@ if not health('http://127.0.0.1:8766/healthz'):
   if health('http://127.0.0.1:8766/healthz'):break
   time.sleep(1)
  else:raise SystemExit('맥 제작 서버를 시작하지 못했습니다.')
+if not health('http://127.0.0.1:8767/api/food/health'):
+ food=Path(__file__).resolve().parents[1]/'server/food.py'
+ owned.append(subprocess.Popen([str(root/'.venv-asr/bin/python'),str(food)],cwd=food.parent,env=env))
 worker=subprocess.Popen([sys.executable,str(Path(__file__).with_name('worker.py'))],env=env);owned.append(worker)
 try:
  while worker.poll() is None:time.sleep(2)

@@ -5,3 +5,8 @@ public/core/
 public/ort/
 __pycache__/
 *.pyc
+food-data/
+
+server/food-sounds/
+
+server/food-sounds/
