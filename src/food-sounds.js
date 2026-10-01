@@ -55,5 +55,7 @@ export function createSoundLibrary({$,safe,project,json,file,toast,changed,isWor
   try{const s=selected($('soundPreview').value,$('soundStart').value,$('soundLength').value);const d=await json('/api/food/sfx-preview',{id:project().id,sound:s.sound,start:s.soundStart,length:s.soundLength});const r=await file(d.name);if(!r.ok)throw Error('음원 전송이 중단됐어요.');if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(await r.blob());const a=$('soundAudio');a.src=previewUrl;a.volume=Number($('sfxGain').value);a.hidden=false;await a.play();$('soundSourceMeta').textContent=d.soundName+' · '+d.start.toFixed(2)+'초부터 '+d.duration.toFixed(2)+'초 미리듣기';
   }catch(e){toast(e.message);}finally{$('listenSound').disabled=isWorking()||!$('soundPreview').value;}
  };
- return {ready,segmentHTML,bind,values,setBusy};
+ function previewState(){return Object.fromEntries(['soundSearch','soundCategory','soundPreview','soundStart','soundLength'].map(k=>[k,$(k).value]));}
+ function restorePreview(state){if(!state)return;ready.then(()=>{$('soundSearch').value=state.soundSearch||'';$('soundCategory').value=state.soundCategory||'';filter();if(rows.some(r=>r.id===state.soundPreview))$('soundPreview').value=state.soundPreview;if(state.soundStart!==undefined)$('soundStart').value=state.soundStart;if(state.soundLength!==undefined)$('soundLength').value=state.soundLength;choice();});}
+ return {ready,segmentHTML,bind,values,setBusy,previewState,restorePreview};
 }

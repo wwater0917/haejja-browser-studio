@@ -1,7 +1,7 @@
 # 한입 릴스 — 맥 없이 제작하는 서버 버전
 
 배포 대상: https://haejja-reel-studio.onrender.com/food.html
-이 문서를 작성한 시점에는 서버 버전을 아직 배포하지 않았습니다.
+기존 무료 서버에 배포되어 있으며, 맥을 끈 상태에서도 사용할 수 있습니다.
 
 가게명·위치·먹은 메뉴·음식평과 영상 소스를 넣으면 장면에 맞는 한국어 멘트와 리뷰를 생성합니다. 멘트를 수정한 뒤 음성과 자막이 들어간 MP4를 저장합니다. 리뷰는 해시태그 정확히 5개를 포함해 총 200자 이내입니다.
 
@@ -14,7 +14,7 @@
 - 임시 보관: 생성 후 6시간, 또는 무료 서버 재시작 시 만료될 수 있습니다. 완성 후 바로 MP4를 저장하세요. 최근 작업에서 임시 작업을 삭제할 수 있습니다.
 - 무료 서버는 첫 접속이나 제작이 느릴 수 있습니다. 실제 Render 자원에서의 성능과 실제 아이폰 사파리 저장은 배포 후 검증이 필요합니다.
 
-배포 준비: 현재 저장소의 main에 준비된 변경을 게시하면 기존 정적 사이트와 무료 helper가 자동 배포됩니다. helper에 기존 `DEEPSEEK_API_KEY`를 비공개 환경 변수로 병합하고 `FOOD_MODE=cloud`, `DEEPSEEK_VISION_MODEL=deepseek-flash`를 설정합니다. 기존 서비스 설정·환경 변수·Mac relay 키는 보존합니다. 무료 요금제를 유지합니다. 자동 승인 검토에서 기존 main push가 거절되어 실제 게시에는 사용자의 구체적인 배포 승인이 남아 있습니다.
+배포: 사용자의 게시 승인에 따라 기존 정적 사이트와 무료 helper에 반영했습니다. 기존 DeepSeek API 키를 비공개 환경 변수로 사용하며, 기존 서비스 설정·환경 변수·Mac relay 키와 무료 요금제를 유지합니다.
 
 검증: 배포용 모바일 화면을 로컬 시험 서버에 연결해 접속 코드 → 2개 시험 영상 업로드 → 실제 DeepSeek 장면 확인/멘트 → 수정 → 실제 edge-tts/패키지 FFmpeg → 인증된 MP4 다운로드 → 재접속 복원까지 완료했습니다. Mac relay 온라인 상태는 false였으며 브라우저의 Mac 작업 요청은 0건입니다. 시험 소스는 음식 촬영본이 아닌 색상·문자 패턴 영상입니다. 결과 11.38초, 720×1280, 리뷰 96자·해시태그 5개, 내려받은 파일과 서버 SHA-256 일치. JavaScript 15개, Python 접속·경로·보관 한도 검증 17개 통과. 실제 아이폰 사파리는 미검증입니다.
 
@@ -47,3 +47,11 @@
 2026-10-02 update: all four restaurant fields may be blank. Food impressions, per-scene narration and menu labels accept Korean browser speech input. InJoon +40%/+10Hz is the default voice. Narration is generated as one connected spoken review and is also the exact subtitle text. Reviews have sentence breaks, two or three matching emojis and five hashtags within 200 characters. Steps 01–03 each collapse separately.
 
 Uploads automatically scan human faces with the bundled MIT-licensed OpenCV YuNet model. Soft Gaussian blur affects detected face boxes; manual normalized boxes have source-time ranges and adjustable global strength, and survive reload. Authenticated JPEG previews show the actual blur. Render uses the same sampled detections/regions before fit, camera motion and transitions. Small/occluded/fast faces may be missed, so users can inspect source times and add regions. No face identity recognition or new paid provider is introduced. Speech recognition availability and microphone access depend on the user's browser; actual iPhone dictation is not verified by simulated event tests.
+
+## 새로고침 자동 저장
+
+입력할 때마다 현재 브라우저의 localStorage에 저장합니다. 생성 전 가게 정보·음식평, 직접 수정한 제목·멘트·리뷰, 음성·속도·효과·블러 설정, 영상 순서·제외·시작/끝·장면 설명, 접은 단계와 저장 전 수동 블러 영역을 복원합니다. 서버 연결이 늦거나 끊겨도 입력 내용부터 복원합니다. 수정된 내용을 기존 서버 결과로 덮어쓰지 않으며, 제작 중 새로고침하면 완료 상태를 다시 확인합니다. 새 작업 버튼을 누르면 현재 초안을 초기화합니다.
+
+업로드 중 새로고침한 경우 같은 원본 파일을 다시 선택하면 서버에 남아 있는 지점부터 이어 올립니다. 원본 영상 바이트는 브라우저에 저장하지 않습니다. 브라우저 데이터 삭제·시크릿 모드·다른 브라우저에서는 초안이 이어지지 않으며, 서버 영상은 기존 6시간/재시작 임시 보관 한도가 적용됩니다.
+
+검증: 모바일 화면에서 생성 전 입력, 서버 연결 실패 중 입력, 멘트·리뷰·설정·저장 전 블러, 장면 설명·구간, 순서 변경·제외를 새로고침 뒤 복원했습니다. 중단된 업로드가 기존 영상 ID와 10,000바이트 지점부터 재개됐고, 새 작업 초기화와 이전 완성본 숨김을 확인했습니다. JavaScript 19개 검사 통과.
