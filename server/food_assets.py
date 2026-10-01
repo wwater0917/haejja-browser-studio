@@ -18,7 +18,9 @@ def ensure_assets(root=None,secret=None):
     for s in rows:
         if not re.fullmatch(r'sound-[a-f0-9]{20}',s['id']) and s['id'] not in {'tap','bubble','swish','chime','signature','pop'}:raise ValueError('Invalid sealed sound identifier.')
         source=root/'server/food-sound-sealed'/(s['id']+'.enc')
-        data=source.read_bytes()
+        count=int(s.get('sealedParts',1))
+        if not 1<=count<=64:raise ValueError('Invalid sealed sound part count.')
+        data=source.read_bytes() if source.is_file() else b''.join(Path(str(source)+f'.part{i:03d}').read_bytes() for i in range(count))
         clear=cipher.decrypt(data[:12],data[12:],(s['id']+':'+s['sha256']).encode())
         if hashlib.sha256(clear).hexdigest()!=s['sha256']:raise ValueError('Sound integrity check failed.')
         dest=target/Path(s['file']).name;dest.write_bytes(clear);dest.chmod(0o600)
