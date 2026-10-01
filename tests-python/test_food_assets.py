@@ -29,6 +29,15 @@ class SealedAssetsTest(unittest.TestCase):
   with tempfile.TemporaryDirectory() as root,patch.dict(os.environ):
    key,rows=self.fixture(root);p=Path(root)/'server/food-sound-sealed'/(rows[0]['id']+'.enc');data=bytearray(p.read_bytes());data[-1]^=1;p.write_bytes(data)
    with self.assertRaises(Exception):food_assets.ensure_assets(root,key)
+ def test_chunked_ciphertext_restores_the_same_assets(self):
+  with tempfile.TemporaryDirectory() as root,patch.dict(os.environ):
+   key,rows=self.fixture(root)
+   for s in rows:
+    p=Path(root)/'server/food-sound-sealed'/(s['id']+'.enc');data=p.read_bytes();mid=len(data)//2
+    Path(str(p)+'.part000').write_bytes(data[:mid]);Path(str(p)+'.part001').write_bytes(data[mid:]);p.unlink();s['sealedParts']=2
+   (Path(root)/'public/food-sfx/catalog.json').write_text(json.dumps({'sounds':rows}))
+   out=food_assets.ensure_assets(root,key)
+   self.assertTrue(all(hashlib.sha256((out/Path(s['file']).name).read_bytes()).hexdigest()==s['sha256'] for s in rows))
  def test_existing_local_originals_need_no_cloud_key(self):
   with tempfile.TemporaryDirectory() as root,patch.dict(os.environ,{'FOOD_SOUND_KEY':''}):
    _,rows=self.fixture(root)
