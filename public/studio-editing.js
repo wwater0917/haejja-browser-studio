@@ -20,13 +20,47 @@
  const stage=q('positionImage').parentElement;
  stage.classList.add('live-stage');
  const canvas=document.createElement('canvas');canvas.id='positionCanvas';canvas.width=540;canvas.height=960;canvas.setAttribute('aria-label','크기·위치·색상을 실시간으로 표시하는 미리보기');stage.append(canvas);
- const hint=document.createElement('p');hint.className='frame-guide-note';hint.textContent='슬라이더를 움직이면 즉시 표시됩니다. 잠시 멈추면 정확한 글자 배치로 갱신합니다.';stage.after(hint);
+ const hint=document.createElement('p');hint.className='frame-guide-note';hint.textContent='글자를 누르면 선택 ✓ · 끌어서 이동 · 모서리 손잡이로 크기 조절';stage.after(hint);
+ const selection=document.createElement('div');selection.id='captionTargets';stage.append(selection);
+ const quick=document.createElement('div');quick.className='caption-quick';quick.innerHTML='<strong id="captionSelected" aria-live="polite">화면에서 조절할 글자를 누르세요.</strong><label for="captionQuickSize">글자 크기 <output id="captionQuickSizeValue"></output></label><input id="captionQuickSize" type="range" min="24" max="160" step="1"><p>선택한 종류의 모든 자막에 적용됩니다.</p>';hint.after(quick);
+ const selectionCss=document.createElement('style');selectionCss.textContent='#captionTargets{position:absolute;inset:0;pointer-events:none;z-index:3}.caption-hit{position:absolute!important;pointer-events:auto;touch-action:none;cursor:grab;background:transparent!important;border:1px dashed transparent!important;padding:0!important;margin:0!important;min-height:0!important;border-radius:4px!important;color:white!important}.caption-hit:hover{border-color:#80eeb5!important}.caption-hit[aria-pressed="true"]{border:2px solid #44e894!important;background:#44e8940b!important}.caption-hit:focus-visible{outline:3px solid #ffd000}.caption-check{position:absolute;top:-24px;left:-2px;background:#174d34;color:white;border-radius:4px;padding:3px 6px;font:12px sans-serif;white-space:nowrap}.caption-resize{position:absolute;right:-9px;bottom:-9px;width:20px;height:20px;border:2px solid white;border-radius:4px;background:#1e9257;cursor:nwse-resize;touch-action:none}.caption-quick{max-width:360px;padding:10px 12px;background:#e9f6ee;border-radius:8px;margin:8px 0}.caption-quick label{margin:8px 0 4px}.caption-quick p{font-size:11px;margin:6px 0;color:#486351}.caption-quick input{padding:0}.caption-quick strong{font-size:13px}';document.head.append(selectionCss);
  const banner=document.createElement('div');banner.id='applyProgress';banner.hidden=true;banner.setAttribute('role','status');banner.setAttribute('aria-live','polite');q('preview').parentElement.before(banner);
- const live={base:null,layers:[],style:null,at:0,timer:null,busy:false,pending:false,generation:0,rendering:false};
+ const live={base:null,layers:[],style:null,at:0,timer:null,busy:false,pending:false,generation:0,rendering:false,selected:null,previewRole:null};
+ const selectionMath=HaejjaCaptionSelection,targetNodes=new Map();let gesture=null;
+ function roleLabel(role){return role==='sub'?'한글 번역 자막':role==='title'?'제목':labels[role]||role;}
+ function bounds(image){const c=document.createElement('canvas');c.width=540;c.height=960;const ctx=c.getContext('2d');ctx.drawImage(image,0,0,540,960);return selectionMath.alphaBounds(ctx.getImageData(0,0,540,960).data,540,960);}
+ function selectText(role){live.selected=role;q('positionRole').value=role;positionSync();paint();}
+ function quickSync(){const role=live.selected;q('captionSelected').textContent=role?'✓ '+roleLabel(role)+' 선택됨':'화면에서 조절할 글자를 누르세요.';const slider=q('captionQuickSize');slider.disabled=!role||!!watched||live.rendering;slider.max=q('positionSize').max;slider.value=role?q(role+'Size').value:65;q('captionQuickSizeValue').textContent=role?slider.value+'px':'';}
+ function updateTargets(boxes){
+  for(const [role,node]of targetNodes)if(!boxes.has(role)){node.remove();targetNodes.delete(role);}
+  for(const [role,box]of boxes){
+   let node=targetNodes.get(role);if(!node){node=document.createElement('button');node.type='button';node.className='caption-hit';node.dataset.role=role;node.setAttribute('aria-label',roleLabel(role)+' 선택 · 끌어서 이동');node.onpointerdown=e=>beginGesture(e,role,false);node.onclick=()=>{if(!live.rendering&&!watched)selectText(role);};node.onkeydown=e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||watched)return;e.preventDefault();selectText(role);const suffix=e.key.includes('Left')||e.key.includes('Right')?'X':'Y',delta=(e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:1)*(e.shiftKey?10:1);q(role+suffix).value=Math.max(suffix==='X'?100:0,Math.min(suffix==='X'?980:1700,+q(role+suffix).value+delta));changes();};selection.append(node);targetNodes.set(role,node);}
+   node.disabled=!!watched||live.rendering;node.setAttribute('aria-pressed',String(role===live.selected));
+   Object.assign(node.style,{left:(box.x-5)/540*100+'%',top:(box.y-5)/960*100+'%',width:(box.width+10)/540*100+'%',height:(box.height+10)/960*100+'%'});
+   if(role===live.selected&&!node.firstChild){const check=document.createElement('span');check.className='caption-check';check.textContent='✓ '+roleLabel(role);const handle=document.createElement('span');handle.className='caption-resize';handle.setAttribute('aria-hidden','true');handle.onpointerdown=e=>beginGesture(e,role,true);node.append(check,handle);}
+   if(role!==live.selected)node.replaceChildren();
+  }
+  quickSync();
+ }
+ function beginGesture(e,role,resize){
+  if(watched||live.rendering||e.button!==0)return;e.preventDefault();e.stopPropagation();selectText(role);clearTimeout(live.timer);
+  const point=selectionMath.coordinates(e.clientX,e.clientY,stage.getBoundingClientRect()),node=targetNodes.get(role),box=node.getBoundingClientRect();
+  gesture={role,resize,start:point,x:+q(role+'X').value,y:+q(role+'Y').value,size:+q(role+'Size').value,width:box.width*540/stage.getBoundingClientRect().width};
+  node.setPointerCapture(e.pointerId);
+ }
+ selection.addEventListener('pointermove',e=>{
+  if(!gesture)return;const g=gesture,p=selectionMath.coordinates(e.clientX,e.clientY,stage.getBoundingClientRect());
+  if(g.resize){q(g.role+'Size').value=Math.max(24,Math.min(+q('positionSize').max,Math.round(g.size*(1+(p.x-g.start.x)/Math.max(20,g.width)))));}
+  else{q(g.role+'X').value=Math.round(Math.max(100,Math.min(980,g.x+(p.x-g.start.x)*2)));q(g.role+'Y').value=Math.round(Math.max(0,Math.min(1700,g.y+(p.y-g.start.y)*2)));}
+  changes();clearTimeout(live.timer);
+ });
+ function finishGesture(){if(!gesture)return;gesture=null;live.timer=setTimeout(refresh,650);}
+ for(const event of ['pointerup','pointercancel','lostpointercapture'])selection.addEventListener(event,finishGesture);
+ q('captionQuickSize').oninput=()=>{if(!live.selected||watched)return;q(live.selected+'Size').value=q('captionQuickSize').value;changes();};
  function tint(image,color){const c=document.createElement('canvas');c.width=image.width;c.height=image.height;const ctx=c.getContext('2d');ctx.drawImage(image,0,0);ctx.globalCompositeOperation='source-in';ctx.fillStyle=color;ctx.fillRect(0,0,c.width,c.height);return c;}
  function paint(){
   if(!live.base)return;
-  const s=layoutStyle(),base=live.style,ctx=canvas.getContext('2d');ctx.clearRect(0,0,540,960);ctx.drawImage(live.base,0,0,540,960);
+  const s=layoutStyle(),base=live.style,ctx=canvas.getContext('2d'),boxes=new Map();ctx.clearRect(0,0,540,960);ctx.drawImage(live.base,0,0,540,960);
   for(const layer of live.layers){
    if(layer.name==='paper'){
     const before=HaejjaPaperLayout.box(live.plan,base,live.sourceAt),after=HaejjaPaperLayout.box(live.plan,s,live.sourceAt);
@@ -37,9 +71,11 @@
    const gapKey=role==='english'?'bilingual_gap':role==='vocabKo'?'vocabulary_gap':null;const gap=gapKey?(s[gapKey]||0):0,oldGap=gapKey?(base[gapKey]||0):0;const ox=base[role+'_x']??540,oy=base[role+'_y']+oldGap;let image=layer.image;
    if(layer.name==='title_first')image=tint(image,s.title_first_color);
    if(layer.name==='title_rest')image=tint(image,s.title_rest_color);
-   ctx.save();ctx.translate(s[role+'_x']/2,(s[role+'_y']+gap)/2);ctx.scale(ratio,ratio);ctx.translate(-ox/2,-oy/2);ctx.drawImage(image,0,0,540,960);ctx.restore();
+   const tx=(s[role+'_x']-ox*ratio)/2,ty=(s[role+'_y']+gap-oy*ratio)/2;
+   ctx.save();ctx.translate(tx,ty);ctx.scale(ratio,ratio);ctx.drawImage(image,0,0,540,960);ctx.restore();
+   const targetRole=role==='subtitle'?'sub':role,b=selectionMath.transformBounds(layer.bounds,{sx:ratio,sy:ratio,tx,ty});if(b)boxes.set(targetRole,selectionMath.union(boxes.get(targetRole),b));
   }
-  canvas.hidden=false;q('positionImage').hidden=true;if(q('positionResult'))q('positionResult').hidden=true;
+  canvas.hidden=false;selection.hidden=false;updateTargets(boxes);q('positionImage').hidden=true;if(q('positionResult'))q('positionResult').hidden=true;
  }
  function changes(){live.generation++;dirty=true;positionSync();paint();q('positionStatus').textContent=live.base?'실시간 미리보기 · 아직 영상에 적용하지 않았어요.':'미리보기를 준비하고 있어요…';clearTimeout(live.timer);live.timer=setTimeout(refresh,650);}
  async function refresh(){
@@ -48,10 +84,10 @@
   live.busy=true;live.pending=false;const generation=live.generation,values=layoutStyle(),sourceAt=+q('layoutAt').value,previewPlan=structuredClone({...current.plan,title:q('title').value});
   if(!live.base)q('positionStatus').textContent='실시간 편집 화면을 준비하고 있어요…';
   try{
-   const r=await api('/api/layout-preview',{id:positionProject,plan:previewPlan,style:{...current.style,...values},at:sourceAt,role:q('positionRole').value,layers:true});
+   const r=await api('/api/layout-preview',{id:positionProject,plan:previewPlan,style:{...current.style,...values},at:sourceAt,role:live.previewRole,layers:true});
    const images=await Promise.all([loadImage(r.base_image),...r.layers.map(x=>loadImage(x.image))]);
    if(generation!==live.generation||!q('positionDialog').open){live.pending=q('positionDialog').open;return;}
-   live.plan=previewPlan;live.sourceAt=sourceAt;live.base=images[0];live.layers=r.layers.map((x,i)=>({name:x.name,image:images[i+1]}));live.style=r.style;live.at=r.output_at??0;paint();
+   live.plan=previewPlan;live.sourceAt=sourceAt;live.base=images[0];live.layers=r.layers.map((x,i)=>({name:x.name,image:images[i+1],bounds:x.name==='paper'?null:bounds(images[i+1])}));live.style=r.style;live.at=r.output_at??0;paint();
    if(!live.rendering)q('positionStatus').textContent='실시간 미리보기 · 위치·크기·색상을 바로 조절하세요.';
   }catch(e){if(generation===live.generation)q('positionStatus').textContent='미리보기: '+e.message+' · 입력값을 조절하거나 다시 확인해 주세요.';}
   finally{live.busy=false;if(live.pending){live.pending=false;refresh();}}
@@ -59,13 +95,13 @@
  q('positionOpen').onclick=guard(async()=>{
   if(!current?.plan)throw Error('작업 목록에서 영상을 먼저 선택하세요.');
   initExtras();positionProject=current.id;positionSnapshot={values:Object.fromEntries(positionFields.map(id=>[id,q(id).value])),dirty};dirty=true;
-  live.generation++;live.base=null;live.layers=[];canvas.hidden=true;q('positionImage').hidden=true;
+  live.generation++;live.base=null;live.layers=[];live.selected=null;live.previewRole=q('positionRole').value;gesture=null;selection.replaceChildren();targetNodes.clear();quickSync();canvas.hidden=true;q('positionImage').hidden=true;
   const previous=q('positionResult');if(previous)previous.remove();
   q('positionCancel').textContent='취소·닫기';positionSync();q('positionDialog').showModal();refresh();
  });
  for(const [id]of paperFields)q(id).oninput=()=>{q(id+'_value').textContent=q(id).value;changes();};q('paper_style').onchange=changes;q('paper_color').oninput=changes;
  for(const id of ['bilingualGap','vocabularyGap'])q(id).oninput=()=>{q(id+'Value').textContent=q(id).value;changes();};
- q('positionRole').onchange=()=>{positionSync();live.generation++;live.base=null;refresh();};
+ q('positionRole').onchange=()=>{live.previewRole=q('positionRole').value;live.selected=live.previewRole;positionSync();paint();live.generation++;refresh();};
  q('captionColor').oninput=()=>{extraStyle[q('positionRole').value+'_color']=q('captionColor').value;changes();};q('captionFont').onchange=()=>{extraStyle[q('positionRole').value+'_font']=q('captionFont').value;changes();};for(const id of ['hostCaptionColor','guestCaptionColor','hostEnglishColor','guestEnglishColor'])q(id).oninput=changes;
  for(const suffix of ['X','Y','Size'])q('position'+suffix).oninput=()=>{q(q('positionRole').value+suffix).value=q('position'+suffix).value;changes();};
  for(const id of ['positionFirst','positionRest'])q(id).oninput=changes;
@@ -104,7 +140,7 @@
       const dialog=q(token.dialog==='position'?'positionDialog':'videoEditDialog');
       if(dialog.open){
        let v=q(token.dialog+'Result');if(!v){v=document.createElement('video');v.id=token.dialog+'Result';v.controls=true;v.playsInline=true;v.className='applied-result';(token.dialog==='position'?stage:q('videoEditImage').parentElement).append(v);}
-       if(token.dialog==='position'){canvas.hidden=true;q('positionImage').hidden=true;}else q('videoEditImage').hidden=true;v.hidden=false;v.src=src;v.muted=true;v.addEventListener('loadedmetadata',()=>{v.currentTime=Math.min(live.at||2.5,Math.max(0,v.duration-.1));},{once:true});v.load();
+       if(token.dialog==='position'){canvas.hidden=true;selection.hidden=true;q('positionImage').hidden=true;}else q('videoEditImage').hidden=true;v.hidden=false;v.src=src;v.muted=true;v.addEventListener('loadedmetadata',()=>{v.currentTime=Math.min(live.at||2.5,Math.max(0,v.duration-.1));},{once:true});v.load();
        q(token.dialog==='position'?'positionCancel':'videoEditCancel').textContent='완료·닫기';
       }
      }
